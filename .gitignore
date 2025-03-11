@@ -59,3 +59,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 SnatchGame/.vsconfig
+ReachPathwaysGameProject/Assets/Plugins/FMOD/Cache.meta
+ReachPathwaysGameProject/Assets/Plugins/FMOD/Cache/Editor.meta
+ReachPathwaysGameProject/Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
+ReachPathwaysGameProject/Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset.meta
