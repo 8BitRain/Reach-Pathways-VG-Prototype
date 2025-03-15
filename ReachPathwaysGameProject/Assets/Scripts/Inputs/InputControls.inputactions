@@ -1,0 +1,11 @@
+{
+    "name": "InputControls",
+    "maps": [],
+    "controlSchemes": [
+        {
+            "name": "UserControls",
+            "bindingGroup": "UserControls",
+            "devices": []
+        }
+    ]
+}
