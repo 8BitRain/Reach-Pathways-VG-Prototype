@@ -1928,6 +1928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenuState: 1
   QuitCanvas: {fileID: 1047239208}
+  UIEventSystem: {fileID: 220352173}
 --- !u!1 &1405233327
 GameObject:
   m_ObjectHideFlags: 0

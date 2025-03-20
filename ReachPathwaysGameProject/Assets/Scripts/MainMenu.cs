@@ -47,6 +47,7 @@ public class MainMenu : MonoBehaviour
             case MenuState.Start:
                 //Should tutoail be in it's own section?
                 SceneManager.LoadScene("Tutorial");
+                
                 //SceneManager.LoadScene("Gameplay");
                 break;
             case MenuState.Settings:

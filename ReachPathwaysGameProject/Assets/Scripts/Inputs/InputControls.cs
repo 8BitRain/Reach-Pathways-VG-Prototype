@@ -22,7 +22,36 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""InputControls"",
-    ""maps"": [],
+    ""maps"": [
+        {
+            ""name"": ""User"",
+            ""id"": ""91c70403-31eb-44d5-a05f-e4fe2080aaa6"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e324c70-b168-4c90-8c8d-8bac9047da05"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c1369ebd-7d28-47b1-8223-221597e0ec0d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        }
+    ],
     ""controlSchemes"": [
         {
             ""name"": ""UserControls"",
@@ -31,6 +60,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         }
     ]
 }");
+        // User
+        m_User = asset.FindActionMap("User", throwIfNotFound: true);
+        m_User_Pause = m_User.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -86,6 +118,39 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     {
         return asset.FindBinding(bindingMask, out action);
     }
+
+    // User
+    private readonly InputActionMap m_User;
+    private IUserActions m_UserActionsCallbackInterface;
+    private readonly InputAction m_User_Pause;
+    public struct UserActions
+    {
+        private @InputControls m_Wrapper;
+        public UserActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_User_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_User; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UserActions set) { return set.Get(); }
+        public void SetCallbacks(IUserActions instance)
+        {
+            if (m_Wrapper.m_UserActionsCallbackInterface != null)
+            {
+                @Pause.started -= m_Wrapper.m_UserActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_UserActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_UserActionsCallbackInterface.OnPause;
+            }
+            m_Wrapper.m_UserActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public UserActions @User => new UserActions(this);
     private int m_UserControlsSchemeIndex = -1;
     public InputControlScheme UserControlsScheme
     {
@@ -94,5 +159,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
             if (m_UserControlsSchemeIndex == -1) m_UserControlsSchemeIndex = asset.FindControlSchemeIndex("UserControls");
             return asset.controlSchemes[m_UserControlsSchemeIndex];
         }
+    }
+    public interface IUserActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }
