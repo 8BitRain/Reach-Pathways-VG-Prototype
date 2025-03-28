@@ -81,6 +81,30 @@ public class StateManager : MonoBehaviour
 
             // Notify subscribers of the event
             OnGamePausedChanged?.Invoke(gamePaused);
+
+            if (gamePaused)
+            {
+                // Release the player cursor
+                Cursor.lockState = CursorLockMode.None;
+                // Load the pause scene/UI
+                if (!SceneManager.GetSceneByName("Pause").isLoaded)
+                {
+                    SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
+                }
+            }
+            else
+            {
+                // Capture the player cursor
+                Cursor.lockState = CursorLockMode.Locked;
+                if (SceneManager.GetSceneByName("Pause").isLoaded)
+                {
+                    SceneManager.UnloadSceneAsync("Pause");
+                }
+                if (SceneManager.GetSceneByName("Settings").isLoaded)
+                {
+                    SceneManager.UnloadSceneAsync("Settings");
+                }
+            }
         }
     }
 
@@ -109,6 +133,8 @@ public class StateManager : MonoBehaviour
     }
 }
 
+// STATE DECLARATIONS
+
 public abstract class State
 {
     // Defines template methods to be overridden at the state level
@@ -127,6 +153,11 @@ public class MainMenuState : State
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
+
+        if (SceneManager.GetSceneByName("Pause").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Pause");
+        }
     }
 
     public override void Update()
@@ -136,5 +167,26 @@ public class MainMenuState : State
     public override void Exit()
     {
         SceneManager.UnloadSceneAsync("MainMenu");
+    }
+}
+
+public class GameplayState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+        if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
+        {
+            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
+        }
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        SceneManager.UnloadSceneAsync("Gameplay");
     }
 }

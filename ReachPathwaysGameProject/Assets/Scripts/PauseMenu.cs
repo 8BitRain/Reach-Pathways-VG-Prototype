@@ -1,50 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    private bool ShowPauseMenu;
-
     [SerializeField]
-    private GameObject PausePanel;
-
-    private void OnEnable()
-    {
-        ControlsManager.Instance.User.Pause.performed += PauseTheGame;
-    }
-
-    private void OnDisable()
-    {
-        ControlsManager.Instance.User.Pause.performed -= PauseTheGame;
-    }
+    private GameObject pauseMenu;
 
     void Start()
     {
-        PausePanel.SetActive(false);
-    }
-    private void PauseTheGame(InputAction.CallbackContext callback)
-    {
-        if(!ShowPauseMenu)
-        {
-            SetPauseMenu(true);
-        }
-        else
-        {
-            SetPauseMenu(false);
-        }
-    }
-
-    private void SetPauseMenu(bool condition)
-    {
-        PausePanel.SetActive(condition);
-        ShowPauseMenu = condition;
+        SceneManager.sceneUnloaded += OnSceneUnload;
     }
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        StateManager.Instance.ChangeState(new MainMenuState());
+    }
+
+    public void OpenSettings()
+    {
+        pauseMenu.SetActive(false);
+        SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
+    }
+
+    void OnSceneUnload(Scene scene)
+    {
+        pauseMenu.SetActive(true);
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneUnloaded -= OnSceneUnload;
     }
 }
