@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a3d89d1a-efe3-46f6-9f1d-ee4b79824215}">
+		<property name="assetPath">
+			<value>REACH_CoreGameplay_Perc2_R1M1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>61.331687500000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7e02d121-b9cc-438f-be13-5f1b2c8d662a}</destination>
+		</relationship>
+	</object>
+</objects>
