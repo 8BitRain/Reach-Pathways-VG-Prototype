@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d5b201a6-eac0-444d-a949-8f70ce94343f}">
+		<property name="assetPath">
+			<value>ProjectImosha_MainTheme_R1_M3.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>114.14789583333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7e02d121-b9cc-438f-be13-5f1b2c8d662a}</destination>
+		</relationship>
+	</object>
+</objects>
