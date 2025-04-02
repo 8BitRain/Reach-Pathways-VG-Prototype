@@ -1,0 +1,33 @@
+﻿title: Start
+tags:
+---
+<<declare $gameTitle = "Project Imosha">>
+
+PersonA: Greetings, welcome to {$gameTitle}!
+PersonA: Going to explain Introduction here:
+    <<jump Introduction>>
+===
+
+
+title: Introduction
+---
+<<deactivate PersonA>>
+<<activate PersonB>>
+
+PersonB: This is where we explain the story and background.
+PersonB: After we finish, we will switch to the game mechanics and tutorial.
+    <<jump Tutorial>>
+===
+
+
+title: Tutorial
+---
+<<deactivate PersonB >>
+<<activate PersonC>>
+
+PersonC: This is where we explain the steps on how to play the game.
+PersonC: Once we have explained and shown each part, you will be ready to start the game!
+
+===
+
+
