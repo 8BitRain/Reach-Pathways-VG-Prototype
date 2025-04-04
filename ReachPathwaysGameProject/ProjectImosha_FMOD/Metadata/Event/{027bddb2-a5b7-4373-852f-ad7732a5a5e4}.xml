@@ -141,7 +141,7 @@
 			<value>2.5714285714285712</value>
 		</property>
 		<property name="length">
-			<value>0.85714285714285721</value>
+			<value>2.1428571428571432</value>
 		</property>
 		<property name="timelockedOffset">
 			<value>28.285720833333336</value>
@@ -157,9 +157,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{d0be824a-b95d-4e36-8e92-915c2567354a}">
-		<property name="volume">
-			<value>-80</value>
-		</property>
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
@@ -283,6 +280,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{44dc574a-3af4-46c1-b797-85d54592e4c0}">
 		<relationship name="effects">
+			<destination>{8811417e-04b2-4bb9-8acf-6c1a611f71fd}</destination>
 			<destination>{5ecdbf5f-25a4-4616-bd44-e3006e7f7fcb}</destination>
 		</relationship>
 	</object>
@@ -351,10 +349,21 @@
 	</object>
 	<object class="AutomationPoint" id="{e192881e-6e64-441b-9627-6408bafede30}">
 		<property name="position">
-			<value>3.4285714285713431</value>
+			<value>4.7142857142856291</value>
 		</property>
 		<property name="value">
 			<value>0</value>
+		</property>
+	</object>
+	<object class="MultibandEqEffect" id="{8811417e-04b2-4bb9-8acf-6c1a611f71fd}">
+		<property name="filterTypeA">
+			<value>4</value>
+		</property>
+		<property name="frequencyA">
+			<value>585.783386</value>
+		</property>
+		<property name="qualityA">
+			<value>0.591913342</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{5ecdbf5f-25a4-4616-bd44-e3006e7f7fcb}" />
