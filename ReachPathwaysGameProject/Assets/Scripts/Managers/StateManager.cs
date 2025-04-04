@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
@@ -158,6 +158,11 @@ public class MainMenuState : State
         {
             SceneManager.UnloadSceneAsync("Pause");
         }
+
+        if (SceneManager.GetSceneByName("Ricky_Week8").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Ricky_Week8");
+        }
     }
 
     public override void Update()
@@ -170,14 +175,27 @@ public class MainMenuState : State
     }
 }
 
-public class GameplayState : State
+public class SkillDrawState : State
 {
     public override bool Pausable => true;
+    private GameObject skillDeck;
     public override void Enter()
     {
-        if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
+        if (!SceneManager.GetSceneByName("Ricky_Week8").isLoaded)
         {
-            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Ricky_Week8", LoadSceneMode.Additive);
+        }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Ricky_Week8")
+        {
+            Debug.Log("hi");
+            skillDeck = GameObject.Find("Skill Deck");
+            skillDeck.GetComponent<Button>().interactable = true;
         }
     }
 
@@ -187,6 +205,61 @@ public class GameplayState : State
 
     public override void Exit()
     {
-        SceneManager.UnloadSceneAsync("Gameplay");
+        skillDeck.GetComponent<Button>().interactable = false;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        // SceneManager.UnloadSceneAsync("Ricky_Week8");
+    }
+}
+
+public class EventDrawState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+        GameplayManager.Instance.eventDeck.GetComponent<Button>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        GameplayManager.Instance.eventDeck.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class ScenarioDrawState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+        GameplayManager.Instance.scenarioDeck.SetActive(true);
+        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class TurnState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
     }
 }

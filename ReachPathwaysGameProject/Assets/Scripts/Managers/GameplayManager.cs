@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
@@ -7,8 +8,8 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager Instance { get; private set; }
 
     [SerializeField]
-    private GameObject cardPrefab;
-    private GameObject hand;
+    public GameObject cardPrefab, hand, skillDeck, eventDeck, scenarioDeck;
+    // public GameObject hand, eventDeck;
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +27,30 @@ public class GameplayManager : MonoBehaviour
 
     void Awake()
     {
-        hand = GameObject.Find("Hand");
+        scenarioDeck.SetActive(false);
     }
 
-    public void DrawCard()
+    public void DrawSkillCard()
     {
         Instantiate(cardPrefab, hand.transform);
+        if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
+        {
+            StateManager.Instance.ChangeState(new EventDrawState());
+        }
     }
+
+    public void DrawEventCard()
+    {
+        // Instantiate(cardPrefab, eventDisplay.transform);
+        eventDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT EVENT";
+        StateManager.Instance.ChangeState(new ScenarioDrawState());
+    }
+
+    public void DrawScenarioCard()
+    {
+        // Instantiate(cardPrefab, eventDisplay.transform);
+        scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
+        StateManager.Instance.ChangeState(new TurnState());
+    }
+
 }

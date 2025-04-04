@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     
     public void StartGame()
     {
-        StateManager.Instance.ChangeState(new GameplayState());
+        StateManager.Instance.ChangeState(new SkillDrawState());
     }
 
     public void OpenSettings()
