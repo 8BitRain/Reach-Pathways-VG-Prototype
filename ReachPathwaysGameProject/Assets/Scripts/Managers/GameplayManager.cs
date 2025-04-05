@@ -9,10 +9,8 @@ public class GameplayManager : MonoBehaviour
 
     [SerializeField]
     public GameObject cardPrefab, hand, skillDeck, eventDeck, scenarioDeck;
-    // public GameObject hand, eventDeck;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Singleton enforcement
         if (Instance == null)
@@ -22,18 +20,15 @@ public class GameplayManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
-    }
-
-    void Awake()
-    {
+        
         scenarioDeck.SetActive(false);
-    }
-
-    public void DrawSkillCard()
-    {
-        Instantiate(cardPrefab, hand.transform);
-        if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
+        
+        // Check if we're in GameInitState and transition to EventDrawState
+        // This ensures GameplayManager is fully initialized before EventDrawState is entered
+        if (StateManager.Instance != null && 
+            StateManager.Instance.GetCurrentState() is GameInitState)
         {
             StateManager.Instance.ChangeState(new EventDrawState());
         }
@@ -43,7 +38,16 @@ public class GameplayManager : MonoBehaviour
     {
         // Instantiate(cardPrefab, eventDisplay.transform);
         eventDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT EVENT";
-        StateManager.Instance.ChangeState(new ScenarioDrawState());
+        StateManager.Instance.ChangeState(new SkillDrawState());
+    }
+
+    public void DrawSkillCard()
+    {
+        Instantiate(cardPrefab, hand.transform);
+        if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
+        {
+            StateManager.Instance.ChangeState(new ScenarioDrawState());
+        }
     }
 
     public void DrawScenarioCard()

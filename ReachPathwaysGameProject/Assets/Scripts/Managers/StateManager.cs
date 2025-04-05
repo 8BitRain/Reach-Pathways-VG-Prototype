@@ -29,6 +29,7 @@ public class StateManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
@@ -181,22 +182,8 @@ public class SkillDrawState : State
     private GameObject skillDeck;
     public override void Enter()
     {
-        if (!SceneManager.GetSceneByName("Ricky_Week8").isLoaded)
-        {
-            SceneManager.LoadScene("Ricky_Week8", LoadSceneMode.Additive);
-        }
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "Ricky_Week8")
-        {
-            Debug.Log("hi");
-            skillDeck = GameObject.Find("Skill Deck");
-            skillDeck.GetComponent<Button>().interactable = true;
-        }
+        skillDeck = GameplayManager.Instance.skillDeck;
+        skillDeck.GetComponent<Button>().interactable = true;
     }
 
     public override void Update()
@@ -206,17 +193,23 @@ public class SkillDrawState : State
     public override void Exit()
     {
         skillDeck.GetComponent<Button>().interactable = false;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        // SceneManager.UnloadSceneAsync("Ricky_Week8");
     }
 }
 
-public class EventDrawState : State
+public class GameInitState : State
 {
-    public override bool Pausable => true;
+    public override bool Pausable => false;
+    
     public override void Enter()
     {
-        GameplayManager.Instance.eventDeck.GetComponent<Button>().interactable = true;
+        // Load the gameplay scene if not already loaded
+        if (!SceneManager.GetSceneByName("Ricky_Week8").isLoaded)
+        {
+            SceneManager.LoadScene("Ricky_Week8", LoadSceneMode.Additive);
+        }
+        
+        // GameplayManager's Awake() will handle the transition to EventDrawState
+        // once it's fully initialized
     }
 
     public override void Update()
@@ -225,7 +218,29 @@ public class EventDrawState : State
 
     public override void Exit()
     {
-        GameplayManager.Instance.eventDeck.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class EventDrawState : State
+{
+    public override bool Pausable => true;
+    private GameObject eventDeck;
+    
+    public override void Enter()
+    {
+        // The scene should already be loaded by GameInitState
+        // and GameplayManager should be fully initialized
+        eventDeck = GameplayManager.Instance.eventDeck;
+        eventDeck.GetComponent<Button>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        eventDeck.GetComponent<Button>().interactable = false;
     }
 }
 
