@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4c92c12e-b397-437e-9f41-d70ab508ac1e}">
+		<property name="assetPath">
+			<value>REACH_Defeat_R1_M1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>25.712499999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7e02d121-b9cc-438f-be13-5f1b2c8d662a}</destination>
+		</relationship>
+	</object>
+</objects>
