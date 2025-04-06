@@ -25,7 +25,7 @@ public class Rounds : MonoBehaviour
         TotalRounds = TotalRounds == 0 ? 4 : TotalRounds;
         CurrentRound = 1;
         CurrentTurn = 0;
-        Characters[0].IsCurrentTurn = true;       
+        Characters[0].isCurrentTurn = true;       
     }
 
     // Update is called once per frame
@@ -40,18 +40,18 @@ public class Rounds : MonoBehaviour
         {
             Debug.Log("Current round: " + CurrentRound);
             
-            if (Characters[CurrentTurn].IsCurrentTurn)
+            if (Characters[CurrentTurn].isCurrentTurn)
             {
                 Debug.Log("It's currently " + Characters[CurrentTurn] + " turn");
 
                 CurrentPlayer = Characters[CurrentTurn].ToString();
 
 
-                if (Characters[CurrentTurn].HasPlayedCard)
+                if (Characters[CurrentTurn].hasPlayedCard)
                 {
                     Debug.Log(Characters[CurrentTurn] + " has played");
 
-                    Characters[CurrentTurn].IsCurrentTurn = false;
+                    Characters[CurrentTurn].isCurrentTurn = false;
 
                     if (CurrentTurn == Characters.Count - 1)
                     {
@@ -63,7 +63,7 @@ public class Rounds : MonoBehaviour
                         CurrentTurn++;
                     }
 
-                    Characters[CurrentTurn].IsCurrentTurn = true;
+                    Characters[CurrentTurn].isCurrentTurn = true;
                 }               
             }
         }
@@ -82,9 +82,9 @@ public class Rounds : MonoBehaviour
 
         foreach(var c in Characters)
         {
-            c.IsCurrentTurn = false;
+            c.isCurrentTurn = false;
         }
-        Characters[0].IsCurrentTurn = true;
+        Characters[0].isCurrentTurn = true;
 
         EndAllRounds = false;
     }

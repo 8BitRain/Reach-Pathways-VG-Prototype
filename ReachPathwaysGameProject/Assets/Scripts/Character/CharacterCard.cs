@@ -9,26 +9,24 @@ public abstract class CharacterCard : MonoBehaviour, ICard
     public CharacterType Character;
     //public string Role;
     //public string Ability;
-    public string Description { get; set; }
-    public bool HasPlayedCard = false;
-    public bool IsCurrentTurn;
+    public string description { get; set; }
+    public bool hasPlayedCard = false;
+    public bool isCurrentTurn = false;
 
     public void OnPlayCard()
     {
-        //Debug.Log(Character + " has played");
-       
-        if(IsCurrentTurn)
+        if(isCurrentTurn)
         {
-            HasPlayedCard = true;
+            hasPlayedCard = true;
         }
         else
         {
-            HasPlayedCard = false;
+            hasPlayedCard = false;
         }
     }
 }
 
 public interface ICard
 {
-    public string Description { get; set; }
+    public string description { get; set; }
 }
