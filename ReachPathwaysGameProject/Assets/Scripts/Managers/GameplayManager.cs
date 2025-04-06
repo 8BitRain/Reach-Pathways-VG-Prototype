@@ -10,18 +10,21 @@ public class GameplayManager : MonoBehaviour
 
     [SerializeField]
     public GameObject cardPrefab, characterParent, actionsMenu, hand, skillDeck, eventDeck, scenarioDeck;
+    [SerializeField]
+    public RoundUI roundUI;
 
     [SerializeField]
     private int totalRounds = 4;
 
-    public int currentRound { get; private set; }
+    // Note that currentRound will start at 1 instead of 0 for text display purposes
+    public int currentRound = 1;
 
-    private int currentTurn = 0;
+    public int currentTurn { get; private set; } = 0;
 
     public bool endAllRounds { get; private set; }
 
     [SerializeField] 
-    List<CharacterCard> characterList = new();
+    public List<CharacterCard> characterList = new();
 
     void Awake()
     {
@@ -82,4 +85,26 @@ public class GameplayManager : MonoBehaviour
         StateManager.Instance.ChangeState(new TurnState());
     }
 
+    void AdvanceTurn()
+    {
+        if (currentTurn < characterList.Count - 1)
+        {
+            currentTurn++;
+            roundUI.UpdateTurnText(characterList[currentTurn]);
+        }
+        else
+        {
+            // currentRound starts at 1, not 0, for text display purposes
+            if (currentRound < totalRounds)
+            {
+                currentTurn = 0;
+                currentRound++;
+                roundUI.UpdateRoundText(currentRound);
+            }
+            else
+            {
+                roundUI.EndRounds();
+            }
+        }
+    }
 }

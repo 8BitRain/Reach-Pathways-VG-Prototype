@@ -8,37 +8,21 @@ public class RoundUI : MonoBehaviour
 {
     //Temp class to display UI 
     [SerializeField]
-    private TextMeshProUGUI RoundTxt;
+    private TextMeshProUGUI roundText, turnText, endText;
 
-    [SerializeField]
-    private TextMeshProUGUI TurnTxt;
-
-    [SerializeField]
-    private TextMeshProUGUI EndTxt;
-
-    [SerializeField]
-    private Rounds CheckRounds;
-
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateTurnText(CharacterCard character)
     {
-        
+        turnText.text = $"Turn: {character}";
     }
 
-    // Update is called once per frame
-    void Update()
-    {    
-        if(CheckRounds.EndAllRounds)
-        {
-            RoundTxt.text = string.Empty;
-            TurnTxt.text = string.Empty; 
-            EndTxt.text = "End of rounds";
-        }
-        else
-        {
-            RoundTxt.text = "Round " + CheckRounds.CurrentRound.ToString();
-            TurnTxt.text = "Current turn: " + CheckRounds.CurrentPlayer;
-            EndTxt.text = string.Empty;
-        }
+    public void UpdateRoundText(int round)
+    {
+        roundText.text = $"Round: {round}";
+    }
+
+    public void EndRounds()
+    {
+        roundText.text = turnText.text = string.Empty;
+        endText.text = "Rounds ended";
     }
 }

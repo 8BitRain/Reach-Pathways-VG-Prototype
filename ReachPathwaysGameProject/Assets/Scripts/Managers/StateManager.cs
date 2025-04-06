@@ -271,6 +271,8 @@ public class TurnState : State
     public override void Enter()
     {
         GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
+        GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
+        GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
     }
 
     public override void Update()
