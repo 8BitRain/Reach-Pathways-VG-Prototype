@@ -32,3 +32,43 @@ public interface ICard
 {
     public string Description { get; set; }
 }
+
+public class Communicator : CharacterCard
+{
+    void Start()
+    {
+        Character = CharacterType.Communicator;
+    }
+}
+
+public class Innovator : CharacterCard
+{
+    void Start()
+    {
+        Character = CharacterType.Innovator;
+    }
+}
+
+public class Collaborator : CharacterCard
+{
+    void Start()
+    {
+        Character = CharacterType.Collaborator;
+    }
+}
+
+public class Strategist : CharacterCard
+{
+    void Start()
+    {
+        Character = CharacterType.Strategist;
+    }
+}
+
+public class Visionary : CharacterCard
+{
+    void Start()
+    {
+        Character = CharacterType.Visionary;
+    }
+}
