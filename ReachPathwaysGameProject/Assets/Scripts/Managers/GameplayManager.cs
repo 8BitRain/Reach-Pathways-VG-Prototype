@@ -8,7 +8,7 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager Instance { get; private set; }
 
     [SerializeField]
-    public GameObject cardPrefab, hand, skillDeck, eventDeck, scenarioDeck;
+    public GameObject cardPrefab, actionsMenu, hand, skillDeck, eventDeck, scenarioDeck;
 
     void Awake()
     {

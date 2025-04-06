@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 373055107}
   - component: {fileID: 373055106}
   - component: {fileID: 373055108}
+  - component: {fileID: 373055109}
   m_Layer: 5
   m_Name: Actions Menu
   m_TagString: Untagged
@@ -569,6 +570,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &373055109
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373055104}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &440700189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,6 +1213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 8873871271037899261, guid: de872de44f0974d55a9f9dbf1d7808c0, type: 3}
+  actionsMenu: {fileID: 373055104}
   hand: {fileID: 810829050}
   skillDeck: {fileID: 553256243}
   eventDeck: {fileID: 2069641705}

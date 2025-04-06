@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -269,6 +270,7 @@ public class TurnState : State
     public override bool Pausable => true;
     public override void Enter()
     {
+        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
     }
 
     public override void Update()
@@ -277,5 +279,6 @@ public class TurnState : State
 
     public override void Exit()
     {
+        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
     }
 }
