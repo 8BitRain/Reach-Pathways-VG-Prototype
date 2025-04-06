@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -8,7 +9,19 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager Instance { get; private set; }
 
     [SerializeField]
-    public GameObject cardPrefab, actionsMenu, hand, skillDeck, eventDeck, scenarioDeck;
+    public GameObject cardPrefab, characterParent, actionsMenu, hand, skillDeck, eventDeck, scenarioDeck;
+
+    [SerializeField]
+    private int totalRounds = 4;
+
+    public int currentRound { get; private set; }
+
+    private int currentTurn = 0;
+
+    public bool endAllRounds { get; private set; }
+
+    [SerializeField] 
+    List<CharacterCard> characterList = new();
 
     void Awake()
     {
@@ -34,6 +47,11 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
+    }
+
     public void DrawEventCard()
     {
         // Instantiate(cardPrefab, eventDisplay.transform);
@@ -43,10 +61,17 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawSkillCard()
     {
-        Instantiate(cardPrefab, hand.transform);
-        if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
+        if (StateManager.Instance.GetCurrentState() is SkillDrawState)
         {
-            StateManager.Instance.ChangeState(new ScenarioDrawState());
+            Instantiate(cardPrefab, hand.transform);
+            if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
+            {
+                StateManager.Instance.ChangeState(new ScenarioDrawState());
+            }
+        }
+        else if (StateManager.Instance.GetCurrentState() is TurnState)
+        {
+            Instantiate(cardPrefab, hand.transform);
         }
     }
 
