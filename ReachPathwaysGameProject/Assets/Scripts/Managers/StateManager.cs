@@ -58,6 +58,7 @@ public class StateManager : MonoBehaviour
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
+        Debug.Log($"Switched to {newState}");
     }
 
     private void Update()
@@ -118,7 +119,7 @@ public class StateManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log(scene.name);
+        Debug.Log($"Loaded {scene.name} scene");
         if (scene.name == "Start")
         {
             // Sets the active scene, which is used for lighting settings & instantiating new GameObjects.
