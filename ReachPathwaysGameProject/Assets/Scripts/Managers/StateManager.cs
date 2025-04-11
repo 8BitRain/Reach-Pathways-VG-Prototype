@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -270,6 +269,10 @@ public class TurnState : State
     public override bool Pausable => true;
     public override void Enter()
     {
+        // This should be doable with .interactable, but this version of Unity has a bug where the cards do not inherit this properly when instantiated
+        // For now, we can use blocksRaycasts as a workaround, but updating to a 2022 or 2023 version of Unity would fix this
+        // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = true;
+        GameplayManager.Instance.hand.GetComponent<CanvasGroup>().blocksRaycasts = true;
         GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
@@ -281,6 +284,8 @@ public class TurnState : State
 
     public override void Exit()
     {
+        // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = false;
+        GameplayManager.Instance.hand.GetComponent<CanvasGroup>().blocksRaycasts = false;
         GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
     }
 }

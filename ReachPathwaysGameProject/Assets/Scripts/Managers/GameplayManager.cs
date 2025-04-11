@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -64,17 +63,13 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawSkillCard()
     {
+        Instantiate(cardPrefab, hand.transform);        
         if (StateManager.Instance.GetCurrentState() is SkillDrawState)
         {
-            Instantiate(cardPrefab, hand.transform);
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
             {
                 StateManager.Instance.ChangeState(new ScenarioDrawState());
             }
-        }
-        else if (StateManager.Instance.GetCurrentState() is TurnState)
-        {
-            Instantiate(cardPrefab, hand.transform);
         }
     }
 
@@ -85,7 +80,7 @@ public class GameplayManager : MonoBehaviour
         StateManager.Instance.ChangeState(new TurnState());
     }
 
-    void AdvanceTurn()
+    public void AdvanceTurn(GameObject card)
     {
         if (currentTurn < characterList.Count - 1)
         {
@@ -106,5 +101,6 @@ public class GameplayManager : MonoBehaviour
                 roundUI.EndRounds();
             }
         }
+        card.SetActive(false);
     }
 }
