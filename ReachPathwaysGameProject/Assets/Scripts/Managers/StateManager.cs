@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
@@ -29,6 +29,7 @@ public class StateManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
@@ -57,6 +58,7 @@ public class StateManager : MonoBehaviour
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
+        Debug.Log($"Switched to {newState}");
     }
 
     private void Update()
@@ -117,7 +119,7 @@ public class StateManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log(scene.name);
+        Debug.Log($"Loaded {scene.name} scene");
         if (scene.name == "Start")
         {
             // Sets the active scene, which is used for lighting settings & instantiating new GameObjects.
@@ -158,6 +160,11 @@ public class MainMenuState : State
         {
             SceneManager.UnloadSceneAsync("Pause");
         }
+
+        if (SceneManager.GetSceneByName("Gameplay").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Gameplay");
+        }
     }
 
     public override void Update()
@@ -170,15 +177,14 @@ public class MainMenuState : State
     }
 }
 
-public class GameplayState : State
+public class SkillDrawState : State
 {
     public override bool Pausable => true;
+    private GameObject skillDeck;
     public override void Enter()
     {
-        if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
-        {
-            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
-        }
+        skillDeck = GameplayManager.Instance.skillDeck;
+        skillDeck.GetComponent<Button>().interactable = true;
     }
 
     public override void Update()
@@ -187,6 +193,99 @@ public class GameplayState : State
 
     public override void Exit()
     {
-        SceneManager.UnloadSceneAsync("Gameplay");
+        skillDeck.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class GameInitState : State
+{
+    public override bool Pausable => false;
+    
+    public override void Enter()
+    {
+        // Load the gameplay scene if not already loaded
+        if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
+        {
+            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
+        }
+        
+        // GameplayManager's Awake() will handle the transition to EventDrawState
+        // once it's fully initialized
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+    }
+}
+
+public class EventDrawState : State
+{
+    public override bool Pausable => true;
+    private GameObject eventDeck;
+    
+    public override void Enter()
+    {
+        // The scene should already be loaded by GameInitState
+        // and GameplayManager should be fully initialized
+        eventDeck = GameplayManager.Instance.eventDeck;
+        eventDeck.GetComponent<Button>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        eventDeck.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class ScenarioDrawState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+        GameplayManager.Instance.scenarioDeck.SetActive(true);
+        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class TurnState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+        // This should be doable with .interactable, but this version of Unity has a bug where the cards do not inherit this properly when instantiated
+        // For now, we can use blocksRaycasts as a workaround, but updating to a 2022 or 2023 version of Unity would fix this
+        // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = true;
+        GameplayManager.Instance.hand.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
+        GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
+        GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = false;
+        GameplayManager.Instance.hand.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
     }
 }
