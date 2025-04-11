@@ -161,9 +161,9 @@ public class MainMenuState : State
             SceneManager.UnloadSceneAsync("Pause");
         }
 
-        if (SceneManager.GetSceneByName("Ricky_Week8").isLoaded)
+        if (SceneManager.GetSceneByName("Gameplay").isLoaded)
         {
-            SceneManager.UnloadSceneAsync("Ricky_Week8");
+            SceneManager.UnloadSceneAsync("Gameplay");
         }
     }
 
@@ -204,9 +204,9 @@ public class GameInitState : State
     public override void Enter()
     {
         // Load the gameplay scene if not already loaded
-        if (!SceneManager.GetSceneByName("Ricky_Week8").isLoaded)
+        if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
         {
-            SceneManager.LoadScene("Ricky_Week8", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
         }
         
         // GameplayManager's Awake() will handle the transition to EventDrawState
