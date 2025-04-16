@@ -11,16 +11,17 @@ public class SkillCardGenerator : MonoBehaviour
 
     public int totalCount;
 
+    [SerializeField]
+    List<Transform> cardLocation = new List<Transform>();
+
     // Start is called before the first frame update
     void Start()
     {        
         GenerateCards(totalCount, cardPrefab);
         GenerateCards(10, cardSpecial);
 
-        //the last parameter is just for temp placement to display, it can be removed
-        AssignCardColor(false, 0, cards.Count - 10, totalCount / 5, 0);
-        AssignCardColor(true, cards.Count - 10, cards.Count, 2, -30);
-
+        AssignCardColor(false, 0, cards.Count - 10, totalCount / 5);
+        AssignCardColor(true, cards.Count - 10, cards.Count, 2);
     }
 
     private void GenerateCards(int totalCount, GameObject prefab)
@@ -34,13 +35,10 @@ public class SkillCardGenerator : MonoBehaviour
         prefab.SetActive(false);
     }
 
-    private void AssignCardColor(bool hasSpecialAbility, int startPos, int endPost, int divideNum, int x)
+    private void AssignCardColor(bool hasSpecialAbility, int startPos, int endPost, int divideNum) //, int x)
     {
         int c = 0;
-
-        //this temp is for display only, can adjust to remove this and line 63 later
-        int tempx = x;
-        int tempy = -8;
+        int p = -1;
 
         for (int i = startPos; i < endPost; i++)
         {
@@ -48,14 +46,12 @@ public class SkillCardGenerator : MonoBehaviour
             if (i % divideNum == 0)
             {
                 c++;
-                tempy += 8;
-                tempx = x;
+                p++;
             }
             
             SetCardValues(hasSpecialAbility, c, i);
 
-            cards[i].transform.position = new Vector3(tempx, tempy, 0);
-            tempx += 10;
+            cards[i].transform.position = cardLocation[p].position;
         }
     }
 
