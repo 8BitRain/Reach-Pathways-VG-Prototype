@@ -2,78 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class SkillCardGenerator : MonoBehaviour
 {
-    public JSONFileParse file;
-
     List<GameObject> cards = new List<GameObject>();
 
     public GameObject cardPrefab;
-    public GameObject cardSpecial;
 
     public int totalCount;
-
-    [SerializeField]
-    List<Transform> cardLocation = new List<Transform>();
+    private int divideNum;
 
     // Start is called before the first frame update
     void Start()
-    {        
-        GenerateCards(totalCount, cardPrefab);
-        GenerateCards(10, cardSpecial);
-
-        AssignCardColor(false, 0, cards.Count - 10, totalCount / 5);
-        AssignCardColor(true, cards.Count - 10, cards.Count, 2);
-
-       
-       for(int i = 0; i < cards.Count; i++)
-       {
-            file.GetFile(cards[i].GetComponent<SkillCardBase>(), i);
-       }
-
+    {
+        divideNum = totalCount / 5;
+        GenerateCards();
+        AssignCardColor();
+        
     }
 
-    
-
-    private void GenerateCards(int totalCount, GameObject prefab)
+    private void GenerateCards()
     {
         for(int i = 0; i < totalCount; i++)
         {
-            GameObject temp = Instantiate(prefab);
+            GameObject temp = Instantiate(cardPrefab);
             cards.Add(temp);
         }
 
-        prefab.SetActive(false);
+        cardPrefab.SetActive(false);
     }
 
-    private void AssignCardColor(bool hasSpecialAbility, int startPos, int endPost, int divideNum) //, int x)
+    private void AssignCardColor()
     {
         int c = 0;
-        int p = -1;
 
-        for (int i = startPos; i < endPost; i++)
+        //this temp is for display only, can adjust to remove this and line 63 later
+        int tempx = 0;
+        int tempy = -8;
+
+        for (int i = 0; i < cards.Count; i++)
         {
-
-            if (i % divideNum == 0)
+           
+            if(i % divideNum == 0)
             {
                 c++;
-                p++;
+                tempy += 8;
+                tempx = 0;
             }
-            
-            SetCardValues(hasSpecialAbility, c, i);
+            cards[i].GetComponent<SkillCard>().SetCardColor(c);
 
-            cards[i].transform.position = cardLocation[p].position;
+            cards[i].GetComponent<SkillCard>().SetName(i);
+
+            cards[i].transform.position = new Vector3(tempx, tempy, 0);
+            tempx += 10;
         }
     }
-
-    private void SetCardValues(bool hasSpecialAbility, int c, int i)
-    {
-        cards[i].GetComponent<SkillCardBase>().SetCardColor(c);
-
-        cards[i].GetComponent<SkillCardBase>().SetName(i);
-
-        cards[i].GetComponent<SkillCardBase>().SetSpecialty(hasSpecialAbility, i);
-    }
 }
-
-
