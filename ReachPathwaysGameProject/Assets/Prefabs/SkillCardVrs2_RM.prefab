@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 3959043166025574216}
   - component: {fileID: 851178022683776468}
   m_Layer: 0
-  m_Name: SkillCardVrs2
+  m_Name: SkillCardVrs2_RM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
