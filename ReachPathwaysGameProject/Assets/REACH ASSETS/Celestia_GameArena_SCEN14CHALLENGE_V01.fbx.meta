@@ -3,7 +3,17 @@ guid: 51c6806f2426341c48577c232ea5ebea
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CelestiaM_Scenario15Challenge_v02_standardSurface2
+    second: {fileID: 2100000, guid: b905faba4fa3d4b19846ae97c2c7aa6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface1
+    second: {fileID: 2100000, guid: b905faba4fa3d4b19846ae97c2c7aa6c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
