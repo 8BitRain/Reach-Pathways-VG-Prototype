@@ -13,6 +13,9 @@ public class PointsCalculator : MonoBehaviour
 
     int pointsTotal;
 
+    [SerializeField]
+    private PointsUI pointsUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +46,8 @@ public class PointsCalculator : MonoBehaviour
             }
         }
 
-        Debug.Log("Total points = " + pointsTotal);
+        //Debug.Log("Total points = " + pointsTotal);
+        pointsUI.DisplayTotalPoints(pointsTotal);
         
         cards.RemoveAll(c => c.pointValue < 6);
         CanCalculate = false;

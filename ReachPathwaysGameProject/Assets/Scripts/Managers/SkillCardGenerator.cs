@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SkillCardGenerator : MonoBehaviour
 {
+    public JSONFileParse file;
+
     List<GameObject> cards = new List<GameObject>();
 
     public GameObject cardPrefab;
@@ -22,7 +24,16 @@ public class SkillCardGenerator : MonoBehaviour
 
         AssignCardColor(false, 0, cards.Count - 10, totalCount / 5);
         AssignCardColor(true, cards.Count - 10, cards.Count, 2);
+
+       
+       for(int i = 0; i < cards.Count; i++)
+       {
+            file.GetFile(cards[i].GetComponent<SkillCardBase>(), i);
+       }
+
     }
+
+    
 
     private void GenerateCards(int totalCount, GameObject prefab)
     {
@@ -64,3 +75,5 @@ public class SkillCardGenerator : MonoBehaviour
         cards[i].GetComponent<SkillCardBase>().SetSpecialty(hasSpecialAbility, i);
     }
 }
+
+

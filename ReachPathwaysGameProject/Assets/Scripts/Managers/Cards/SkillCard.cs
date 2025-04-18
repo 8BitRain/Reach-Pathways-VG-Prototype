@@ -8,18 +8,10 @@ public enum Specialty { Point, Crisis, Breakthrough }
 
 public class SkillCard : SkillCardBase
 {
-    public bool isPositiveNumber { get; private set; }
-    public int pointValue { get; private set; }
-    public string pointSymbol;
-    private string[] symbol = new string[2];
-
     //Normal Skill card
     void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-
-        symbol[0] = "+";
-        symbol[1] = "-";
     }
 
     public override void SetCardColor(int c)
@@ -35,18 +27,6 @@ public class SkillCard : SkillCardBase
     public override void SetSpecialty(bool condition, int c)
     {
         base.SetSpecialty(condition, c);
-       
-
-        if (!condition)
-        {
-            int temp = Random.Range(0, 2);
-
-            pointSymbol = symbol[temp];
-
-            isPositiveNumber = pointSymbol.Contains("+") ? true : false;
-
-            pointValue = Random.Range(1, 6); //Temp randomizing
-        }
     }
 
 }
@@ -61,6 +41,11 @@ public abstract class SkillCardBase : MonoBehaviour, ICard
     public MeshRenderer meshRenderer;
 
     public Material[] colorForCard = new Material[5];
+    public int pointValue { get; set; }
+    public string pointSymbol;
+
+    //private string[] symbol = { "+", "-" };
+    public bool isPositiveNumber { get; set; }
 
     public virtual void SetSpecialty(bool condition, int c)
     {

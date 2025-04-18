@@ -6,7 +6,8 @@ using TMPro;
 public class SkillCardUI : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI pointText;
+    private TextMeshProUGUI pointText, descriptionText;
+    //private TextMeshProUGUI descriptionText;
 
     private SkillCardBase card;
 
@@ -15,7 +16,11 @@ public class SkillCardUI : MonoBehaviour
     {
         card = transform.parent.GetComponent<SkillCardBase>();
 
-        pointText.text = $"{card.GetComponent<SkillCard>().pointSymbol}" + card.GetComponent<SkillCard>().pointValue.ToString();
+        if(card.GetType() == typeof(SkillCard))
+        {
+            pointText.text = $"{card.GetComponent<SkillCard>().pointSymbol}" + card.GetComponent<SkillCard>().pointValue.ToString();
+        }
+        descriptionText.text = $"{card.description}";
     }
 
 
