@@ -205,10 +205,10 @@ MonoBehaviour:
     Path: event:/MUS_MainMenu
   gameplayMusic:
     Guid:
-      Data1: 239314943
-      Data2: 1264381420
-      Data3: 445610902
-      Data4: -1984962426
+      Data1: -37508523
+      Data2: 1155959368
+      Data3: -1990185292
+      Data4: 1293625733
     Path: event:/MUS_CardGame
 --- !u!4 &1024968430
 Transform:

@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
     public EventReference menuMusic, gameplayMusic;
     private EventInstance menuMusicInst, gameplayMusicInst;
 
+    private string cont = "Continue";
+
     private List<EventInstance> instances = new();
 
     private void Awake()
@@ -103,6 +105,7 @@ public class AudioManager : MonoBehaviour
                 ChangeBGM(menuMusic, menuMusicInst);
                 break;
             case GameInitState:
+                menuMusicInst.setParameterByName(cont, 1);
                 ChangeBGM(gameplayMusic, gameplayMusicInst);
                 break;
         }
