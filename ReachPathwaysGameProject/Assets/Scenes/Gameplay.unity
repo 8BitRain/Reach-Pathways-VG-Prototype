@@ -285,11 +285,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -362,6 +362,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -547,11 +551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -624,6 +628,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -913,11 +921,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -990,6 +998,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -1374,11 +1386,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -1451,6 +1463,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -2122,11 +2138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -2199,6 +2215,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -2724,6 +2744,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1160228953}
   - {fileID: 1963511757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -41.597, z: 0}
@@ -2857,11 +2878,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -2934,6 +2955,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -3827,6 +3852,118 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124753158}
   m_CullTransparentMesh: 1
+--- !u!1 &1160228952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1160228953}
+  - component: {fileID: 1160228956}
+  - component: {fileID: 1160228955}
+  - component: {fileID: 1160228954}
+  m_Layer: 0
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1160228953
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160228952}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.025}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 747906211}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -0.49}
+  m_SizeDelta: {x: 3.5, y: 1.75}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1160228954
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160228952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994c66b6148109b489689ed705d244cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 0}
+  SiblingIndex: 0
+  LayoutPosition: {x: 0, y: 0, z: 0}
+  LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
+  AdapterBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 1.75, y: 0.875, z: 0}
+  LayoutBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 1.75, y: 0.875, z: 0}
+  RotatedAndScaledBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 1.75, y: 0.875, z: 0}
+  ComponentScale: {x: 1, y: 1, z: 1}
+  FillSize: {x: 6, y: 3, z: 0}
+  ShrinkSize: {x: 999999, y: 999999, z: 999999}
+  TargetPosition: {x: -1.3125, y: 0.5833334, z: 0}
+  TargetRotation: {x: 0, y: 0, z: 0, w: 1}
+  TargetScale: {x: 1, y: 1, z: 1}
+  TargetRectSize: {x: 3.5, y: 1.75, z: 0}
+  TransformPosition: {x: 0, y: -0.49, z: 0.025}
+  TransformRotation: {x: -0, y: -0, z: -0, w: 1}
+  TransformScale: {x: 1, y: 1, z: 1}
+  TransformRectSize: {x: 3.5, y: 1.75}
+--- !u!114 &1160228955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160228952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 1, b: 0.4513507, a: 0.38431373}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1160228956
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160228952}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1192160709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4357,11 +4494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -4434,6 +4571,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -4701,11 +4842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -4778,6 +4919,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -5045,11 +5190,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -5122,6 +5267,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -5297,11 +5446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -5374,6 +5523,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -5565,6 +5718,8 @@ GameObject:
   - component: {fileID: 1963511760}
   - component: {fileID: 1963511759}
   - component: {fileID: 1963511758}
+  - component: {fileID: 1963511762}
+  - component: {fileID: 1963511761}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -5767,6 +5922,44 @@ MonoBehaviour:
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
   TransformRectSize: {x: 3.5, y: 1.75}
+--- !u!114 &1963511761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963511756}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1963511762
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963511756}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1975560524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5837,11 +6030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -5914,6 +6107,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
@@ -6179,11 +6376,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.w
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TargetRotation.z
-      value: 0.70710677
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2112166120019199960, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: TransformScale.x
@@ -6256,6 +6453,10 @@ PrefabInstance:
     - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_Name
       value: SkillCardVrs2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456886299242859184, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8456886299242859196, guid: a5fc5481d40eb584b9ecdf4e047e9253, type: 3}
       propertyPath: m_LocalScale.x
