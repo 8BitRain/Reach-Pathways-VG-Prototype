@@ -2,6 +2,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using System.Collections.Generic;
+using System.Linq;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class AudioManager : MonoBehaviour
 
     // Place all events you want to have stored as comma separated EventReference variables, then assign them to the corresponding FMOD events in the inspector
     [SerializeField]
-    public EventReference ambience;
-    private EventInstance ambienceInstance;
+    public EventReference menuMusic, gameplayMusic;
+    private EventInstance menuMusicInst, gameplayMusicInst;
 
     private List<EventInstance> instances = new();
 
@@ -24,19 +25,14 @@ public class AudioManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
     }
 
-    // UNCOMMENT FOR AMBIENCE SFX ON SCRIPT LOAD
-    // private void Start()
-    // {
-    //     ambienceInstance.getPlaybackState(out PLAYBACK_STATE state);
-    //     if (state == PLAYBACK_STATE.STOPPED)
-    //     {
-    //         ambienceInstance = (EventInstance)PlaySFX(ambience, null, gameObject, true);
-    //     }
-    // }
+    void Start()
+    {
+        StateManager.Instance.OnStateChanged += OnStateChanged;
+    }
 
     // Primary function for audio playback - overloaded method that allows for playback of both one-shots and instances. Returns the instance if an instance is made for future reference, and returns null if it plays a one-shot.
     // Example usage
@@ -81,15 +77,40 @@ public class AudioManager : MonoBehaviour
     // Stops and removes all instances from the AudioManager's instance list
     private void ClearInstances()
     {
-        foreach (EventInstance instance in instances)
+        foreach (EventInstance instance in instances.ToList())
         {
             instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             instances.Remove(instance);
         }
     }
 
+    void ChangeBGM(EventReference reference, EventInstance instance)
+    {
+        ClearInstances();
+        instance.getPlaybackState(out PLAYBACK_STATE playbackState);
+        if (playbackState == PLAYBACK_STATE.STOPPED)
+        {
+            instance = (EventInstance)PlaySFX(reference, null, gameObject, true);
+            AddInstance(instance);
+        }
+    }
+
+    void OnStateChanged(State newState)
+    {
+        switch(newState)
+        {
+            case MainMenuState:
+                ChangeBGM(menuMusic, menuMusicInst);
+                break;
+            case GameInitState:
+                ChangeBGM(gameplayMusic, gameplayMusicInst);
+                break;
+        }
+    }
+
     void OnDestroy()
     {
         ClearInstances();
+        StateManager.Instance.OnStateChanged -= OnStateChanged;
     }
 }
