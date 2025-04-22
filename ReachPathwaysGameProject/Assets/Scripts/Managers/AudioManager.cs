@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     // Place all events you want to have stored as comma separated EventReference variables, then assign them to the corresponding FMOD events in the inspector
     [SerializeField]
     public EventReference menuMusic, gameplayMusic;
-    private EventInstance menuMusicInst, gameplayMusicInst;
+    private EventInstance musicInst;
 
     private string cont = "Continue";
 
@@ -28,7 +28,6 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             StateManager.Instance.OnStateChanged += OnStateChanged;
-            // DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -70,6 +69,7 @@ public class AudioManager : MonoBehaviour
     {
         instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         instances.Remove(instance);
+        instance.release();
     }
 
     // Stops and removes all instances from the AudioManager's instance list
@@ -79,20 +79,19 @@ public class AudioManager : MonoBehaviour
         {
             instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             instances.Remove(instance);
+            instance.release();
         }
     }
 
-    void ChangeBGM(EventReference reference, EventInstance instance)
+    void ChangeBGM(EventReference reference)
     {
-        ClearInstances();
-        instance.getPlaybackState(out PLAYBACK_STATE playbackState);
-        Debug.Log(instance.ToString());
-        if (playbackState == PLAYBACK_STATE.STOPPED)
+        musicInst.getPlaybackState(out PLAYBACK_STATE playbackState);
+        if (playbackState != PLAYBACK_STATE.STOPPED)
         {
-            instance = (EventInstance)PlaySFX(reference, null, gameObject, true);
-            Debug.Log(instance.ToString());
-            AddInstance(instance);
+            RemoveInstance(musicInst);
         }
+        musicInst = (EventInstance)PlaySFX(reference, null, gameObject, true);
+        AddInstance(musicInst);
     }
 
     void OnStateChanged(State newState)
@@ -100,12 +99,11 @@ public class AudioManager : MonoBehaviour
         switch(newState)
         {
             case MainMenuState:
-                ChangeBGM(menuMusic, menuMusicInst);
-                Debug.Log("switch case");
+                ChangeBGM(menuMusic);
                 break;
             case GameInitState:
-                menuMusicInst.setParameterByName(cont, 1);
-                ChangeBGM(gameplayMusic, gameplayMusicInst);
+                musicInst.setParameterByName(cont, 1);
+                ChangeBGM(gameplayMusic);
                 break;
         }
     }
