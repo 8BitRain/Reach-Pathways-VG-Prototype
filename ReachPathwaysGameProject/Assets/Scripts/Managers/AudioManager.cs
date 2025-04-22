@@ -27,13 +27,9 @@ public class AudioManager : MonoBehaviour
         else
         {
             Instance = this;
+            StateManager.Instance.OnStateChanged += OnStateChanged;
             // DontDestroyOnLoad(gameObject);
         }
-    }
-
-    void Start()
-    {
-        StateManager.Instance.OnStateChanged += OnStateChanged;
     }
 
     // Primary function for audio playback - overloaded method that allows for playback of both one-shots and instances. Returns the instance if an instance is made for future reference, and returns null if it plays a one-shot.
@@ -90,9 +86,11 @@ public class AudioManager : MonoBehaviour
     {
         ClearInstances();
         instance.getPlaybackState(out PLAYBACK_STATE playbackState);
+        Debug.Log(instance.ToString());
         if (playbackState == PLAYBACK_STATE.STOPPED)
         {
             instance = (EventInstance)PlaySFX(reference, null, gameObject, true);
+            Debug.Log(instance.ToString());
             AddInstance(instance);
         }
     }
@@ -103,6 +101,7 @@ public class AudioManager : MonoBehaviour
         {
             case MainMenuState:
                 ChangeBGM(menuMusic, menuMusicInst);
+                Debug.Log("switch case");
                 break;
             case GameInitState:
                 menuMusicInst.setParameterByName(cont, 1);
