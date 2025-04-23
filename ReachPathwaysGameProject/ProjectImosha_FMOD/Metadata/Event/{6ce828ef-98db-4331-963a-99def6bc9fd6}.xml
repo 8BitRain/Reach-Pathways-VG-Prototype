@@ -205,7 +205,10 @@
 			<value>0</value>
 		</property>
 		<property name="releaseTime">
-			<value>2000</value>
+			<value>5000</value>
+		</property>
+		<property name="releaseShape">
+			<value>0.728825212</value>
 		</property>
 		<property name="finalValue">
 			<value>-80</value>
