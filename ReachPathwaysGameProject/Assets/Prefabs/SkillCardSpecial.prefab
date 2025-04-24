@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3146699519524605693}
   - component: {fileID: 3146699519524605692}
   - component: {fileID: 3146699519524605695}
+  - component: {fileID: 5893705524854483052}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -105,6 +106,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5893705524854483052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3146699519524605689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a8ccadec2e441469fcf302be84cd1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointText: {fileID: 0}
+  descriptionText: {fileID: 3146699521220511958}
 --- !u!1 &3146699519981473980
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +132,7 @@ GameObject:
   - component: {fileID: 3146699519981473971}
   - component: {fileID: 3146699519981473970}
   - component: {fileID: 3146699519981473981}
+  - component: {fileID: 6871539947624282310}
   m_Layer: 0
   m_Name: SkillCardSpecial
   m_TagString: Untagged
@@ -211,6 +227,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6871539947624282310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3146699519981473980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4116bf3c13024014db86f54f2b85f0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardColor: 0
+  characterType: 0
+  specialty: 0
+  meshRenderer: {fileID: 0}
+  colorForCard:
+  - {fileID: 2100000, guid: 4fbdd75629c4a1f4fb99aa576abb8731, type: 2}
+  - {fileID: 2100000, guid: 5aa25970e2081ec4a8cb7bd272ba65d9, type: 2}
+  - {fileID: 2100000, guid: 9b93694842ba0ed4cab6ae6df06200ed, type: 2}
+  - {fileID: 2100000, guid: 92aa885b970115b42992aa97069cacda, type: 2}
+  - {fileID: 2100000, guid: d51056ec121b57e449d2402b52145bdc, type: 2}
+  - {fileID: 2100000, guid: 91c3ed60a1efa5f4dbf416b2d7e17a95, type: 2}
+  pointSymbol: 
 --- !u!1 &3146699520201121649
 GameObject:
   m_ObjectHideFlags: 0
