@@ -466,7 +466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &392113580
 Transform:
   m_ObjectHideFlags: 0
@@ -722,6 +722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BusinessEventCard
       objectReference: {fileID: 0}
+    - target: {fileID: 1790873584891470549, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1938710299464296696, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
       propertyPath: m_Color.b
       value: 0.6823069
@@ -750,6 +754,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6981132
       objectReference: {fileID: 0}
+    - target: {fileID: 2715064532739537280, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
+      propertyPath: eCardSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b4838db36d879d48866fa005b0af7bb, type: 2}
     - target: {fileID: 3861524581303055383, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
       propertyPath: m_Color.b
       value: 0.6823069
@@ -953,7 +961,7 @@ Transform:
   m_GameObject: {fileID: 628049503}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.4, z: -11.01}
+  m_LocalPosition: {x: 0, y: 3.4, z: -13.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1365,6 +1373,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &773954454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 773954456}
+  - component: {fileID: 773954455}
+  m_Layer: 0
+  m_Name: TempTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &773954455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773954454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3193c3104dc9ce45bb0dd485765d01c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterParent: {fileID: 392113579}
+  eventCardParent: {fileID: 1594875671}
+  characterList: []
+--- !u!4 &773954456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773954454}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.2194786, y: -0.6546762, z: 3.1142378}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &815368474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,6 +1719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TechnologyEventCard
       objectReference: {fileID: 0}
+    - target: {fileID: 1790873584891470549, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1938710299464296696, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
       propertyPath: m_Color.b
       value: 0.6823069
@@ -1692,6 +1751,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6981132
       objectReference: {fileID: 0}
+    - target: {fileID: 2715064532739537280, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
+      propertyPath: eCardSO
+      value: 
+      objectReference: {fileID: 11400000, guid: fbae587c837717544b04b6ee458a826e, type: 2}
     - target: {fileID: 3861524581303055383, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
       propertyPath: m_Color.b
       value: 0.6823069
@@ -3202,6 +3265,11 @@ MonoBehaviour:
   m_DefaultActionMap: User
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &1594875671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1790873584891470549, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
+  m_PrefabInstance: {fileID: 898347105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1608978826
 GameObject:
   m_ObjectHideFlags: 0
@@ -4440,6 +4508,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthEventCard
       objectReference: {fileID: 0}
+    - target: {fileID: 1790873584891470549, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7259750027558094431, guid: 75684b52733edde449743fe5c192c9c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.37
@@ -4607,3 +4679,4 @@ SceneRoots:
   - {fileID: 6609245284409871475}
   - {fileID: 898347105}
   - {fileID: 626277482}
+  - {fileID: 773954456}

@@ -640,6 +640,7 @@ GameObject:
   - component: {fileID: 7285354973294117187}
   - component: {fileID: 3996595566926443441}
   - component: {fileID: 8509872006944963673}
+  - component: {fileID: 2715064532739537280}
   m_Layer: 0
   m_Name: OrderEventCard-Vrs1
   m_TagString: Untagged
@@ -734,6 +735,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2715064532739537280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790873584891470549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa30d4832ac0fd44afdf84f00411f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 662428139978826520}
+  descriptionText: {fileID: 5437774512450594739}
+  goalPointsText:
+  - {fileID: 2649157219926136332}
+  - {fileID: 5118962054703758816}
+  - {fileID: 1378228405580765183}
+  charactersIconImage:
+  - {fileID: 8209980452061396843}
+  - {fileID: 8458140770858675105}
+  - {fileID: 2256105154888632748}
+  - {fileID: 3861524581303055383}
+  - {fileID: 1938710299464296696}
+  - {fileID: 5702092136044462870}
+  - {fileID: 855676407957535922}
+  - {fileID: 7293465462314292284}
+  - {fileID: 7241688386633463240}
+  eCardSO: {fileID: 11400000, guid: 3d96d1e0509b7314f87991a9618d0cec, type: 2}
 --- !u!1 &2294575413096448671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,7 +1159,6 @@ GameObject:
   - component: {fileID: 8658236416164744267}
   - component: {fileID: 1634049988434391576}
   - component: {fileID: 2930784606245820376}
-  - component: {fileID: 2136557799198601383}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -1226,35 +1255,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2136557799198601383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5195731384008069155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa30d4832ac0fd44afdf84f00411f97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleText: {fileID: 662428139978826520}
-  descriptionText: {fileID: 5437774512450594739}
-  goalPointsText:
-  - {fileID: 2649157219926136332}
-  - {fileID: 5118962054703758816}
-  - {fileID: 1378228405580765183}
-  charactersIconImage:
-  - {fileID: 8209980452061396843}
-  - {fileID: 8458140770858675105}
-  - {fileID: 2256105154888632748}
-  - {fileID: 3861524581303055383}
-  - {fileID: 1938710299464296696}
-  - {fileID: 5702092136044462870}
-  - {fileID: 855676407957535922}
-  - {fileID: 7293465462314292284}
-  - {fileID: 7241688386633463240}
-  eCardSO: {fileID: 11400000, guid: 3d96d1e0509b7314f87991a9618d0cec, type: 2}
 --- !u!1 &5211871710254392813
 GameObject:
   m_ObjectHideFlags: 0

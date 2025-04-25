@@ -18,6 +18,17 @@ public class EventCardUI : MonoBehaviour
     [SerializeField]
     private EventCardScriptableObject eCardSO;
 
+    public EventCardScriptableObject eventCardSO { get
+        {
+            return eCardSO;
+        } 
+        set
+        {
+            eCardSO = value;
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
