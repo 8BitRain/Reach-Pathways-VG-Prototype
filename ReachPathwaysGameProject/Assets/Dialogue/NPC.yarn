@@ -1,0 +1,20 @@
+﻿title: NPC
+tags:
+---
+<<declare $player = "UserName">>
+
+PersonA: Greetings, {$player}!
+PersonA: Explain here:
+    <<jump GiveCard>>
+===
+
+
+title: GiveCard
+---
+<<displayCard PersonA >>
+PersonA: Here is your card:
+<<addCardToInventory PersonA>>
+PersonA: Best of luck!
+<<deactivate PersonA>>
+    
+===
