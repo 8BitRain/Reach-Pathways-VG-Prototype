@@ -5,16 +5,20 @@ tags:
 
 PersonA: Greetings, {$player}!
 PersonA: Explain here:
-    <<jump GiveCard>>
-===
-
-
-title: GiveCard
----
 <<displayCard PersonA >>
 PersonA: Here is your card:
 <<addCardToInventory PersonA>>
 PersonA: Best of luck!
 <<deactivate PersonA>>
-    
+===
+
+title: NPC2
+---
+PersonB: Hey there {$player}!
+PersonB: Explain here:
+<<displayCard PersonB >>
+PersonB: Here is your card:
+<<addCardToInventory PersonB>>
+PersonB: Hope it helps!!
+<<deactivate PersonB>>
 ===
