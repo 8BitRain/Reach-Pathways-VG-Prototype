@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{fdc3aa55-8a48-44e6-b42e-608985291b4d}">
 		<property name="name">
-			<value>MUS_CardGame</value>
+			<value>MUS_CardGame (old) 2</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -40,9 +40,6 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{cd3d8529-9fca-4a5d-a878-5086022b14dd}</destination>
-		</relationship>
-		<relationship name="banks">
-			<destination>{ce777361-e400-46b1-9dc0-c1f224664413}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{6de24777-d075-4a24-bd08-6cd3caff40fe}">
