@@ -20,8 +20,21 @@ public class CharacterSpeaking : MonoBehaviour
 
     private Image CharacterIcon;
 
+    [SerializeField]
+    private bool ContainsCard;
+
+    private Transform cameraLocation;
+
+    [SerializeField]
+    private SkillCardBase card;
+
+    [SerializeField] 
+    private Inventory inventory;
+
     private void Start()
     {
+        cameraLocation = Camera.main.transform;
+
         if (CharacterIcon == null)
         {
             CharacterIcon = transform.GetChild(0).GetComponent<Image>();
@@ -35,6 +48,11 @@ public class CharacterSpeaking : MonoBehaviour
         {
             CharacterIcon.gameObject.SetActive(false);
         }
+
+        if(ContainsCard)
+        {
+            card.gameObject.SetActive(false);
+        }
     }
 
     [YarnCommand("deactivate")]
@@ -47,6 +65,19 @@ public class CharacterSpeaking : MonoBehaviour
     public void Activate()
     {
         CharacterIcon.gameObject.SetActive(true);   
+    }
+
+    [YarnCommand("displayCard")]
+    public void ShowCard()
+    {
+        card.transform.position = new Vector3(cameraLocation.position.x, cameraLocation.position.y, cameraLocation.position.z + 300);
+        card.gameObject.SetActive(true); 
+    }
+
+    [YarnCommand("addCardToInventory")]
+    public void AddCardToInventory()
+    {
+        inventory.AddToInventory(card);
     }
 }
 
