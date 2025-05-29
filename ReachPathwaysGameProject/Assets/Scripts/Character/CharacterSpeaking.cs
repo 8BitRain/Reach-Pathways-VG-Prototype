@@ -77,6 +77,11 @@ public class CharacterSpeaking : MonoBehaviour
     [YarnCommand("addCardToInventory")]
     public void AddCardToInventory()
     {
+        if(!card.isActiveAndEnabled)
+        {
+            card.gameObject.SetActive(true);
+        }
+
         inventory.AddToInventory(card);
     }
 }
