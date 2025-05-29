@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerReturn" id="{0c61f1a6-1326-4b4b-a327-3454cd525398}">
+		<property name="name">
+			<value>Pause</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{45783796-84c9-486d-aef0-2c99521c6068}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{a5b14631-5255-47b0-aaab-217959f35a1a}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{33c99b06-4ff8-4467-908c-975677b0988b}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{45783796-84c9-486d-aef0-2c99521c6068}">
+		<relationship name="effects">
+			<destination>{a8779c9d-04fa-42cf-8943-58a085d6700a}</destination>
+			<destination>{62880bba-002d-4824-b9a3-59eaa8200ffc}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{a5b14631-5255-47b0-aaab-217959f35a1a}" />
+	<object class="MultibandEqEffect" id="{a8779c9d-04fa-42cf-8943-58a085d6700a}" />
+	<object class="MixerBusFader" id="{62880bba-002d-4824-b9a3-59eaa8200ffc}" />
+</objects>

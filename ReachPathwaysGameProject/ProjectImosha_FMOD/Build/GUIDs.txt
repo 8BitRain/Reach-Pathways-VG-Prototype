@@ -2,4 +2,10 @@
 {566a53b5-957b-0af3-1b89-4b0cd595428b} bank:/Master.strings
 {33c99b06-4ff8-4467-908c-975677b0988b} bus:/
 {d0137b8f-2e35-4716-88f4-b4647c18b9d1} bus:/Reverb
-{7a59f944-8d88-49fe-92f5-af8eab93b2bd} event:/TestEvent
+{fdc3aa55-8a48-44e6-b42e-608985291b4d} event:/MUS_CardGame
+{0b756e84-dfe3-4e4f-88c9-b40f4db5f7d5} event:/MUS_Failure
+{6ce828ef-98db-4331-963a-99def6bc9fd6} event:/MUS_MainMenu
+{027bddb2-a5b7-4373-852f-ad7732a5a5e4} event:/MUS_Success
+{7a59f944-8d88-49fe-92f5-af8eab93b2bd} event:/SFX_TestEvent
+{1f8cbdac-d62d-4d9f-a1b9-16056d6d0f51} parameter:/Continue
+{4512e681-206c-41ca-9f27-50e7edba0764} parameter:/Round

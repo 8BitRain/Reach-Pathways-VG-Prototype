@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{0b756e84-dfe3-4e4f-88c9-b40f4db5f7d5}">
 		<property name="name">
-			<value>MUS_Failure</value>
+			<value>MUS_Failure (old)</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -33,9 +33,6 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{ed9d74a4-cf3e-41fe-9dfb-aede1447d625}</destination>
-		</relationship>
-		<relationship name="banks">
-			<destination>{ce777361-e400-46b1-9dc0-c1f224664413}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{5b190d03-4fb7-4205-aade-cd6b209bba8b}">

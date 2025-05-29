@@ -23,5 +23,10 @@ public class SkillCardUI : MonoBehaviour
         descriptionText.text = $"{card.description}";
     }
 
+    public void Click()
+    {
+        Debug.Log("Clicked!");
+    }
+
 
 }
