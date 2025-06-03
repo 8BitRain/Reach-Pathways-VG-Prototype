@@ -23,7 +23,7 @@ public class SubArea : MonoBehaviour
 
     public void ReturnToOverworld()
     {
-        SceneManager.UnloadSceneAsync("SubArea");
         SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("SubArea");
     }
 }

@@ -170,6 +170,11 @@ public class MainMenuState : State
         {
             SceneManager.UnloadSceneAsync("Overworld");
         }
+
+        if (SceneManager.GetSceneByName("SubArea").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("SubArea");
+        }
     }
 
     public override void Update()
@@ -195,6 +200,11 @@ public class OverworldState : State
         if (SceneManager.GetSceneByName("Pause").isLoaded)
         {
             SceneManager.UnloadSceneAsync("Pause");
+        }
+
+        if (SceneManager.GetSceneByName("SubArea").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("SubArea");
         }
 
         if (SceneManager.GetSceneByName("MainMenu").isLoaded)
