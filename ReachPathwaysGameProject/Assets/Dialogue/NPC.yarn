@@ -1,7 +1,7 @@
 ﻿title: NPC
 tags:
 ---
-<<declare $player = "UserName">>
+// <<declare $player = "UserName">>
 
 PersonA: Greetings, {$player}!
 PersonA: Explain here:
