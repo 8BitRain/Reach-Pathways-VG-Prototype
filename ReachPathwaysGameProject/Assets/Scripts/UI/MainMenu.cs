@@ -10,10 +10,11 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.sceneUnloaded += OnSceneUnload;
     }
-    
+
     public void StartGame()
     {
-        StateManager.Instance.ChangeState(new GameInitState());
+        // StateManager.Instance.ChangeState(new GameInitState());
+        StateManager.Instance.ChangeState(new OverworldState());
     }
 
     public void OpenSettings()

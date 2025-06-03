@@ -165,6 +165,11 @@ public class MainMenuState : State
         {
             SceneManager.UnloadSceneAsync("Gameplay");
         }
+
+        if (SceneManager.GetSceneByName("Overworld").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Overworld");
+        }
     }
 
     public override void Update()
@@ -174,6 +179,42 @@ public class MainMenuState : State
     public override void Exit()
     {
         SceneManager.UnloadSceneAsync("MainMenu");
+    }
+}
+
+public class OverworldState : State
+{
+    public override bool Pausable => false;
+    public override void Enter()
+    {
+        if (!SceneManager.GetSceneByName("Overworld").isLoaded)
+        {
+            SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
+        }
+
+        if (SceneManager.GetSceneByName("Pause").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Pause");
+        }
+
+        if (SceneManager.GetSceneByName("MainMenu").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("MainMenu");
+        }
+
+        if (SceneManager.GetSceneByName("Gameplay").isLoaded)
+        {
+            SceneManager.UnloadSceneAsync("Gameplay");
+        }
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        SceneManager.UnloadSceneAsync("Overworld");
     }
 }
 
