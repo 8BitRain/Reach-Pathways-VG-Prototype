@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dc9be038caf4758a4824a3d28cc63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueRunner: {fileID: 1185607461}
 --- !u!1001 &200446460
 PrefabInstance:
   m_ObjectHideFlags: 0
