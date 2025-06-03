@@ -59,6 +59,14 @@ PersonA: What would you like to do?
     <<UnlockConfidant Confidant>>
     PersonA: Our relationship is now unlocked!
     <<jump ConfidantMenu>>
+-> Reset my data.
+    <<ResetConfidant Confidant>>
+    PersonA: I've reset our relationship data to default values.
+    <<jump ConfidantMenu>>
+-> Save my progress.
+    <<SaveData Confidant>>
+    PersonA: I've saved our current relationship progress.
+    <<jump ConfidantMenu>>
 -> Goodbye.
     PersonA: See you later, {$player}!
 

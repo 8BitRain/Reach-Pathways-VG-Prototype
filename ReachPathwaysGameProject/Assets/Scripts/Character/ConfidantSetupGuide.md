@@ -14,6 +14,7 @@ This guide explains how to set up a simple Confidant system that works reliably 
 - Demonstrates conditional dialogue based on confidant status
 - Shows interactive options for rank management
 - Features a looping menu system that returns to options after each action
+- Includes save/load options for persistent data
 
 ## Setup Instructions
 
@@ -134,6 +135,72 @@ PersonA: What would you like to do?
 -> Goodbye
     PersonA: See you later!  // Ends dialogue
 ===
+```
+
+## Save/Load System
+
+The Confidant system now includes automatic save/load functionality to persist data between game sessions.
+
+### How It Works
+
+1. **Automatic Saving**: Data is saved automatically when:
+   - Any confidant action is performed (rank changes, lock/unlock)
+   - The application loses focus or is paused
+   - The GameObject is destroyed
+   - The application quits
+
+2. **Automatic Loading**: Data is loaded automatically when:
+   - The component starts (if Auto Load is enabled)
+   - You can also manually load with the LoadData command
+
+3. **Storage Method**: Uses Unity's PlayerPrefs with JSON serialization
+   - Each confidant is saved with a unique key: `Confidant_{confidantName}`
+   - Data persists across game sessions and builds
+
+### Save/Load Settings
+
+In the Inspector, you can configure:
+- **Auto Save**: Automatically saves after each change (recommended: true)
+- **Auto Load**: Automatically loads saved data on Start (recommended: true)
+
+### Available Save/Load Commands
+
+- `<<SaveData GameObjectName>>` - Manually save current data
+- `<<LoadData GameObjectName>>` - Manually load saved data
+- `<<ResetConfidant GameObjectName>>` - Reset to default values and save
+
+### Example Usage in Yarn
+
+```yarn
+-> Save my progress
+    <<SaveData Confidant>>
+    PersonA: I've saved our relationship progress!
+-> Reset everything
+    <<ResetConfidant Confidant>>
+    PersonA: I've reset our relationship to the beginning.
+```
+
+### Save Data Structure
+
+The system saves:
+- Confidant name
+- Current rank
+- Unlock status
+
+### Managing Save Data
+
+From C# code, you can:
+```csharp
+// Manual save/load
+confidant.SaveConfidantData();
+confidant.LoadConfidantData();
+
+// Delete save data
+confidant.DeleteSaveData();
+
+// Check if save data exists
+string saveKey = $"Confidant_{confidantName}";
+bool hasSaveData = PlayerPrefs.HasKey(saveKey);
 ```
 
 ## Extending the System
