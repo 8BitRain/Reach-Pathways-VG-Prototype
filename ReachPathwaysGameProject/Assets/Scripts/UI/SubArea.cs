@@ -24,7 +24,6 @@ public class SubArea : MonoBehaviour
     public void ReturnToOverworld()
     {
         SceneManager.UnloadSceneAsync("SubArea");
-        Debug.Log("unloading the thing");
         SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
     }
 }

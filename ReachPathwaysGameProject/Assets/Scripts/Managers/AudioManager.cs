@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
 
     // Place all events you want to have stored as comma separated EventReference variables, then assign them to the corresponding FMOD events in the inspector
     [SerializeField]
-    public EventReference menuMusic, gameplayMusic;
+    public EventReference menuMusic, gameplayMusic, overworldMusic;
     private EventInstance musicInst;
 
     private string cont = "Continue";
@@ -96,7 +96,7 @@ public class AudioManager : MonoBehaviour
 
     void OnStateChanged(State newState)
     {
-        switch(newState)
+        switch (newState)
         {
             case MainMenuState:
                 ChangeBGM(menuMusic);
@@ -104,6 +104,9 @@ public class AudioManager : MonoBehaviour
             case GameInitState:
                 musicInst.setParameterByName(cont, 1);
                 ChangeBGM(gameplayMusic);
+                break;
+            case OverworldState:
+                ChangeBGM(overworldMusic);
                 break;
         }
     }
