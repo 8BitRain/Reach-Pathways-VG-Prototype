@@ -2,12 +2,64 @@ title: Confidant
 tags:
 ---
 <<declare $player = "UserName">>
+<<declare $conRank = 0>>
+<<declare $conName = "DefaultConfidant">>
+<<declare $conUnlocked = true>>
 
 PersonA: Greetings, {$player}!
-PersonA: Explain here:
-<<displayCard PersonA >>
-PersonA: Here is your card:
-<<addCardToInventory PersonA>>
-PersonA: Best of luck!
-<<deactivate PersonA>>
+PersonA: I like the cut of your jib.
+PersonA: My name is {$conName}.
+
+<<if $conUnlocked>>
+    PersonA: I'm glad we can talk freely.
+    <<IncreaseRank Confidant>>
+    PersonA: Yay! Our rank is now {$conRank}.
+    
+    <<jump ConfidantMenu>>
+<<else>>
+    PersonA: I'm sorry, but I can't talk to you right now.
+    PersonA: You need to unlock our relationship first.
+    
+    -> Unlock our relationship.
+        <<UnlockConfidant Confidant>>
+        PersonA: Great! Now we can be friends. Our rank is {$conRank}.
+        <<jump ConfidantMenu>>
+    -> Goodbye.
+        PersonA: Maybe next time, {$player}.
+<<endif>>
+
+===
+
+title: ConfidantMenu
+tags:
+---
+PersonA: What would you like to do?
+
+-> I want to check my rank with you.
+    PersonA: Our current rank is {$conRank}.
+    <<jump ConfidantMenu>>
+-> I want to increase our rank again.
+    <<if $conRank < 10>>
+        <<IncreaseRank Confidant>>
+        PersonA: Great! Our rank is now {$conRank}.
+    <<else>>
+        PersonA: We're already at maximum rank!
+    <<endif>>
+    <<jump ConfidantMenu>>
+-> I want to set our rank to 5.
+    <<SetRank Confidant 5>>
+    PersonA: Okay, I've set our rank to {$conRank}.
+    <<jump ConfidantMenu>>
+-> Lock our relationship.
+    <<LockConfidant Confidant>>
+    PersonA: Our relationship is now locked.
+    PersonA: You'll need to unlock it again to continue talking.
+    <<jump ConfidantMenu>>
+-> Unlock our relationship.
+    <<UnlockConfidant Confidant>>
+    PersonA: Our relationship is now unlocked!
+    <<jump ConfidantMenu>>
+-> Goodbye.
+    PersonA: See you later, {$player}!
+
 ===
