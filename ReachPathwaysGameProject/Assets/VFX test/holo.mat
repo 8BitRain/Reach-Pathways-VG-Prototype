@@ -32,6 +32,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: e635a327ba557534eabd34d9a5b30bf1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_8c4c02aa9a7342be852da60ca88a524e_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: e635a327ba557534eabd34d9a5b30bf1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,6 +59,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
+    - _FresnelStrength: 0.48
     - _Fresnel_Power: 1.74
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -67,10 +72,24 @@ Material:
     - _ZWriteControl: 0
     - _vertexOffset: 0.05
     m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _Fresnel_Color: {r: 4, g: 4, b: 4, a: 0.3921569}
     - _ScanLinesSpeed: {r: 0, g: -1, b: 0, a: 0}
     - _ScanLinesTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &5059766812186098914
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
 --- !u!114 &6006248019807897664
 MonoBehaviour:
   m_ObjectHideFlags: 11
