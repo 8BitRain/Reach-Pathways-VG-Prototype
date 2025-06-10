@@ -198,18 +198,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuMusic:
     Guid:
-      Data1: 1827154159
-      Data2: 1127323867
-      Data3: -560383338
-      Data4: -694174474
+      Data1: -462764250
+      Data2: 1166139544
+      Data3: -1496914296
+      Data4: -1483354576
     Path: event:/MUS_MainMenu
   gameplayMusic:
     Guid:
-      Data1: -37508523
-      Data2: 1155959368
-      Data3: -1990185292
-      Data4: 1293625733
+      Data1: -922097665
+      Data2: 1094514928
+      Data3: 1260460215
+      Data4: -437175202
     Path: event:/MUS_CardGame
+  overworldMusic:
+    Guid:
+      Data1: 1328371092
+      Data2: 1303781364
+      Data3: 128400814
+      Data4: -1053708948
+    Path: event:/MUS_GuildHall
 --- !u!4 &1024968430
 Transform:
   m_ObjectHideFlags: 0
