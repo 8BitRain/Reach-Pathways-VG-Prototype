@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: holo
-  m_Shader: {fileID: -6465566751694194690, guid: ee78b6034c5816248b4b6c23a537b847, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 6facc7b33e22bb747860f5b79c8c804d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -18,13 +18,16 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses:
-  - DepthOnly
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _ScanLinesTexture:
+        m_Texture: {fileID: 2800000, guid: e635a327ba557534eabd34d9a5b30bf1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_222a902523da430b852e1365af7d4542_Out_0_Texture2D:
         m_Texture: {fileID: 2800000, guid: e635a327ba557534eabd34d9a5b30bf1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -59,7 +62,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
-    - _FresnelStrength: 0.48
+    - _FresnelStrength: 0.69
     - _Fresnel_Power: 1.74
     - _QueueControl: 0
     - _QueueOffset: 0
