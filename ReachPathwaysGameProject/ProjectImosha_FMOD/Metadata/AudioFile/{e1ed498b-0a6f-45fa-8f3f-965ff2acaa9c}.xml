@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e1ed498b-0a6f-45fa-8f3f-965ff2acaa9c}">
+		<property name="assetPath">
+			<value>ProjectImosha_Failure_V3_R2_M1_SilenceRemoved.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>26.522666666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7e02d121-b9cc-438f-be13-5f1b2c8d662a}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -8,7 +8,7 @@
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{9eac2f82-7fa6-4808-8dc4-45cb62f254bc}</destination>
+			<destination>{2ba7594c-20c8-4d43-a6f4-593361af019b}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{aa7b107d-1a44-43cc-a269-aeac005adb43}</destination>
@@ -103,6 +103,9 @@
 	<object class="SingleSound" id="{f1c97270-a5f3-4878-bd4d-0bb93f0f7856}">
 		<property name="length">
 			<value>209.24920833333334</value>
+		</property>
+		<property name="startOffset">
+			<value>3.5</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{ac99a63b-8d6d-4df1-9cf8-a21f8c60bf36}</destination>
