@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class FadeTransition : MonoBehaviour
 {
+    public static FadeTransition Instance;
+
     [SerializeField] 
     private Transform fadeGameObject;
 
@@ -14,6 +13,20 @@ public class FadeTransition : MonoBehaviour
     private float fadeOutDuration;
 
     private Image image;
+
+    private void Awake()
+    {
+        //Singleton
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }   
+    }
 
     void Start()
     {
@@ -34,4 +47,5 @@ public class FadeTransition : MonoBehaviour
     {
         image.DOFade(0, secondsDuration).OnComplete(() => Debug.Log("fade out completed"));
     }
+
 }
