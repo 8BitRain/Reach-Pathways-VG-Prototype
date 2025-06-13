@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{c909e7ff-f8f0-413c-b718-214b5e3cf1e5}">
 		<property name="name">
-			<value>MUS_CardGame</value>
+			<value>MUS_CardGame (old) 3</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{9eac2f82-7fa6-4808-8dc4-45cb62f254bc}</destination>
+			<destination>{840ecd37-3d88-483f-8a5e-2c32339c5093}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{b1fb5243-b2f6-4a76-9b4b-9ce651957a54}</destination>
@@ -30,9 +30,6 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{5a2c600f-fdae-4d2b-993c-e22058dddb0a}</destination>
-		</relationship>
-		<relationship name="banks">
-			<destination>{ce777361-e400-46b1-9dc0-c1f224664413}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{b1fb5243-b2f6-4a76-9b4b-9ce651957a54}">

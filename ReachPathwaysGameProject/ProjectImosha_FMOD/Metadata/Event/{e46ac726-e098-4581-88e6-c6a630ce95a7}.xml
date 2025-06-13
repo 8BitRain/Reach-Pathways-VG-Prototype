@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{e46ac726-e098-4581-88e6-c6a630ce95a7}">
 		<property name="name">
-			<value>MUS_MainMenu</value>
+			<value>MUS_MainMenu (old) 2</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{9eac2f82-7fa6-4808-8dc4-45cb62f254bc}</destination>
+			<destination>{840ecd37-3d88-483f-8a5e-2c32339c5093}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{2a4cc323-7514-411e-9526-1f8277bfed80}</destination>
@@ -32,9 +32,6 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{6aac9156-41f4-416f-90f7-4bdbd911d910}</destination>
-		</relationship>
-		<relationship name="banks">
-			<destination>{ce777361-e400-46b1-9dc0-c1f224664413}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{2a4cc323-7514-411e-9526-1f8277bfed80}">
