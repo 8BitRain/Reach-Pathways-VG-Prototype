@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,16 @@ public class SubArea : MonoBehaviour
 
     public void ReturnToOverworld()
     {
-        SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync("SubArea");
+        FadeTransition fadeTransition = FindObjectOfType<FadeTransition>();
+        if (fadeTransition != null)
+        {
+            fadeTransition.FadeIn(2);
+            DOVirtual.DelayedCall(2, () => {
+
+                SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("SubArea");
+            });
+        }
+
     }
 }
