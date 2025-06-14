@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: holo
+  m_Name: holo 2
   m_Shader: {fileID: -6465566751694194690, guid: 6facc7b33e22bb747860f5b79c8c804d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -31,6 +31,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ScanLinesTexture:
+        m_Texture: {fileID: 2800000, guid: e635a327ba557534eabd34d9a5b30bf1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Scanlines:
         m_Texture: {fileID: 2800000, guid: e635a327ba557534eabd34d9a5b30bf1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -90,12 +94,12 @@ Material:
     - _Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 0}
     - _Fresnel_Color: {r: 4, g: 4, b: 4, a: 0.3921569}
     - _ScanLinePosition: {r: 0.23, g: 1.3, b: -2.1, a: 0}
-    - _ScanLineSpeed: {r: -1, g: 0, b: 0, a: 0}
-    - _ScanLineTiling: {r: 3, g: 3, b: 0, a: 0}
+    - _ScanLineSpeed: {r: -1, g: -1, b: 0, a: 0}
+    - _ScanLineTiling: {r: 1, g: 1, b: 0, a: 0}
     - _ScanLinesSpeed: {r: 0, g: -1, b: 0, a: 0}
     - _ScanLinesTiling: {r: 1, g: 1, b: 0, a: 0}
     - _ScreenLinePosition: {r: 1, g: 1, b: 1, a: 0}
-    - _mult: {r: 0, g: 1, b: 0.9200001, a: 1}
+    - _mult: {r: 0.9357196, g: 1, b: 0.3443396, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5059766812186098914
 MonoBehaviour:
