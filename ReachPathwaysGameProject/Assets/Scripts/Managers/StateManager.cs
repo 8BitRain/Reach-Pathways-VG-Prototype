@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +21,9 @@ public class StateManager : MonoBehaviour
     public delegate void PauseChangeHandler(bool gamePaused);
     public event PauseChangeHandler OnGamePausedChanged;
 
+    [SerializeField]
+    private bool launchMenuOnStart = true;
+
     private void Awake()
     {
         // Singleton enforcement
@@ -37,7 +42,10 @@ public class StateManager : MonoBehaviour
     {
         // Subscribe to the scene loaded event and load the main menu
         SceneManager.sceneLoaded += OnSceneLoaded;
-        ChangeState(new MainMenuState());
+        if (launchMenuOnStart)
+        {
+            ChangeState(new MainMenuState());
+        }
     }
 
     public State GetCurrentState()
