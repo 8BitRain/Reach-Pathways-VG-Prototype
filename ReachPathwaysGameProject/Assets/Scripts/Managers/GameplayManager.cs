@@ -22,8 +22,10 @@ public class GameplayManager : MonoBehaviour
 
     public bool endAllRounds { get; private set; }
 
-    [SerializeField] 
+    [SerializeField]
     public List<CharacterCard> characterList = new();
+
+    private List<GameObject> handList = new();
 
     void Awake()
     {
@@ -63,7 +65,7 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawSkillCard()
     {
-        Instantiate(cardPrefab, hand.transform);        
+        handList.Add(Instantiate(cardPrefab, hand.transform));
         if (StateManager.Instance.GetCurrentState() is SkillDrawState)
         {
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
@@ -80,7 +82,7 @@ public class GameplayManager : MonoBehaviour
         StateManager.Instance.ChangeState(new TurnState());
     }
 
-    public void AdvanceTurn(GameObject card)
+    public void AdvanceTurn()
     {
         if (currentTurn < characterList.Count - 1)
         {
@@ -101,6 +103,5 @@ public class GameplayManager : MonoBehaviour
                 roundUI.EndRounds();
             }
         }
-        card.SetActive(false);
     }
 }
