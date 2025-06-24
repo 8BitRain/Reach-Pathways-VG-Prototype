@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -26,6 +27,82 @@ public class GameplayManager : MonoBehaviour
     public List<CharacterCard> characterList = new();
 
     private List<GameObject> handList = new();
+    
+    // Innovator Cards
+    static List<Type> innovatorCards = new()
+    {
+        typeof(EurekaCard),
+        typeof(UnconventionalHackCard),
+        typeof(AdaptTheWorldCard),
+        typeof(ArtTherapyCard),
+        typeof(WeatherTheBrainstormCard),
+        typeof(BlueElectricityWhiteSmokeCard),
+        typeof(MissingEyebrowsCard),
+        typeof(StuckInARutCard),
+        typeof(WatchItBurnCard)
+    };
+
+    // Strategist Cards
+    static List<Type> strategistCards = new()
+    {
+            typeof(TimedJustRightCard),
+            typeof(AllInOnePieceCard),
+            typeof(BreatheInBreatheOutCard),
+            typeof(PerceivedRisksCard),
+            typeof(RestAndRecuperateCard),
+            typeof(FriendInNeedCard),
+            typeof(EmotionalOutburstCard),
+            typeof(TearToPiecesCard),
+            typeof(LackOfAwarenessCard)
+    };
+
+    // Visionary Cards
+    static List<Type> visionaryCards = new()
+    {
+        typeof(APinchOfPunctualityCard),
+        typeof(TheGiftOfAVisionCard),
+        typeof(PromisesPromisesCard),
+        typeof(ElephantInTheRoomCard),
+        typeof(AdvocationPracticesCard),
+        typeof(DelayedAccountabilityCard),
+        typeof(TheBiggerPictureCard),
+        typeof(SuperSonicPotentialCard),
+        typeof(OverestimatedAbilitiesCard),
+        typeof(TheCurseOfAVisionCard),
+        typeof(AstronomicalRecalculationCard)
+    };
+
+    // Collaborator Cards
+    static List<Type> collaboratorCards = new()
+    {
+        typeof(AHelpingHand),
+        typeof(WeListenAndWeDontJudgeCard),
+        typeof(TakingInitiativeCard),
+        typeof(DungeonsAndDelegationsCard),
+        typeof(TrustFallCard),
+        typeof(MoodBoardCard),
+        typeof(PartyRockerCard),
+        typeof(OpenNoteQuizCard),
+        typeof(BurntAndCrunchedCard),
+        typeof(FightForTheCrownCard),
+        typeof(TooManyEggsForOneBasketCard)
+    };
+
+    // Communicator Cards
+    static List<Type> communicatorCards = new()
+    {
+        typeof(AllsWellThatEndsWellCard),
+        typeof(FruitfulTruthsCard),
+        typeof(TalkOfTheTownCard),
+        typeof(StalematesCard),
+        typeof(AdjustingConnectionsCard),
+        typeof(AForEffortCard),
+        typeof(ClearSummationCard),
+        typeof(HighStakesPitchCard),
+        typeof(AllEarsNoMouthCard),
+        typeof(InterruptionsCard),
+        typeof(DetrimentalMisstepCard)
+    };
 
     void Awake()
     {
@@ -58,7 +135,10 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawSkillCard()
     {
-        handList.Add(Instantiate(cardPrefab, hand.transform));
+        GameObject cardObj;
+        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
+        CardBase card = cardObj.AddComponent(innovatorCards[0]) as CardBase;
+        print(card.cardName);
         if (StateManager.Instance.GetCurrentState() is SkillDrawState)
         {
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
