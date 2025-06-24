@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 5401001677949555229}
   - component: {fileID: 8595898136670215274}
   - component: {fileID: 5880052676811060865}
+  - component: {fileID: 454727592054844632}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -307,3 +308,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f03fcf6c7703461083a6bde4dc45986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &454727592054844632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873871271037899261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cedae822cbb7d46b7efe1993e9ae6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardColor: 0
+  characterType: 0
+  specialty: 0
+  meshRenderer: {fileID: 0}
+  colorForCard:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pointSymbol: 
