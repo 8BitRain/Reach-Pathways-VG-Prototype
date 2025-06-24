@@ -268,7 +268,7 @@ public class GameInitState : State
             SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
         }
         
-        // GameplayManager's Awake() will handle the transition to EventDrawState
+        // GameplayManager's Awake() will handle the transition to ScenarioDrawState
         // once it's fully initialized
     }
 
@@ -281,28 +281,6 @@ public class GameInitState : State
     }
 }
 
-public class EventDrawState : State
-{
-    public override bool Pausable => true;
-    private GameObject eventDeck;
-    
-    public override void Enter()
-    {
-        // The scene should already be loaded by GameInitState
-        // and GameplayManager should be fully initialized
-        eventDeck = GameplayManager.Instance.eventDeck;
-        eventDeck.GetComponent<Button>().interactable = true;
-    }
-
-    public override void Update()
-    {
-    }
-
-    public override void Exit()
-    {
-        eventDeck.GetComponent<Button>().interactable = false;
-    }
-}
 
 public class ScenarioDrawState : State
 {

@@ -8,7 +8,7 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager Instance { get; private set; }
 
     [SerializeField]
-    public GameObject cardPrefab, characterParent, actionsMenu, hand, skillDeck, eventDeck, scenarioDeck;
+    public GameObject cardPrefab, characterParent, actionsMenu, hand, skillDeck, scenarioDeck;
     [SerializeField]
     public RoundUI roundUI;
 
@@ -42,25 +42,18 @@ public class GameplayManager : MonoBehaviour
         
         scenarioDeck.SetActive(false);
         
-        // Check if we're in GameInitState and transition to EventDrawState
-        // This ensures GameplayManager is fully initialized before EventDrawState is entered
+        // Check if we're in GameInitState and transition to ScenarioDrawState
+        // This ensures GameplayManager is fully initialized before ScenarioDrawState is entered
         if (StateManager.Instance != null && 
             StateManager.Instance.GetCurrentState() is GameInitState)
         {
-            StateManager.Instance.ChangeState(new EventDrawState());
+            StateManager.Instance.ChangeState(new ScenarioDrawState());
         }
     }
 
     void Start()
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
-    }
-
-    public void DrawEventCard()
-    {
-        // Instantiate(cardPrefab, eventDisplay.transform);
-        eventDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT EVENT";
-        StateManager.Instance.ChangeState(new SkillDrawState());
     }
 
     public void DrawSkillCard()
@@ -70,7 +63,7 @@ public class GameplayManager : MonoBehaviour
         {
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
             {
-                StateManager.Instance.ChangeState(new ScenarioDrawState());
+                StateManager.Instance.ChangeState(new TurnState());
             }
         }
     }
@@ -79,7 +72,7 @@ public class GameplayManager : MonoBehaviour
     {
         // Instantiate(cardPrefab, eventDisplay.transform);
         scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
-        StateManager.Instance.ChangeState(new TurnState());
+        StateManager.Instance.ChangeState(new SkillDrawState());
     }
 
     public void AdvanceTurn()
