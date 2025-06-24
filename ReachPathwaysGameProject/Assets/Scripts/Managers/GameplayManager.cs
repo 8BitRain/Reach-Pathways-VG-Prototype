@@ -135,7 +135,10 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawSkillCard()
     {
-        handList.Add(Instantiate(cardPrefab, hand.transform));
+        GameObject cardObj;
+        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
+        cardObj.GetComponent<CardObj>().Init(innovatorCards[0]);
+
         if (StateManager.Instance.GetCurrentState() is SkillDrawState)
         {
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)

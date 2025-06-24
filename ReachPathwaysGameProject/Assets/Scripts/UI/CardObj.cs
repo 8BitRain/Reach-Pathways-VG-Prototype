@@ -1,15 +1,19 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
 
 public class CardObj : MonoBehaviour
 {
     CardBase card;
 
-    void Awake()
+    public void Init(Type cardType)
     {
-        card = gameObject.AddComponent(GameplayManager.innovatorCards[0]) as CardBase;
-        print(card.cardName);
+        if (card == null)
+        {
+            card = gameObject.AddComponent(cardType) as CardBase;
+            print(card.cardName);
+        }
     }
 
     public void PlayCard()
