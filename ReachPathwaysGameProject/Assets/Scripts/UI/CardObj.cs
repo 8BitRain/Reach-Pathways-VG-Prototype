@@ -4,11 +4,12 @@ using UnityEngine.UIElements;
 
 public class CardObj : MonoBehaviour
 {
-    EurekaCard card;
+    CardBase card;
 
     void Awake()
     {
-
+        card = gameObject.AddComponent(GameplayManager.innovatorCards[0]) as CardBase;
+        print(card.cardName);
     }
 
     public void PlayCard()

@@ -29,7 +29,7 @@ public class GameplayManager : MonoBehaviour
     private List<GameObject> handList = new();
     
     // Innovator Cards
-    static List<Type> innovatorCards = new()
+    public static List<Type> innovatorCards = new()
     {
         typeof(EurekaCard),
         typeof(UnconventionalHackCard),
@@ -43,7 +43,7 @@ public class GameplayManager : MonoBehaviour
     };
 
     // Strategist Cards
-    static List<Type> strategistCards = new()
+    public static List<Type> strategistCards = new()
     {
             typeof(TimedJustRightCard),
             typeof(AllInOnePieceCard),
@@ -57,7 +57,7 @@ public class GameplayManager : MonoBehaviour
     };
 
     // Visionary Cards
-    static List<Type> visionaryCards = new()
+    public static List<Type> visionaryCards = new()
     {
         typeof(APinchOfPunctualityCard),
         typeof(TheGiftOfAVisionCard),
@@ -73,7 +73,7 @@ public class GameplayManager : MonoBehaviour
     };
 
     // Collaborator Cards
-    static List<Type> collaboratorCards = new()
+    public static List<Type> collaboratorCards = new()
     {
         typeof(AHelpingHand),
         typeof(WeListenAndWeDontJudgeCard),
@@ -89,7 +89,7 @@ public class GameplayManager : MonoBehaviour
     };
 
     // Communicator Cards
-    static List<Type> communicatorCards = new()
+    public static List<Type> communicatorCards = new()
     {
         typeof(AllsWellThatEndsWellCard),
         typeof(FruitfulTruthsCard),
@@ -135,10 +135,7 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawSkillCard()
     {
-        GameObject cardObj;
-        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
-        CardBase card = cardObj.AddComponent(innovatorCards[0]) as CardBase;
-        print(card.cardName);
+        handList.Add(Instantiate(cardPrefab, hand.transform));
         if (StateManager.Instance.GetCurrentState() is SkillDrawState)
         {
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
