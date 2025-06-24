@@ -1,14 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Card : MonoBehaviour
+public class CardObj : MonoBehaviour
 {
-    private SkillCard card;
+    EurekaCard card;
 
     void Awake()
     {
-        card = GetComponent<SkillCard>();
-        card.SetName(5);
+
     }
 
     public void PlayCard()
