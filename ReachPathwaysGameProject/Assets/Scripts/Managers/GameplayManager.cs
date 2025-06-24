@@ -27,6 +27,8 @@ public class GameplayManager : MonoBehaviour
 
     private List<GameObject> handList = new();
 
+    private List<CardBase> cardList = new();
+
     void Awake()
     {
         // Singleton enforcement
@@ -58,7 +60,38 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawSkillCard()
     {
-        handList.Add(Instantiate(cardPrefab, hand.transform));
+        GameObject cardObj;
+        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
+        
+        // CardObj now automatically creates a random card from all available cards
+        CardObj cardObjComponent = cardObj.GetComponent<CardObj>();
+        CardBase card = cardObjComponent.card;
+        print($"Drew card: {card.cardName}");
+        
+        if (StateManager.Instance.GetCurrentState() is SkillDrawState)
+        {
+            if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
+            {
+                StateManager.Instance.ChangeState(new TurnState());
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Draw a specific card type
+    /// </summary>
+    /// <param name="cardType">The specific card type to draw</param>
+    public void DrawSpecificSkillCard(System.Type cardType)
+    {
+        GameObject cardObj;
+        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
+        
+        CardObj cardObjComponent = cardObj.GetComponent<CardObj>();
+        cardObjComponent.SetCardType(cardType);
+        
+        CardBase card = cardObjComponent.card;
+        print($"Drew specific card: {card.cardName}");
+        
         if (StateManager.Instance.GetCurrentState() is SkillDrawState)
         {
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
