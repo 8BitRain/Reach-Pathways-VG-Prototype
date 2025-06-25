@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using MemoryCards;
+using AbilityCards;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -27,6 +29,8 @@ public class GameplayManager : MonoBehaviour
     public List<CharacterCard> characterList = new();
 
     private List<GameObject> handList = new();
+
+    private List<CardBase> playerDeck = new();
     
     // Innovator Cards
     public static List<Type> innovatorCards = new()
