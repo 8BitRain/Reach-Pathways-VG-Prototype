@@ -109,6 +109,76 @@ public class GameplayManager : MonoBehaviour
         typeof(DetrimentalMisstepCard)
     };
 
+    // Ability Cards
+    public static List<Type> abilityCards = new()
+    {
+        // Awareness Ability Cards
+        typeof(GroundedFocusCard),
+        typeof(RefocusCard),
+        typeof(MentalClarityCard),
+        typeof(TacticalResetCard),
+        // Creativity Ability Cards
+        typeof(CreativeSparkCard),
+        typeof(TriageCard),
+        typeof(ImagineAWorldCard),
+        typeof(BufferCard),
+        // Integrity Ability Cards
+        typeof(MomentumCard),
+        typeof(PauseAndReflectCard),
+        typeof(PreparationPaysCard),
+        typeof(SteadyNervesCard),
+        // Teamwork Ability Cards
+        typeof(ReorganizeResourcesCard),
+        typeof(BoostMoraleCard),
+        typeof(QuickAssessmentCard),
+        typeof(GroupCheckInCard),
+        // Communication Ability Cards
+        typeof(SynchronizeCard),
+        typeof(SwapSupportCard),
+        typeof(ExtendAHandCard),
+        typeof(CollectiveWisdomCard)
+    };
+
+    // Support Cards
+    public static List<Type> supportCards = new()
+    {
+        // Awareness Support Cards
+        typeof(DeepBreathCard),
+        typeof(ChallengingAssumptionCard),
+        typeof(ClearObservationCard),
+        typeof(EmpatheticEyesCard),
+        typeof(WorldlyImpactCard),
+        typeof(SocialWavesCard),
+        // Creativity Support Cards
+        typeof(SparklingRealizationCard),
+        typeof(InspirationOfLightCard),
+        typeof(ExpressiveConnectionCard),
+        typeof(FuturePossibilitiesCard),
+        typeof(ResourcefulPurposeCard),
+        typeof(ReadyForTheUnknownCard),
+        // Integrity Support Cards
+        typeof(ValuableActionCard),
+        typeof(HardTruthCard),
+        typeof(MistakesWillPassCard),
+        typeof(ProbableThinkingCard),
+        typeof(WhoCallsTheNormCard),
+        typeof(HonorFocusCard),
+        // Teamwork Support Cards
+        typeof(SharedTrustCard),
+        typeof(AdaptNRelyCard),
+        typeof(CelebrationUnitesCard),
+        typeof(ValuedInputCard),
+        typeof(HarmonizeLightCard),
+        typeof(ShoulderOfSupportCard),
+        // Communication Support Cards
+        typeof(PurposeOfWordsCard),
+        typeof(ActiveListeningCard),
+        typeof(IntentionalClarityCard),
+        typeof(VulnerableRootsCard),
+        typeof(TalesFlutterCard),
+        typeof(AmplifyEndsCard)
+    };
+
     void Awake()
     {
         // Singleton enforcement

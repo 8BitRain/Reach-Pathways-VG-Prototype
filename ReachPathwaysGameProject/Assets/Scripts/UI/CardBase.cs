@@ -484,7 +484,6 @@ namespace MemoryCards
 
 }
 
-
 namespace AbilityCards
 {
     // Abstract base class for all Ability Cards
