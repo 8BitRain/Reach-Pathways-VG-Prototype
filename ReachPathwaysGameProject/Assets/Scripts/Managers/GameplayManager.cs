@@ -9,6 +9,7 @@ using SupportCards;
 
 public class GameplayManager : MonoBehaviour
 {
+    private System.Random rng = new();
     public static GameplayManager Instance { get; private set; }
 
     [SerializeField]
@@ -31,7 +32,7 @@ public class GameplayManager : MonoBehaviour
 
     private List<GameObject> handList = new();
 
-    private List<CardBase> playerDeck = new();
+    private List<Type> playerDeck = new();
     
     // Innovator Cards
     public static List<Type> innovatorCards = new()
@@ -208,13 +209,18 @@ public class GameplayManager : MonoBehaviour
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
     }
 
-    public void DrawSkillCard()
+    public void DrawPlayerCard()
     {
+        // Create the new card object & save it in the player's hand
         GameObject cardObj;
         handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
-        cardObj.GetComponent<CardObj>().Init(innovatorCards[0]);
 
-        if (StateManager.Instance.GetCurrentState() is SkillDrawState)
+        // Draw a card & remove it from the player's deck
+        int cardIndex = rng.Next(playerDeck.Count);
+        cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
+        playerDeck.RemoveAt(cardIndex);
+
+        if (StateManager.Instance.GetCurrentState() is InitialDrawState)
         {
             if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
             {
@@ -223,11 +229,21 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    public void DrawAbilityCard()
+    {
+        // Create the new card object & add it to the player's hand
+        GameObject cardObj;
+        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
+
+        // Draw a random ability card from all possible options
+        cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+    }
+
     public void DrawScenarioCard()
     {
         // Instantiate(cardPrefab, eventDisplay.transform);
         scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
-        StateManager.Instance.ChangeState(new SkillDrawState());
+        StateManager.Instance.ChangeState(new InitialDrawState());
     }
 
     public void AdvanceTurn()

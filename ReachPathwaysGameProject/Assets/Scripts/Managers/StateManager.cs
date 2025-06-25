@@ -236,7 +236,7 @@ public class OverworldState : State
     }
 }
 
-public class SkillDrawState : State
+public class InitialDrawState : State
 {
     public override bool Pausable => true;
     private GameObject skillDeck;
