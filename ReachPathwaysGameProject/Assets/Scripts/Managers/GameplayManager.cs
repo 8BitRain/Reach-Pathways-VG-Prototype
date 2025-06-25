@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using MemoryCards;
 using AbilityCards;
+using SupportCards;
 
 public class GameplayManager : MonoBehaviour
 {

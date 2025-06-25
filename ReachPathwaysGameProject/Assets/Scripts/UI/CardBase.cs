@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MemoryCards;
 using UnityEngine;
 
 public abstract class CardBase : MonoBehaviour
@@ -15,6 +16,7 @@ namespace MemoryCards
     // Classes to group cards with shared effects
     public abstract class NeutralCard : CardBase
     {
+        public override int numberEffect => 1;
         public override void SpecialEffect()
         {
             // No effect
@@ -714,5 +716,193 @@ namespace AbilityCards
             // Everyone may look at the top card of their inventory deck
             throw new System.NotImplementedException();
         }
+    }
+}
+
+namespace SupportCards
+{
+    // Awareness Support Cards
+    public class DeepBreathCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Deep Breath";
+        public override string description => "";
+    }
+
+    public class ChallengingAssumptionCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Challenging Assumption";
+        public override string description => "";
+    }
+
+    public class ClearObservationCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Clear Observation";
+        public override string description => "";
+    }
+
+    public class EmpatheticEyesCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Empathetic Eyes";
+        public override string description => "";
+    }
+
+    public class WorldlyImpactCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Worldly Impact";
+        public override string description => "";
+    }
+
+    public class SocialWavesCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Social Waves";
+        public override string description => "";
+    }
+
+    // Creativity Support Cards
+    public class SparklingRealizationCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Sparkling Realization";
+        public override string description => "";
+    }
+
+    public class InspirationOfLightCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Inspiration of Light";
+        public override string description => "";
+    }
+
+    public class ExpressiveConnectionCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Expressive Connection";
+        public override string description => "";
+    }
+
+    public class FuturePossibilitiesCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Future Possibilities";
+        public override string description => "";
+    }
+
+    public class ResourcefulPurposeCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Resourceful Purpose";
+        public override string description => "";
+    }
+
+    public class ReadyForTheUnknownCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Ready for the Unknown";
+        public override string description => "";
+    }
+
+    // Integrity Support Cards
+    public class ValuableActionCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Valuable Action";
+        public override string description => "";
+    }
+
+    public class HardTruthCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Hard Truth";
+        public override string description => "";
+    }
+
+    public class MistakesWillPassCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Mistakes will Pass";
+        public override string description => "";
+    }
+
+    public class ProbableThinkingCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Probable Thinking";
+        public override string description => "";
+    }
+
+    public class WhoCallsTheNormCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Who Calls the Norm?";
+        public override string description => "";
+    }
+
+    public class HonorFocusCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Honor Focus";
+        public override string description => "";
+    }
+
+    // Teamwork Support Cards
+    public class SharedTrustCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Shared Trust";
+        public override string description => "";
+    }
+
+    public class AdaptNRelyCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Adapt n' Rely";
+        public override string description => "";
+    }
+
+    public class CelebrationUnitesCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Celebration Unites";
+        public override string description => "";
+    }
+
+    public class ValuedInputCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Valued Input";
+        public override string description => "";
+    }
+
+    public class HarmonizeLightCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Harmonize Light";
+        public override string description => "";
+    }
+
+    public class ShoulderOfSupportCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Shoulder of Support";
+        public override string description => "";
+    }
+
+    // Communication Support Cards
+    public class PurposeOfWordsCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Purpose of Words";
+        public override string description => "";
+    }
+
+    public class ActiveListeningCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Active Listening";
+        public override string description => "";
+    }
+
+    public class IntentionalClarityCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Intentional Clarity";
+        public override string description => "";
+    }
+
+    public class VulnerableRootsCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Vulnerable Roots";
+        public override string description => "";
+    }
+
+    public class TalesFlutterCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Tales Flutter";
+        public override string description => "";
+    }
+
+    public class AmplifyEndsCard : MemoryCards.NeutralCard
+    {
+        public override string cardName => "Amplify Ends";
+        public override string description => "";
     }
 }
