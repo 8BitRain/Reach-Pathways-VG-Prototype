@@ -268,6 +268,7 @@ public class GameplayManager : MonoBehaviour
                 currentTurn = 0;
                 currentRound++;
                 roundUI.UpdateRoundText(currentRound);
+                roundUI.UpdateTurnText(characterList[currentTurn]);
             }
             else
             {
