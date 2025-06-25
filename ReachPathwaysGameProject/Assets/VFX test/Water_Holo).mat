@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water_Holo)
-  m_Shader: {fileID: -6465566751694194690, guid: 36f83202685c62d4893f5c1df23ef22e, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 0e1db9579ace09b4fa3a9b08a2ba539c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -28,6 +28,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RefractionNormalTexture:
+        m_Texture: {fileID: 2800000, guid: 80bf76137ae1d1e44a1e2837dc49382c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Refraction_Normals:
         m_Texture: {fileID: 2800000, guid: 80bf76137ae1d1e44a1e2837dc49382c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -53,27 +57,35 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.42
-    - _Distance: 0
-    - _FoamAmount: 41
-    - _FoamCutoff: 191
+    - _Alpha: 0.45
+    - _Distance: 0.6
+    - _FoamAmount: 29.6
+    - _FoamCutoff: 267.2
     - _FoamScale: 1.1
     - _FoamSpeed: 0.1
+    - _HoloStrength: 1
+    - _Horizon_Distance: 0.4
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RefractionSpeed: 0.05
     - _RefractionStrength: 1
     - _holo_Strength: 1
+    - _refraction_Speed: 0.05
+    - _refraction_Strenght: 0.1
     m_Colors:
-    - _Depth_Color: {r: 0, g: 0.78307223, b: 1, a: 1}
+    - _Depth_Color: {r: 0, g: 0.11240196, b: 1, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Horizon_Color: {r: 0, g: 0.7461715, b: 1, a: 0}
     - _RefractionScale: {r: 1, g: 1, b: 0, a: 0}
+    - _Refraction_Scale: {r: 4, g: 4, b: 0, a: 0}
     - _ScanLine_Speed: {r: 0, g: -0.05, b: 0, a: 0}
     - _ScanLine_Speed_1: {r: 0, g: 0, b: 0, a: 0}
     - _ScanLine_Speed_2: {r: 0, g: -0.1, b: 0, a: 0}
     - _ScanLine_Tiling: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _ScanLine_Tiling_2: {r: 1, g: 1, b: 1, a: 0}
-    - _SurfaceColor: {r: 0.22054112, g: 0.7924528, b: 0.78876305, a: 1}
+    - _ScanLines_Speed: {r: 0, g: 0.02, b: 0.01, a: 0}
+    - _ScanLines_Tiling: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _SurfaceColor: {r: 0, g: 0.69767475, b: 1, a: 1}
     - _xgfn: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4409235404805870967

@@ -40,11 +40,19 @@ Material:
         m_Texture: {fileID: 2800000, guid: 80bf76137ae1d1e44a1e2837dc49382c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Refraction_Normals:
+        m_Texture: {fileID: 2800000, guid: 80bf76137ae1d1e44a1e2837dc49382c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_123bf3cfb9974c8da368bfa98d85a9d6_Out_0_Texture2D:
         m_Texture: {fileID: 2800000, guid: e635a327ba557534eabd34d9a5b30bf1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_5a5996859bf34b72aaaa627aaaa6ae8b_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 80bf76137ae1d1e44a1e2837dc49382c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_6e1d56f590ea45f9a86c5ce0e6d4b9f9_Out_0_Texture2D:
         m_Texture: {fileID: 2800000, guid: 80bf76137ae1d1e44a1e2837dc49382c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -62,19 +70,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distance: 1.77
-    - _FoamAmount: 8.2
-    - _FoamCutoff: 12.84
-    - _FoamScale: 5
+    - _Distance: 1.95
+    - _FoamAmount: 0.9
+    - _FoamCutoff: 1.64
+    - _FoamScale: 1.04
     - _FoamSpeed: 0.1
+    - _Horizon_Distance: 2.77
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RefractionSpeed: 0.05
     - _RefractionStrength: 1
+    - _refraction_Scale: 4
+    - _refraction_Speed: 0.1
+    - _refraction_Strenght: 0.66
     m_Colors:
-    - _Depth_Color: {r: 0.20392156, g: 0.41176468, b: 0.737255, a: 1}
-    - _FoamColor: {r: 0.740566, g: 0.9451901, b: 1, a: 1}
+    - _Depth_Color: {r: 0.055999756, g: 0, b: 1, a: 1}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Horizon_Color: {r: 1, g: 0.73333335, b: 0, a: 1}
     - _RefractionScale: {r: 1, g: 1, b: 0, a: 0}
-    - _SurfaceColor: {r: 0.19215685, g: 0.8000001, b: 0.7960785, a: 1}
+    - _Refraction_Scale: {r: 1, g: 1, b: 0, a: 0}
+    - _SurfaceColor: {r: 0, g: 1, b: 0.992157, a: 1}
     - _xgfn: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
