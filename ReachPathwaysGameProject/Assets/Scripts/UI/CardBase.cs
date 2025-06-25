@@ -36,11 +36,11 @@ public class EurekaCard : CardBase
 public class UnconventionalHackCard : CardBase
 {
     public override string cardName => "Unconventional Hack";
-    public override string description => "You recall a time your unconventional solution saved Kaharaba’s main building.";
+    public override string description => "You recall a time your unconventional solution saved Kaharaba's main building.";
     public override int numberEffect => 2;
     public override void SpecialEffect()
     {
-        // After playing this card, draw 2 cards.
+        // Draw 2 cards after playing.
         throw new System.NotImplementedException();
     }
 }
@@ -68,7 +68,7 @@ public class WeatherTheBrainstormCard : CardBase
 {
     public override string cardName => "Weather the Brainstorm";
     public override string description => "You recall a time your brainstorm produced a number of ideas, but you couldn't settle on one.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -80,7 +80,7 @@ public class BlueElectricityWhiteSmokeCard : CardBase
 {
     public override string cardName => "Blue Electricity, White Smoke";
     public override string description => "You recall a time your invention worked before fizzling out in a dramatic display of smoke.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -95,7 +95,7 @@ public class MissingEyebrowsCard : CardBase
     public override int numberEffect => -1;
     public override void SpecialEffect()
     {
-        // When using this card, if the roll is a partial failure, the roll is turned into a success.
+        // Partial failure becomes a success.
         throw new System.NotImplementedException();
     }
 }
@@ -160,7 +160,7 @@ public class PerceivedRisksCard : CardBase
 {
     public override string cardName => "Perceived Risks";
     public override string description => "You recall a time you noticed the potentially dangerous risks in a prospective plan.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -172,7 +172,7 @@ public class RestAndRecuperateCard : CardBase
 {
     public override string cardName => "Rest and Recuperate";
     public override string description => "You recall a time you perceived the stress in your body before an important meeting and rested in Afya.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -184,7 +184,7 @@ public class FriendInNeedCard : CardBase
 {
     public override string cardName => "Friend in Need";
     public override string description => "You recall a time a guild member accompanied you on a nature walk after noticing you ignoring your own stress.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -223,7 +223,7 @@ public class LackOfAwarenessCard : CardBase
     public override int numberEffect => -1;
     public override void SpecialEffect()
     {
-        // When using this card, if the roll is a partial failure, the roll is turned into a success.
+        // Partial failure becomes a success.
         throw new System.NotImplementedException();
     }
 }
@@ -264,7 +264,7 @@ public class ElephantInTheRoomCard : CardBase
 {
     public override string cardName => "Elephant in the Room";
     public override string description => "You recall a time when you needed to address unethical behavior of a colleague in a constructive manner.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -276,7 +276,7 @@ public class AdvocationPracticesCard : CardBase
 {
     public override string cardName => "Advocation Practices";
     public override string description => "You recall a time you spoke up about utilizing ethical practices during a high-stakes project.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -288,7 +288,7 @@ public class DelayedAccountabilityCard : CardBase
 {
     public override string cardName => "Delayed Accountability";
     public override string description => "You recall a time when your lack of accountability led to a major project delay.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -300,7 +300,7 @@ public class TheBiggerPictureCard : CardBase
 {
     public override string cardName => "The Bigger Picture";
     public override string description => "You recall a time when you were trying to create something but couldn't wrap your head around it, until stepping away to unveil crucial revelations.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -312,7 +312,7 @@ public class SuperSonicPotentialCard : CardBase
 {
     public override string cardName => "Super-Sonic Potential";
     public override string description => "You recall a time when you brought an idea to the table, and gathered an extensive team to take it on.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -351,7 +351,7 @@ public class AstronomicalRecalculationCard : CardBase
     public override int numberEffect => -1;
     public override void SpecialEffect()
     {
-        // When using this card, if the roll fails, the roll will be reversed and be successful.
+        // Failed roll becomes a success.
         throw new System.NotImplementedException();
     }
 }
@@ -392,7 +392,7 @@ public class DungeonsAndDelegationsCard : CardBase
 {
     public override string cardName => "Dungeons and Delegations";
     public override string description => "You recall a time you played games with friends, and delegated tasks amongst one another.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -404,7 +404,7 @@ public class TrustFallCard : CardBase
 {
     public override string cardName => "Trust Fall";
     public override string description => "You recall a time you built trust with your colleagues through a cultural exchange, learning from one another what they provide to the team.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -416,7 +416,7 @@ public class MoodBoardCard : CardBase
 {
     public override string cardName => "Mood Board";
     public override string description => "You recall a time when you worked with friends to make a mood board, filled with one another's hopes, dreams, interests and the like, building a stronger bond amongst each other.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -428,7 +428,7 @@ public class PartyRockerCard : CardBase
 {
     public override string cardName => "Party Rocker";
     public override string description => "You recall a time when you held a party, managing the event and making sure everyone was having a good time.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -440,7 +440,7 @@ public class OpenNoteQuizCard : CardBase
 {
     public override string cardName => "Open Note Quiz";
     public override string description => "You recall a time when you shared notes with your team, helping each other better understand where to find solutions.";
-    public override int numberEffect => 0;
+    public override int numberEffect => 1;
     public override void SpecialEffect()
     {
         // No effect
@@ -467,7 +467,7 @@ public class FightForTheCrownCard : CardBase
     public override int numberEffect => -1;
     public override void SpecialEffect()
     {
-        // When using this card, if the roll is a partial failure, the roll is turned into a success.
+        // Partial failure becomes a success.
         throw new System.NotImplementedException();
     }
 }
@@ -583,7 +583,7 @@ public class AllEarsNoMouthCard : CardBase
     public override int numberEffect => -1;
     public override void SpecialEffect()
     {
-        // When using this card, if the roll fails, the roll will be reversed and be successful.
+        // Failed roll becomes a success.
         throw new System.NotImplementedException();
     }
 }
