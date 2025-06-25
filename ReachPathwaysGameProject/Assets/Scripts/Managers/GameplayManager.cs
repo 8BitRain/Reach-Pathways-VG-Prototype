@@ -9,11 +9,11 @@ using SupportCards;
 
 public class GameplayManager : MonoBehaviour
 {
-    private System.Random rng = new();
     public static GameplayManager Instance { get; private set; }
+    private System.Random rng = new();
 
     [SerializeField]
-    public GameObject cardPrefab, characterParent, actionsMenu, hand, skillDeck, scenarioDeck;
+    public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDeck;
     [SerializeField]
     public RoundUI roundUI;
 
@@ -30,7 +30,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     public List<CharacterCard> characterList = new();
 
-    private List<GameObject> handList = new();
+    private List<GameObject> playerHand = new();
 
     private List<Type> playerDeck = new();
     
@@ -213,7 +213,7 @@ public class GameplayManager : MonoBehaviour
     {
         // Create the new card object & save it in the player's hand
         GameObject cardObj;
-        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
+        playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
 
         // Draw a card & remove it from the player's deck
         int cardIndex = rng.Next(playerDeck.Count);
@@ -222,7 +222,7 @@ public class GameplayManager : MonoBehaviour
 
         if (StateManager.Instance.GetCurrentState() is InitialDrawState)
         {
-            if (hand.GetComponentsInChildren<Transform>().Length - 1 > 2)
+            if (playerHandObj.GetComponentsInChildren<Transform>().Length - 1 > 2)
             {
                 StateManager.Instance.ChangeState(new TurnState());
             }
@@ -233,7 +233,7 @@ public class GameplayManager : MonoBehaviour
     {
         // Create the new card object & add it to the player's hand
         GameObject cardObj;
-        handList.Add(cardObj = Instantiate(cardPrefab, hand.transform));
+        playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
 
         // Draw a random ability card from all possible options
         cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
