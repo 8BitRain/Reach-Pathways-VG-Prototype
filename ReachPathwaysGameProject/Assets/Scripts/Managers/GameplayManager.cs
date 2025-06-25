@@ -211,18 +211,25 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawPlayerCard()
     {
-        // Create the new card object & save it in the player's hand
-        GameObject cardObj;
-        playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
-
-        // Draw a card & remove it from the player's deck
-        int cardIndex = rng.Next(playerDeck.Count);
-        cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
-        playerDeck.RemoveAt(cardIndex);
-
+        if (!(playerDeck.Count > 0))
+        {
+            Debug.Log("Player is out of cards!");
+        }
+        else
+        {
+            // Create the new card object & save it in the player's hand
+            GameObject cardObj;
+            playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
+            // Draw a card & remove it from the player's deck
+            int cardIndex = rng.Next(playerDeck.Count);
+            cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
+            playerDeck.RemoveAt(cardIndex);
+        }
+        
+        // Advances to the starting turn once the player has drawn 4 cards or if they have no cards left in the deck
         if (StateManager.Instance.GetCurrentState() is InitialDrawState)
         {
-            if (playerHandObj.GetComponentsInChildren<Transform>().Length - 1 > 2)
+            if ((playerHandObj.GetComponentsInChildren<Transform>().Length - 1 > 4) || !(playerDeck.Count > 0))
             {
                 StateManager.Instance.ChangeState(new TurnState());
             }

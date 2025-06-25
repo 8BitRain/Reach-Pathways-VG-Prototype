@@ -1957,7 +1957,7 @@ GameObject:
   - component: {fileID: 553256246}
   - component: {fileID: 553256245}
   m_Layer: 5
-  m_Name: Skill Deck
+  m_Name: Player Deck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2029,7 +2029,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 776204110}
         m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
-        m_MethodName: DrawSkillCard
+        m_MethodName: DrawPlayerCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2813,8 +2813,8 @@ MonoBehaviour:
   cardPrefab: {fileID: 8873871271037899261, guid: de872de44f0974d55a9f9dbf1d7808c0, type: 3}
   characterParent: {fileID: 190595493}
   actionsMenu: {fileID: 373055104}
-  hand: {fileID: 810829050}
-  skillDeck: {fileID: 553256243}
+  playerHandObj: {fileID: 810829050}
+  playerDeckObj: {fileID: 553256243}
   scenarioDeck: {fileID: 819715510}
   roundUI: {fileID: 483758576}
   totalRounds: 4
@@ -6711,7 +6711,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skill Deck
+  m_text: Player Deck
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
