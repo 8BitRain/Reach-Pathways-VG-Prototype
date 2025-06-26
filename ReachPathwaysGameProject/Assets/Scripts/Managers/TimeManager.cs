@@ -1,26 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
-enum TimeSlot { Morning, Lunchtime, Afternoon, SunSet, Evening}
+public enum TimeSlot { Morning, Lunchtime, Afternoon, SunSet, Evening}
 
 public class TimeManager : MonoBehaviour
 {
     TimeSlot currentTime;
+    
     Calendar calendar;
+
+    [SerializeField]
+    private TimeUI timeUI;
+
+    [SerializeField]
+    private int startingMonth;
 
     void Start()
     {
-        calendar = new Calendar(12);
+        if(timeUI == null) { timeUI = GetComponent<TimeUI>(); }
+
+        calendar = new Calendar(startingMonth);
         currentTime = TimeSlot.Morning;
-        Debug.Log("Current time of day: " + currentTime);
+        timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime);
     }
 
-    //1 slot = rest
-    //2 slots = Skill-based activity
-    //2 slots = confidant interaction
-    //5 slots = Scenario (card game)
-    //5 slots = major confidant event
+    //Handles the time change based on the parameter increments
     public void AdvanceTimeBySlots(int num)
     {
         int timeIndex = (int)currentTime;
@@ -48,8 +52,20 @@ public class TimeManager : MonoBehaviour
 
         currentTime = (TimeSlot)timeIndex;
 
-        Debug.Log("Current time of day: " + currentTime);
-       
+        timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime);
+    }
+
+    [YarnCommand("AdvanceTimeSlot")]
+    public void YarnAdvanceTime(int num)
+    {
+        /*
+         * 1 slot = rest
+         * 2 slots = Skill-based activity
+         * 2 slots = confidant interaction
+         * 5 slots = Scenario (card game)
+         * 5 slots = major confidant event
+         */
+        AdvanceTimeBySlots(num);
     }
 }
 
@@ -57,8 +73,8 @@ public class Calendar
 {
     private int maxDays; //30, 31, and 28
 
-    private int currentDay;
-    private int currentMonth;
+    public int currentDay { get; private set; }
+    public int currentMonth { get; private set; }
 
     public Calendar(int getMonth)
     {
@@ -88,8 +104,6 @@ public class Calendar
         {
             currentDay++;
         }
-
-        Debug.Log("Current date: " + currentMonth + "/" + currentDay);
     }
 
     private void SetMaxDaysForMonth(int getMonth)
