@@ -6,6 +6,7 @@ using UnityEngine;
 using MemoryCards;
 using AbilityCards;
 using SupportCards;
+using UnityEngine.UI;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class GameplayManager : MonoBehaviour
     private System.Random rng = new();
 
     [SerializeField]
-    public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDeck;
+    public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDeck, abilityDeck;
     [SerializeField]
     public RoundUI roundUI;
 
@@ -32,7 +33,7 @@ public class GameplayManager : MonoBehaviour
 
     private List<GameObject> playerHand = new();
 
-    private List<Type> playerDeck = new();
+    public List<Type> playerDeck = new();
     
     // Innovator Cards
     public static List<Type> innovatorCards = new()
@@ -207,6 +208,8 @@ public class GameplayManager : MonoBehaviour
     void Start()
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
+        playerDeck.Add(innovatorCards[0]);
+        playerDeck.Add(innovatorCards[1]);
     }
 
     public void DrawPlayerCard()
@@ -226,13 +229,20 @@ public class GameplayManager : MonoBehaviour
             playerDeck.RemoveAt(cardIndex);
         }
         
-        // Advances to the starting turn once the player has drawn 4 cards or if they have no cards left in the deck
+        // Advances to the starting turn once the player has drawn 4 cards
         if (StateManager.Instance.GetCurrentState() is InitialDrawState)
         {
-            if ((playerHandObj.GetComponentsInChildren<Transform>().Length - 1 > 4) || !(playerDeck.Count > 0))
+            // Enables drawing from the ability deck if the player ran out of cards in their deck on the initial draw
+            if (playerDeck.Count < 1)
             {
-                StateManager.Instance.ChangeState(new TurnState());
+                playerDeckObj.GetComponent<Button>().interactable = false;
+                abilityDeck.GetComponent<Button>().interactable = true;
             }
+
+            if (playerHandObj.GetComponentsInChildren<CardObj>().Length > 3)
+                {
+                    StateManager.Instance.ChangeState(new TurnState());
+                }
         }
     }
 
@@ -244,6 +254,16 @@ public class GameplayManager : MonoBehaviour
 
         // Draw a random ability card from all possible options
         cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+
+        // Advances to the starting turn once the player has drawn 4 cards or if they have no cards left in the deck
+        if (StateManager.Instance.GetCurrentState() is InitialDrawState)
+        {
+            Debug.Log(playerHandObj.GetComponentsInChildren<CardObj>().Length);
+            if (playerHandObj.GetComponentsInChildren<CardObj>().Length > 3)
+            {
+                StateManager.Instance.ChangeState(new TurnState());
+            }
+        }
     }
 
     public void DrawScenarioCard()

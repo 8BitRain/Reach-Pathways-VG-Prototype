@@ -239,11 +239,21 @@ public class OverworldState : State
 public class InitialDrawState : State
 {
     public override bool Pausable => true;
-    private GameObject playerDeckObj;
+    private GameObject playerDeckObj, abilityDeck;
     public override void Enter()
     {
         playerDeckObj = GameplayManager.Instance.playerDeckObj;
-        playerDeckObj.GetComponent<Button>().interactable = true;
+        abilityDeck = GameplayManager.Instance.abilityDeck;
+        
+        if (GameplayManager.Instance.playerDeck.Count > 0)
+        {
+            playerDeckObj.GetComponent<Button>().interactable = true;
+            abilityDeck.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            playerDeckObj.GetComponent<Button>().interactable = false;
+        }
     }
 
     public override void Update()
@@ -253,6 +263,7 @@ public class InitialDrawState : State
     public override void Exit()
     {
         playerDeckObj.GetComponent<Button>().interactable = false;
+        abilityDeck.GetComponent<Button>().interactable = false; 
     }
 }
 
