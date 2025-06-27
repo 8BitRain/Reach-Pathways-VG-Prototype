@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +21,9 @@ public class StateManager : MonoBehaviour
     public delegate void PauseChangeHandler(bool gamePaused);
     public event PauseChangeHandler OnGamePausedChanged;
 
+    [SerializeField]
+    private bool launchMenuOnStart = true;
+
     private void Awake()
     {
         // Singleton enforcement
@@ -37,7 +42,10 @@ public class StateManager : MonoBehaviour
     {
         // Subscribe to the scene loaded event and load the main menu
         SceneManager.sceneLoaded += OnSceneLoaded;
-        ChangeState(new MainMenuState());
+        if (launchMenuOnStart)
+        {
+            ChangeState(new MainMenuState());
+        }
     }
 
     public State GetCurrentState()
@@ -228,14 +236,24 @@ public class OverworldState : State
     }
 }
 
-public class SkillDrawState : State
+public class InitialDrawState : State
 {
     public override bool Pausable => true;
-    private GameObject skillDeck;
+    private GameObject playerDeckObj, abilityDeck;
     public override void Enter()
     {
-        skillDeck = GameplayManager.Instance.skillDeck;
-        skillDeck.GetComponent<Button>().interactable = true;
+        playerDeckObj = GameplayManager.Instance.playerDeckObj;
+        abilityDeck = GameplayManager.Instance.abilityDeck;
+        
+        if (GameplayManager.Instance.playerDeck.Count > 0)
+        {
+            playerDeckObj.GetComponent<Button>().interactable = true;
+            abilityDeck.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            playerDeckObj.GetComponent<Button>().interactable = false;
+        }
     }
 
     public override void Update()
@@ -244,7 +262,8 @@ public class SkillDrawState : State
 
     public override void Exit()
     {
-        skillDeck.GetComponent<Button>().interactable = false;
+        playerDeckObj.GetComponent<Button>().interactable = false;
+        abilityDeck.GetComponent<Button>().interactable = false; 
     }
 }
 
@@ -260,7 +279,7 @@ public class GameInitState : State
             SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
         }
         
-        // GameplayManager's Awake() will handle the transition to EventDrawState
+        // GameplayManager's Awake() will handle the transition to ScenarioDrawState
         // once it's fully initialized
     }
 
@@ -273,28 +292,6 @@ public class GameInitState : State
     }
 }
 
-public class EventDrawState : State
-{
-    public override bool Pausable => true;
-    private GameObject eventDeck;
-    
-    public override void Enter()
-    {
-        // The scene should already be loaded by GameInitState
-        // and GameplayManager should be fully initialized
-        eventDeck = GameplayManager.Instance.eventDeck;
-        eventDeck.GetComponent<Button>().interactable = true;
-    }
-
-    public override void Update()
-    {
-    }
-
-    public override void Exit()
-    {
-        eventDeck.GetComponent<Button>().interactable = false;
-    }
-}
 
 public class ScenarioDrawState : State
 {
@@ -323,7 +320,7 @@ public class TurnState : State
         // This should be doable with .interactable, but this version of Unity has a bug where the cards do not inherit this properly when instantiated
         // For now, we can use blocksRaycasts as a workaround, but updating to a 2022 or 2023 version of Unity would fix this
         // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = true;
-        GameplayManager.Instance.hand.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().blocksRaycasts = true;
         GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
@@ -336,7 +333,7 @@ public class TurnState : State
     public override void Exit()
     {
         // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = false;
-        GameplayManager.Instance.hand.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().blocksRaycasts = false;
         GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
     }
 }
