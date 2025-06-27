@@ -70,6 +70,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Displacement: 0.1
     - _Distance: 1.95
     - _FoamAmount: 0.9
     - _FoamCutoff: 1.64
