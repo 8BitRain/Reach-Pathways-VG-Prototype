@@ -302,6 +302,7 @@ public class GameplayManager : MonoBehaviour
         if (currentTurn < characterList.Count - 1)
         {
             currentTurn++;
+            cardsPlayedThisRound = 0;
             roundUI.UpdateTurnText(characterList[currentTurn]);
         }
         else
