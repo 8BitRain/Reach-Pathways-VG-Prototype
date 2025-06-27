@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{a61f6756-eb1a-461b-99bb-cbf6fe2af817}">
 		<property name="name">
-			<value>UI_Select</value>
+			<value>UI_Select (old)</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{bc4d85b4-eb47-406d-9459-8359f9dcc93a}</destination>
+			<destination>{840ecd37-3d88-483f-8a5e-2c32339c5093}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{4b1e7be1-b314-43d2-b5f9-eaf2b559d7c5}</destination>
@@ -31,9 +31,6 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{f86cc1bf-0dcb-423f-979d-ab11882c71b4}</destination>
-		</relationship>
-		<relationship name="banks">
-			<destination>{ce777361-e400-46b1-9dc0-c1f224664413}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{4b1e7be1-b314-43d2-b5f9-eaf2b559d7c5}">
