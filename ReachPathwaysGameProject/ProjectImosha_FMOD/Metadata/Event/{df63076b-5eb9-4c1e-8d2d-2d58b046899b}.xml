@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{df63076b-5eb9-4c1e-8d2d-2d58b046899b}">
 		<property name="name">
-			<value>UI_MouseOver</value>
+			<value>UI_MouseOver (old)</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{bc4d85b4-eb47-406d-9459-8359f9dcc93a}</destination>
+			<destination>{840ecd37-3d88-483f-8a5e-2c32339c5093}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{9c6a0b25-77b2-47a0-951a-8368fa24dcfe}</destination>
@@ -30,9 +30,6 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{4c1007f4-54e6-4f5b-8c6e-7c296b1823f4}</destination>
-		</relationship>
-		<relationship name="banks">
-			<destination>{ce777361-e400-46b1-9dc0-c1f224664413}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{9c6a0b25-77b2-47a0-951a-8368fa24dcfe}">
