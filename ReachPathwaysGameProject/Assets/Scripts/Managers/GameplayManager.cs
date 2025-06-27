@@ -32,6 +32,8 @@ public class GameplayManager : MonoBehaviour
 
     public int currentTurn { get; private set; } = 0;
 
+    public gameResult result { get; private set; }
+
     public bool endAllRounds { get; private set; }
 
     [SerializeField]
@@ -41,7 +43,7 @@ public class GameplayManager : MonoBehaviour
     private List<GameObject> playerHand = new();
 
     public List<Type> playerDeck = new();
-    
+
     // Innovator Cards
     public static List<Type> innovatorCards = new()
     {
@@ -200,12 +202,12 @@ public class GameplayManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         scenarioDeck.SetActive(false);
-        
+
         // Check if we're in GameInitState and transition to ScenarioDrawState
         // This ensures GameplayManager is fully initialized before ScenarioDrawState is entered
-        if (StateManager.Instance != null && 
+        if (StateManager.Instance != null &&
             StateManager.Instance.GetCurrentState() is GameInitState)
         {
             StateManager.Instance.ChangeState(new ScenarioDrawState());
@@ -235,7 +237,7 @@ public class GameplayManager : MonoBehaviour
             cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
             playerDeck.RemoveAt(cardIndex);
         }
-        
+
         // Advances to the starting turn once the player has drawn 4 cards
         if (StateManager.Instance.GetCurrentState() is InitialDrawState)
         {
@@ -302,6 +304,7 @@ public class GameplayManager : MonoBehaviour
         if (currentTurn < characterList.Count - 1)
         {
             currentTurn++;
+            roundUI.UpdateTurnText(characterList[currentTurn]);
         }
         else
         {
@@ -311,13 +314,35 @@ public class GameplayManager : MonoBehaviour
                 currentTurn = 0;
                 currentRound++;
                 roundUI.UpdateRoundText(currentRound);
+                roundUI.UpdateTurnText(characterList[currentTurn]);
             }
             else
             {
                 roundUI.EndRounds();
+                if (pointSum >= 100)
+                {
+                    result = gameResult.extraordinary;
+                }
+                else if (pointSum >= 80)
+                {
+                    result = gameResult.success;
+                }
+                else if (pointSum >= 61)
+                {
+                    result = gameResult.partialFailure;
+                }
+                else
+                {
+                    result = gameResult.failure;
+                }
+                Debug.Log(result);
             }
         }
         cardsPlayedThisTurn = 0;
-        roundUI.UpdateTurnText(characterList[currentTurn]);
     }
+}
+
+public enum gameResult
+{
+    extraordinary, success, partialFailure, failure
 }
