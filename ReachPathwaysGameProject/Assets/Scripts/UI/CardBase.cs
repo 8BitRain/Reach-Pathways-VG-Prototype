@@ -29,7 +29,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Give card method
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -38,7 +38,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Look through the deck, and choose any one card before reshuffling
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -47,7 +47,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Discard as many cards in your hand as you like, then draw that many cards
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -56,7 +56,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Partial failure becomes a success
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -65,7 +65,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Failure becomes a success
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -74,7 +74,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Ask a teammate for a card from their hand
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -83,7 +83,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Shuffle the deck
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -92,7 +92,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Look at the top three cards in the deck and share with your teammates
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -101,7 +101,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Recover any discarded card
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -121,7 +121,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Draw 2 cards after playing.
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -261,7 +261,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Recover a random card from the discard pile.
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -344,7 +344,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Help a teammate recover a discarded card.
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -500,7 +500,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Reduce stress by 1 for the round
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -511,7 +511,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Reroll dice once this round
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -522,7 +522,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Discard 1 bad memory and draw 1 good memory card
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -533,7 +533,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Discard entire hand and draw 4 new cards
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -545,7 +545,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Add +1 to a card if it is tied to Creativity
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -556,7 +556,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Choose a player. They recover 1 chosen card from their discard pile
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -567,7 +567,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // If you have 3+ Stress, reduce it to 2 for this Scenario
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -578,7 +578,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // If the team fails this round, you do not discard a memory
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -590,7 +590,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Draw 2 cards, then discard 1
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -601,7 +601,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Skip your turn this round to reduce your Stress by 2
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -612,7 +612,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Every player may play 1 additional card this round
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -623,7 +623,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Next round, the dice cannot result in a Failure (1–7 becomes 8)
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -635,7 +635,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Everyone discards 1 card, then draws 1 card
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -646,7 +646,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Add +1 to every teammate's next card played this round
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -657,7 +657,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Look at the top 2 cards of any player's deck. Rearrange or discard one
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -668,7 +668,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // All players may draw 1 card OR discard a bad memory
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -680,7 +680,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Choose two players. They may coordinate cards this round
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -691,7 +691,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Make one teammate's negative card neutral
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -702,7 +702,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Choose a teammate. They draw 1 card and reduce Stress by 1
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -713,7 +713,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Everyone may look at the top card of their inventory deck
-            throw new System.NotImplementedException();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 }

@@ -18,7 +18,6 @@ public class CardObj : MonoBehaviour
 
     public void PlayCard()
     {
-        GameplayManager.Instance.AdvanceTurn();
-        gameObject.SetActive(false);
+        GameplayManager.Instance.PlayCard(gameObject, card);
     }
 }

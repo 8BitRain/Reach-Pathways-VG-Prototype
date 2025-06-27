@@ -17,12 +17,18 @@ public class GameplayManager : MonoBehaviour
     public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDeck, abilityDeck;
     [SerializeField]
     public RoundUI roundUI;
+    [SerializeField]
+    public PointsUI pointsUI;
 
     [SerializeField]
     private int totalRounds = 4;
 
     // Note that currentRound will start at 1 instead of 0 for text display purposes
     public int currentRound = 1;
+
+    private int cardsPlayedThisRound = 0;
+
+    public int pointSum { get; private set; } = 0;
 
     public int currentTurn { get; private set; } = 0;
 
@@ -31,6 +37,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     public List<CharacterCard> characterList = new();
 
+    [SerializeField]
     private List<GameObject> playerHand = new();
 
     public List<Type> playerDeck = new();
@@ -240,9 +247,9 @@ public class GameplayManager : MonoBehaviour
             }
 
             if (playerHandObj.GetComponentsInChildren<CardObj>().Length > 3)
-                {
-                    StateManager.Instance.ChangeState(new TurnState());
-                }
+            {
+                StateManager.Instance.ChangeState(new TurnState());
+            }
         }
     }
 
@@ -271,6 +278,23 @@ public class GameplayManager : MonoBehaviour
         // Instantiate(cardPrefab, eventDisplay.transform);
         scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
         StateManager.Instance.ChangeState(new InitialDrawState());
+    }
+
+    public void PlayCard(GameObject cardObj, CardBase card)
+    {
+        pointSum += card.numberEffect;
+        card.SpecialEffect();
+        pointsUI.DisplayTotalPoints(pointSum);
+        // Placeholder - card should be added to discard pile instead of being disabled
+        cardObj.SetActive(false);
+        playerHand.Remove(cardObj);
+        cardsPlayedThisRound++;
+
+        // Disable the player's hand if they have already played 3 cards
+        if (cardsPlayedThisRound > 2)
+        {
+            playerHandObj.GetComponent<CanvasGroup>().interactable = false;
+        }
     }
 
     public void AdvanceTurn()
