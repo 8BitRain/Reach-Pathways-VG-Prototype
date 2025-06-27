@@ -26,7 +26,7 @@ public class GameplayManager : MonoBehaviour
     // Note that currentRound will start at 1 instead of 0 for text display purposes
     public int currentRound = 1;
 
-    private int cardsPlayedThisRound = 0;
+    private int cardsPlayedThisTurn = 0;
 
     public int pointSum { get; private set; } = 0;
 
@@ -288,10 +288,10 @@ public class GameplayManager : MonoBehaviour
         // Placeholder - card should be added to discard pile instead of being disabled
         cardObj.SetActive(false);
         playerHand.Remove(cardObj);
-        cardsPlayedThisRound++;
+        cardsPlayedThisTurn++;
 
         // Disable the player's hand if they have already played 3 cards
-        if (cardsPlayedThisRound > 2)
+        if (cardsPlayedThisTurn > 2)
         {
             playerHandObj.GetComponent<CanvasGroup>().interactable = false;
         }
@@ -302,8 +302,6 @@ public class GameplayManager : MonoBehaviour
         if (currentTurn < characterList.Count - 1)
         {
             currentTurn++;
-            cardsPlayedThisRound = 0;
-            roundUI.UpdateTurnText(characterList[currentTurn]);
         }
         else
         {
@@ -313,12 +311,13 @@ public class GameplayManager : MonoBehaviour
                 currentTurn = 0;
                 currentRound++;
                 roundUI.UpdateRoundText(currentRound);
-                roundUI.UpdateTurnText(characterList[currentTurn]);
             }
             else
             {
                 roundUI.EndRounds();
             }
         }
+        cardsPlayedThisTurn = 0;
+        roundUI.UpdateTurnText(characterList[currentTurn]);
     }
 }
