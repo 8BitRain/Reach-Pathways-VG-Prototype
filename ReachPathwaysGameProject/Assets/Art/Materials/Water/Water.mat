@@ -86,7 +86,7 @@ Material:
     m_Colors:
     - _Depth_Color: {r: 0.055999756, g: 0, b: 1, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Horizon_Color: {r: 1, g: 0.73333335, b: 0, a: 1}
+    - _Horizon_Color: {r: 1, g: 0.8657131, b: 0, a: 1}
     - _RefractionScale: {r: 1, g: 1, b: 0, a: 0}
     - _Refraction_Scale: {r: 1, g: 1, b: 0, a: 0}
     - _SurfaceColor: {r: 0, g: 1, b: 0.992157, a: 1}
