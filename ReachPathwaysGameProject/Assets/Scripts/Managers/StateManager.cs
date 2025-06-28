@@ -315,10 +315,15 @@ public class ScenarioDrawState : State
 public class TurnState : State
 {
     public override bool Pausable => true;
+    private bool playerTurn = false;
     public override void Enter()
     {
-        GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = true;
-        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
+        if (GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn] == GameplayManager.Instance.playerCharacter)
+        {
+            playerTurn = true;
+            GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = true;
+            GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
+        }
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
     }
@@ -329,7 +334,10 @@ public class TurnState : State
 
     public override void Exit()
     {
-        GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = true;
-        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
+        if (playerTurn)
+        {
+            GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = false;
+            GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
+        }
     }
 }

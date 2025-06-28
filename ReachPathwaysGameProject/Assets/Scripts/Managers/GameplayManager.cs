@@ -38,6 +38,8 @@ public class GameplayManager : MonoBehaviour
 
     [SerializeField]
     public List<CharacterCard> characterList = new();
+    [SerializeField]
+    public CharacterCard playerCharacter;
 
     [SerializeField]
     private List<GameObject> playerHand = new();

@@ -3181,6 +3181,7 @@ MonoBehaviour:
   totalRounds: 4
   currentRound: 1
   characterList: []
+  playerCharacter: {fileID: 510756035}
   playerHand: []
 --- !u!4 &776204111
 Transform:
