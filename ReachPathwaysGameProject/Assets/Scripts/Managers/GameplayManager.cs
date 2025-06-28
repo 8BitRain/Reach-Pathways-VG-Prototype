@@ -300,22 +300,17 @@ public class GameplayManager : MonoBehaviour
 
     public void AdvanceTurn()
     {
-        if (currentTurn < characterList.Count - 1)
+        // Increase the current turn then modulo by the number of players to reset to 0 once the end of the turn order is reached
+        currentTurn = (currentTurn + 1) % characterList.Count;
+        cardsPlayedThisTurn = 0;
+
+        if (currentTurn == 0)
         {
-            currentTurn++;
-            StateManager.Instance.ChangeState(new TurnState());
-        }
-        else
-        {
-            // currentRound starts at 1, not 0, for text display purposes
-            if (currentRound < totalRounds)
+            // Increment the round whenever the turn order wraps back around
+            currentRound++;
+            if (currentRound > totalRounds)
             {
-                currentTurn = 0;
-                currentRound++;
-                StateManager.Instance.ChangeState(new TurnState());
-            }
-            else
-            {
+                // End the game once the current round is incremented past the last round
                 roundUI.EndRounds();
                 if (pointSum >= 100)
                 {
@@ -334,10 +329,11 @@ public class GameplayManager : MonoBehaviour
                     result = gameResult.failure;
                 }
                 Debug.Log(result);
+                return;
             }
         }
-        cardsPlayedThisTurn = 0;
-    }
+        StateManager.Instance.ChangeState(new TurnState());
+}
 }
 
 public enum gameResult
