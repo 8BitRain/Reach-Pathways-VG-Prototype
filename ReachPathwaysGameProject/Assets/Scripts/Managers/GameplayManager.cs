@@ -303,7 +303,7 @@ public class GameplayManager : MonoBehaviour
         if (currentTurn < characterList.Count - 1)
         {
             currentTurn++;
-            roundUI.UpdateTurnText(characterList[currentTurn]);
+            StateManager.Instance.ChangeState(new TurnState());
         }
         else
         {
@@ -312,8 +312,7 @@ public class GameplayManager : MonoBehaviour
             {
                 currentTurn = 0;
                 currentRound++;
-                roundUI.UpdateRoundText(currentRound);
-                roundUI.UpdateTurnText(characterList[currentTurn]);
+                StateManager.Instance.ChangeState(new TurnState());
             }
             else
             {
