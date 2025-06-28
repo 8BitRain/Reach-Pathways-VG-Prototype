@@ -70,7 +70,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Displacement: 0.1
+    - _Displacement: 0.105
     - _Distance: 1.95
     - _FoamAmount: 0.9
     - _FoamCutoff: 1.64
@@ -82,7 +82,7 @@ Material:
     - _RefractionSpeed: 0.05
     - _RefractionStrength: 1
     - _refraction_Scale: 4
-    - _refraction_Speed: 0.1
+    - _refraction_Speed: 0.05
     - _refraction_Strenght: 0.66
     m_Colors:
     - _Depth_Color: {r: 0.055999756, g: 0, b: 1, a: 1}

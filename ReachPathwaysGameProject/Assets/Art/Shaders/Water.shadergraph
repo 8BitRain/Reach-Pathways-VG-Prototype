@@ -280,6 +280,9 @@
         },
         {
             "m_Id": "357ecde478774b20a7625350a98887cb"
+        },
+        {
+            "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
         }
     ],
     "m_StickyNoteDatas": [],
@@ -3249,7 +3252,7 @@
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "4422b49bc71d4499bb51d71abb119b3d",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Property",
     "m_DrawState": {
@@ -3699,6 +3702,17 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.GroupData",
+    "m_ObjectId": "53787b7dc55c40adbb4a6636b4f3a4f6",
+    "m_Title": "Displacement/Waves",
+    "m_Position": {
+        "x": 10.0,
+        "y": 10.0
     }
 }
 
@@ -4479,17 +4493,17 @@
     "m_Type": "UnityEditor.ShaderGraph.TilingAndOffsetNode",
     "m_ObjectId": "6f002f52b70f46ecbf2c11cbb871c14c",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Tiling And Offset",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2116.0341796875,
-            "y": 448.96588134765627,
-            "width": 208.0,
-            "height": 326.0
+            "x": -1878.0,
+            "y": 364.0000305175781,
+            "width": 155.0,
+            "height": 141.99996948242188
         }
     },
     "m_Slots": [
@@ -4511,7 +4525,7 @@
         "scale"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -4593,15 +4607,15 @@
     "m_Type": "UnityEditor.ShaderGraph.DivideNode",
     "m_ObjectId": "70ec46896bb64fe4ad6af265aa643eaf",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Divide",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2563.0,
-            "y": 450.0,
+            "x": -2239.0,
+            "y": 412.0,
             "width": 208.0,
             "height": 302.0
         }
@@ -5014,15 +5028,15 @@
     "m_Type": "UnityEditor.ShaderGraph.PositionNode",
     "m_ObjectId": "89fca4745da84273bd3c5329afd61b97",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Position",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1702.0,
-            "y": -113.99991607666016,
+            "x": -1670.0001220703125,
+            "y": -114.00000762939453,
             "width": 208.0,
             "height": 315.0
         }
@@ -5635,7 +5649,7 @@
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "a1b5e2cf61ae442cb600ae43e1ec9155",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Multiply",
     "m_DrawState": {
@@ -5665,7 +5679,7 @@
         "x"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -5769,17 +5783,17 @@
     "m_Type": "UnityEditor.ShaderGraph.SplitNode",
     "m_ObjectId": "a6b73b95ccca4d2491a297da5022a487",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Split",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1405.0001220703125,
-            "y": -114.99992370605469,
+            "x": -1429.0,
+            "y": -114.00000762939453,
             "width": 120.0,
-            "height": 149.00003051757813
+            "height": 149.0
         }
     },
     "m_Slots": [
@@ -6616,17 +6630,17 @@
     "m_Type": "UnityEditor.ShaderGraph.TimeNode",
     "m_ObjectId": "ca4c49133a404786a4db5a59e98847d6",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Time",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2764.0,
-            "y": 377.0,
+            "x": -2461.0,
+            "y": 411.00006103515627,
             "width": 124.0,
-            "height": 173.0
+            "height": 172.99993896484376
         }
     },
     "m_Slots": [
@@ -7706,17 +7720,17 @@
     "m_Type": "UnityEditor.ShaderGraph.CombineNode",
     "m_ObjectId": "f17ab129892f4907b65a811c839c0880",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Combine",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -925.2243041992188,
-            "y": 64.3634262084961,
-            "width": 0.0,
-            "height": 0.0
+            "x": -1289.0,
+            "y": 160.0,
+            "width": 208.0,
+            "height": 350.00006103515627
         }
     },
     "m_Slots": [
@@ -7900,17 +7914,17 @@
     "m_Type": "UnityEditor.ShaderGraph.GradientNoiseNode",
     "m_ObjectId": "f559f928853f4f0698c3bcde062f5af7",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "53787b7dc55c40adbb4a6636b4f3a4f6"
     },
     "m_Name": "Gradient Noise",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1710.0001220703125,
-            "y": 457.0000305175781,
-            "width": 208.0001220703125,
-            "height": 337.0000305175781
+            "x": -1636.0001220703125,
+            "y": 364.0,
+            "width": 147.0,
+            "height": 153.0
         }
     },
     "m_Slots": [
@@ -7928,7 +7942,7 @@
         "perlin noise"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
