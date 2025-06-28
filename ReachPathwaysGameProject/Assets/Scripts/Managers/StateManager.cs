@@ -236,37 +236,6 @@ public class OverworldState : State
     }
 }
 
-public class InitialDrawState : State
-{
-    public override bool Pausable => true;
-    private GameObject playerDeckObj, abilityDeck;
-    public override void Enter()
-    {
-        playerDeckObj = GameplayManager.Instance.playerDeckObj;
-        abilityDeck = GameplayManager.Instance.abilityDeck;
-        
-        if (GameplayManager.Instance.playerDeck.Count > 0)
-        {
-            playerDeckObj.GetComponent<Button>().interactable = true;
-            abilityDeck.GetComponent<Button>().interactable = false;
-        }
-        else
-        {
-            playerDeckObj.GetComponent<Button>().interactable = false;
-        }
-    }
-
-    public override void Update()
-    {
-    }
-
-    public override void Exit()
-    {
-        playerDeckObj.GetComponent<Button>().interactable = false;
-        abilityDeck.GetComponent<Button>().interactable = false; 
-    }
-}
-
 public class GameInitState : State
 {
     public override bool Pausable => false;
@@ -292,6 +261,62 @@ public class GameInitState : State
     }
 }
 
+public abstract class DrawState : State
+{
+    public int limit { get; private set; }
+    public int cardsDrawn = 0;
+
+    public DrawState(int drawLimit)
+    {
+        limit = drawLimit;
+    }
+    
+    public override void Enter()
+    {
+        if (GameplayManager.Instance.isPlayerTurn)
+        {
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = true;
+            if (GameplayManager.Instance.playerDeck.Count > 0)
+            {
+                GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = true;
+            }
+        }
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = false;
+        GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = false;
+        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
+    }
+}
+
+public class InitialDrawState : DrawState
+{
+    public override bool Pausable => true;
+
+    public InitialDrawState(int drawLimit = 4) : base(drawLimit)
+    {
+    }
+
+    public override void Enter()
+    {
+        if (GameplayManager.Instance.playerDeck.Count > 0)
+        {
+            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = true;
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = false;
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = true;
+        }
+    }
+}
 
 public class ScenarioDrawState : State
 {
@@ -344,29 +369,10 @@ public class TurnState : State
     }
 }
 
-public class TurnEndDrawState : State
+public class TurnEndDrawState : DrawState
 {
     public override bool Pausable => true;
-    public override void Enter()
+    public TurnEndDrawState(int drawLimit = 1) : base(drawLimit)
     {
-        if (GameplayManager.Instance.isPlayerTurn)
-        {
-            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = true;
-            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = true;
-        }
-    }
-
-    public override void Update()
-    {
-    }
-
-    public override void Exit()
-    {
-        if (GameplayManager.Instance.isPlayerTurn)
-        {
-            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = false;
-            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = false;
-            GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
-        }
     }
 }

@@ -226,53 +226,68 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawPlayerCard()
     {
+        DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
         if (!(playerDeck.Count > 0))
         {
             Debug.Log("Player is out of cards!");
         }
         else
         {
-            // Create the new card object & save it in the player's hand
-            GameObject cardObj;
-            playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
-            // Draw a card & remove it from the player's deck
-            int cardIndex = rng.Next(playerDeck.Count);
-            cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
-            playerDeck.RemoveAt(cardIndex);
-        }
-        // Advances to the starting turn once the player has drawn 4 cards
-        if (StateManager.Instance.GetCurrentState() is InitialDrawState)
-        {
-            // Enables drawing from the ability deck if the player ran out of cards in their deck on the initial draw
-            if (playerDeck.Count < 1)
+            if (state.cardsDrawn < state.limit)
             {
-                playerDeckObj.GetComponent<Button>().interactable = false;
-                abilityDeck.GetComponent<Button>().interactable = true;
-            }
+                // Create the new card object & save it in the player's hand
+                GameObject cardObj;
+                playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
+                // Draw a card & remove it from the player's deck
+                int cardIndex = rng.Next(playerDeck.Count);
+                cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
+                playerDeck.RemoveAt(cardIndex);
 
-            if (playerHandObj.GetComponentsInChildren<CardObj>().Length > 3)
-            {
-                StateManager.Instance.ChangeState(new TurnState());
+                // Enables drawing from the ability deck if the player ran out of cards in their deck on the initial draw
+                if (playerDeck.Count < 1)
+                {
+                    playerDeckObj.GetComponent<Button>().interactable = false;
+                    abilityDeck.GetComponent<Button>().interactable = true;
+                }
+
+                state.cardsDrawn++;
+                DrawAdvance(state);
             }
         }
     }
 
     public void DrawAbilityCard()
     {
-        // Create the new card object & add it to the player's hand
-        GameObject cardObj;
-        playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
+        DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
 
-        // Draw a random ability card from all possible options
-        cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
-
-        // Advances to the starting turn once the player has drawn 4 cards or if they have no cards left in the deck
-        if (StateManager.Instance.GetCurrentState() is InitialDrawState)
+        if (state.cardsDrawn < state.limit)
         {
-            Debug.Log(playerHandObj.GetComponentsInChildren<CardObj>().Length);
-            if (playerHandObj.GetComponentsInChildren<CardObj>().Length > 3)
+            // Create the new card object & add it to the player's hand
+            GameObject cardObj;
+            playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
+
+            // Draw a random ability card from all possible options
+            cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+
+            state.cardsDrawn++;
+            DrawAdvance(state);
+        }
+
+    }
+
+    private void DrawAdvance(DrawState state)
+    {
+        // Moves to next state if the draw limit has been reached
+        if (state.cardsDrawn >= state.limit)
+        {
+            switch (state)
             {
-                StateManager.Instance.ChangeState(new TurnState());
+                case InitialDrawState:
+                    StateManager.Instance.ChangeState(new TurnState());
+                    break;
+                case TurnEndDrawState:
+                    AdvanceTurn();
+                    break;
             }
         }
     }
