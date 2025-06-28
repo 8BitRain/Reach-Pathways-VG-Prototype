@@ -315,14 +315,17 @@ public class ScenarioDrawState : State
 public class TurnState : State
 {
     public override bool Pausable => true;
-    private bool playerTurn = false;
     public override void Enter()
     {
         if (GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn] == GameplayManager.Instance.playerCharacter)
         {
-            playerTurn = true;
+            GameplayManager.Instance.isPlayerTurn = true;
             GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = true;
             GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
+        }
+        else
+        {
+            GameplayManager.Instance.isPlayerTurn = false;
         }
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
@@ -334,9 +337,35 @@ public class TurnState : State
 
     public override void Exit()
     {
-        if (playerTurn)
+        if (GameplayManager.Instance.isPlayerTurn)
         {
             GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = false;
+        }
+    }
+}
+
+public class TurnEndDrawState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+        if (GameplayManager.Instance.isPlayerTurn)
+        {
+            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = true;
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = true;
+        }
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        if (GameplayManager.Instance.isPlayerTurn)
+        {
+            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = false;
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = false;
             GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
         }
     }

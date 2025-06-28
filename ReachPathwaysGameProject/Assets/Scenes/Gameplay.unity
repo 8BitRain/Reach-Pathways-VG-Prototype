@@ -2685,7 +2685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: End Turn
+  m_text: Advance to Draw
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3182,6 +3182,7 @@ MonoBehaviour:
   currentRound: 1
   characterList: []
   playerCharacter: {fileID: 510756035}
+  isPlayerTurn: 0
   playerHand: []
 --- !u!4 &776204111
 Transform:
@@ -3808,7 +3809,7 @@ GameObject:
   - component: {fileID: 833516869}
   - component: {fileID: 833516872}
   m_Layer: 5
-  m_Name: EndTurnBtn
+  m_Name: AdvanceTurnBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

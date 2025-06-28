@@ -40,6 +40,7 @@ public class GameplayManager : MonoBehaviour
     public List<CharacterCard> characterList = new();
     [SerializeField]
     public CharacterCard playerCharacter;
+    public bool isPlayerTurn = false;
 
     [SerializeField]
     private List<GameObject> playerHand = new();
@@ -300,6 +301,11 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    public void AdvanceToDraw()
+    {
+        StateManager.Instance.ChangeState(new TurnEndDrawState());
+    }
+
     public void AdvanceTurn()
     {
         // Increase the current turn then modulo by the number of players to reset to 0 once the end of the turn order is reached
@@ -335,7 +341,7 @@ public class GameplayManager : MonoBehaviour
             }
         }
         StateManager.Instance.ChangeState(new TurnState());
-}
+    }
 }
 
 public enum gameResult
