@@ -237,7 +237,6 @@ public class GameplayManager : MonoBehaviour
             cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
             playerDeck.RemoveAt(cardIndex);
         }
-
         // Advances to the starting turn once the player has drawn 4 cards
         if (StateManager.Instance.GetCurrentState() is InitialDrawState)
         {
