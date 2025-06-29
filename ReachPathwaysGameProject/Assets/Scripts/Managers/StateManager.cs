@@ -323,8 +323,8 @@ public class ScenarioDrawState : State
     public override bool Pausable => true;
     public override void Enter()
     {
-        GameplayManager.Instance.scenarioDeck.SetActive(true);
-        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = true;
+        GameplayManager.Instance.scenarioDisplay.SetActive(true);
+        GameplayManager.Instance.scenarioDisplay.GetComponent<Button>().interactable = true;
     }
 
     public override void Update()
@@ -333,7 +333,7 @@ public class ScenarioDrawState : State
 
     public override void Exit()
     {
-        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = false;
+        GameplayManager.Instance.scenarioDisplay.GetComponent<Button>().interactable = false;
     }
 }
 

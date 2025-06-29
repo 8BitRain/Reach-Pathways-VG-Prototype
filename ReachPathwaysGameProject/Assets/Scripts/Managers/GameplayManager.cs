@@ -15,7 +15,7 @@ public class GameplayManager : MonoBehaviour
     private System.Random rng = new();
 
     [SerializeField]
-    public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDeck, abilityDeck;
+    public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDisplay, abilityDeck;
     [SerializeField]
     public RoundUI roundUI;
     [SerializeField]
@@ -209,7 +209,7 @@ public class GameplayManager : MonoBehaviour
             return;
         }
 
-        scenarioDeck.SetActive(false);
+        scenarioDisplay.SetActive(false);
 
         // Check if we're in GameInitState and transition to ScenarioDrawState
         // This ensures GameplayManager is fully initialized before ScenarioDrawState is entered
@@ -230,12 +230,12 @@ public class GameplayManager : MonoBehaviour
     public void SetScenario(Scenario scenario)
     {
         currentScenario = scenario;
+        scenario.AssignObject(scenarioDisplay);
     }
 
     public void DrawScenarioCard()
     {
-        SetScenario(new Scenario(CardStat.Creativity, new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity }, new int[] { 20, 40, 60, 80 }, scenarioDeck));
-        // scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
+        SetScenario(new Scenario(CardStat.Creativity, new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity }, new int[] { 20, 40, 60, 80 }, scenarioDisplay));
         StateManager.Instance.ChangeState(new InitialDrawState());
     }
 

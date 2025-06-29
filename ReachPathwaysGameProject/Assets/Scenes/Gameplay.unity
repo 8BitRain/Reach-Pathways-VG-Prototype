@@ -3675,7 +3675,7 @@ GameObject:
   - component: {fileID: 819715513}
   - component: {fileID: 819715512}
   m_Layer: 5
-  m_Name: Scenario Deck
+  m_Name: Scenario UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
