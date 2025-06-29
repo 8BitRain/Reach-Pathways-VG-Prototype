@@ -8,8 +8,7 @@ public abstract class CardBase : MonoBehaviour
     public abstract string cardName { get; }
     public abstract string description { get; }
     public abstract CardStat stat { get; }
-    public abstract int numberEffect
-    { get; }
+    public abstract int numberEffect { get; }
     public abstract void SpecialEffect();
 }
 
