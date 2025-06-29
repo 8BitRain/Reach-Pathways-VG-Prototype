@@ -7,6 +7,7 @@ using MemoryCards;
 using AbilityCards;
 using SupportCards;
 using UnityEngine.UI;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -46,8 +47,6 @@ public class GameplayManager : MonoBehaviour
     private List<GameObject> playerHand = new();
 
     public List<Type> playerDeck = new();
-
-    public List<CardStat> roundStatBonuses = new();
 
     public Scenario currentScenario;
 
@@ -223,9 +222,10 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
+        SetScenario(new Scenario(CardStat.Creativity, new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity }, new int[] { 20, 40, 60, 80 }));
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
         playerDeck.Add(innovatorCards[0]);
-        playerDeck.Add(innovatorCards[1]);
+        playerDeck.Add(communicatorCards[1]);
     }
 
     public void SetScenario(Scenario scenario)
@@ -301,11 +301,6 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void SetScenario()
-    {
-        
-    }
-
     public void DrawScenarioCard()
     {
         // Instantiate(cardPrefab, eventDisplay.transform);
@@ -316,6 +311,17 @@ public class GameplayManager : MonoBehaviour
     public void PlayCard(GameObject cardObj, CardBase card)
     {
         pointSum += card.numberEffect;
+        Debug.Log($"Adding card value of {card.numberEffect}");
+        if (card.stat == currentScenario.roundBonuses[currentRound - 1])
+        {
+            pointSum++;
+            Debug.Log("Adding round stat bonus");
+        }
+        if (card.stat == currentScenario.domain)
+        {
+            pointSum++;
+            Debug.Log("Adding scenario domain bonus");
+        }
         card.SpecialEffect();
         pointsUI.DisplayTotalPoints(pointSum);
         // Placeholder - card should be added to discard pile instead of being disabled
