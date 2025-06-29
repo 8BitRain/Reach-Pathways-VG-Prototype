@@ -222,7 +222,6 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
-        SetScenario(new Scenario(CardStat.Creativity, new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity }, new int[] { 20, 40, 60, 80 }));
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
         playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(communicatorCards[1]);
@@ -231,6 +230,13 @@ public class GameplayManager : MonoBehaviour
     public void SetScenario(Scenario scenario)
     {
         currentScenario = scenario;
+    }
+
+    public void DrawScenarioCard()
+    {
+        SetScenario(new Scenario(CardStat.Creativity, new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity }, new int[] { 20, 40, 60, 80 }, scenarioDeck));
+        // scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
+        StateManager.Instance.ChangeState(new InitialDrawState());
     }
 
     public void DrawPlayerCard()
@@ -299,13 +305,6 @@ public class GameplayManager : MonoBehaviour
                     break;
             }
         }
-    }
-
-    public void DrawScenarioCard()
-    {
-        // Instantiate(cardPrefab, eventDisplay.transform);
-        scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
-        StateManager.Instance.ChangeState(new InitialDrawState());
     }
 
     public void PlayCard(GameObject cardObj, CardBase card)
