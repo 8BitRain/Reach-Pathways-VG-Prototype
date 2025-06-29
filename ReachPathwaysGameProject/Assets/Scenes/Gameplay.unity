@@ -3174,7 +3174,7 @@ MonoBehaviour:
   actionsMenu: {fileID: 373055104}
   playerHandObj: {fileID: 810829050}
   playerDeckObj: {fileID: 553256243}
-  scenarioDeck: {fileID: 819715510}
+  scenarioDisplay: {fileID: 819715510}
   abilityDeck: {fileID: 61081509}
   roundUI: {fileID: 483758576}
   pointsUI: {fileID: 333079922}
