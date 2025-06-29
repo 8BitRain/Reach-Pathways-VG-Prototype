@@ -47,6 +47,10 @@ public class GameplayManager : MonoBehaviour
 
     public List<Type> playerDeck = new();
 
+    public List<CardStat> roundStatBonuses = new();
+
+    public Scenario currentScenario;
+
     // Innovator Cards
     public static List<Type> innovatorCards = new()
     {
@@ -224,6 +228,11 @@ public class GameplayManager : MonoBehaviour
         playerDeck.Add(innovatorCards[1]);
     }
 
+    public void SetScenario(Scenario scenario)
+    {
+        currentScenario = scenario;
+    }
+
     public void DrawPlayerCard()
     {
         DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
@@ -290,6 +299,11 @@ public class GameplayManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void SetScenario()
+    {
+        
     }
 
     public void DrawScenarioCard()
