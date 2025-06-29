@@ -49,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LavaTexture:
-        m_Texture: {fileID: 2800000, guid: 81e962923754488418c3d7da38c3b6a1, type: 3}
+        m_Texture: {fileID: 2800000, guid: fd4ba274c615d5c48b6bed9bfd6e486b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_9ce95a09b2dd47b3b9d2f3d3570018a3_Texture_1_Texture2D:
@@ -70,36 +70,45 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BottomPower: 0.14
+    - _BottomPower: 10.8
     - _Displacement: 0.1
+    - _Distance: 0.08
     - _FoamAmount: 10.59
     - _FoamCutoff: 4.95
     - _FoamScale: 4.15
     - _FoamSpeed: 2.31
+    - _Foam_Amount: 0.88
+    - _Foam_Cutoff: 15.84
+    - _Foam_Scale: 100
+    - _Foam_Scale_1: 0.4
+    - _Foam_Speed: 0.002
     - _Horizon_Distance: 1
-    - _LavaSpeed: 0.03
+    - _LavaSpeed: 0.009
     - _Metalic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Sample_Noise_Amount: 0.37
-    - _Sample_Noise_Power: 3.36
-    - _Sample_Noise_Scale: 25
+    - _Sample_Noise_Amount: 0.07
+    - _Sample_Noise_Power: 10.92
+    - _Sample_Noise_Scale: 15
     - _Smoothness: 0
     - _Voronoi_Angle_Offset: 0.2
-    - _fresnelPower: -0.13
+    - _fresnelPower: 8.58
     - _normal_LavaSpeed: 0.01
     - _voronoi_amount: 0.1
     m_Colors:
-    - _BottomRemap: {r: 0, g: 5, b: 0, a: 0}
+    - _BottomRemap: {r: 0.11, g: 14.05, b: 0, a: 0}
+    - _Depth_Color: {r: 1, g: 0.03424205, b: 0, a: 1}
     - _Emmision: {r: 0, g: 0, b: 0, a: 0}
     - _FoamColor: {r: 0.6462264, g: 1, b: 0.9861265, a: 0}
-    - _FresnelColor: {r: 1, g: 0.48993397, b: 0, a: 0}
+    - _Foam_Color: {r: 1, g: 0.783123, b: 0, a: 1}
+    - _FresnelColor: {r: 1, g: 0.45882356, b: 0, a: 1}
     - _Horizon_Color: {r: 1, g: 0.4885, b: 0, a: 0}
-    - _LavaColor: {r: 1, g: 0.34170854, b: 0, a: 1}
-    - _LavaRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _LavaColor: {r: 0.5754717, g: 0.115094334, b: 0, a: 1}
+    - _LavaRemap: {r: 9.63, g: 6.22, b: 0, a: 0}
     - _Lava_Direction: {r: 1, g: 1, b: 0, a: 0}
     - _Sample_Noise_Speed: {r: 0, g: 0.5, b: 0, a: 0}
     - _Scale: {r: 0, g: 0, b: 0, a: 0}
+    - _Surface_Color: {r: 0, g: 0, b: 0, a: 1}
     - _voronoi_scale: {r: 5, g: 5, b: 0, a: 0}
-    - _voronoi_speed: {r: 0, g: 0, b: 0, a: 0}
+    - _voronoi_speed: {r: 0, g: 0.001, b: 0, a: 0}
   m_BuildTextureStacks: []
