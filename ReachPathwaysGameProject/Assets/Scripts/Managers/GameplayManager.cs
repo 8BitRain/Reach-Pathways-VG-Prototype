@@ -235,7 +235,15 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawScenarioCard()
     {
-        SetScenario(new Scenario(CardStat.Creativity, new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity }, new int[] { 20, 40, 60, 80 }, scenarioDisplay));
+        SetScenario(new Scenario(
+            CardStat.Creativity,
+            new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity },
+            new int[] { 20, 40, 60, 80 },
+            new Dictionary<gameResult, int> {
+                { gameResult.extraordinary, 100 },
+                { gameResult.success, 80 },
+                { gameResult.partialFailure, 61 } },
+            scenarioDisplay));
         StateManager.Instance.ChangeState(new InitialDrawState());
     }
 
@@ -354,15 +362,15 @@ public class GameplayManager : MonoBehaviour
             {
                 // End the game once the current round is incremented past the last round
                 roundUI.EndRounds();
-                if (pointSum >= 100)
+                if (pointSum >= currentScenario.finalThresholds[gameResult.extraordinary])
                 {
                     result = gameResult.extraordinary;
                 }
-                else if (pointSum >= 80)
+                else if (pointSum >= currentScenario.finalThresholds[gameResult.success])
                 {
                     result = gameResult.success;
                 }
-                else if (pointSum >= 61)
+                else if (pointSum >= currentScenario.finalThresholds[gameResult.partialFailure])
                 {
                     result = gameResult.partialFailure;
                 }

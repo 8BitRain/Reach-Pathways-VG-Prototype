@@ -9,11 +9,12 @@ public class Scenario
     public CardStat domain { get; private set; }
     public CardStat[] roundBonuses { get; private set; }
     public int[] roundThresholds { get; private set; }
+    public Dictionary<gameResult, int> finalThresholds { get; private set; }
     public GameObject obj { get; private set; }
 
-    public Scenario(CardStat domain, CardStat[] roundBonuses, int[] roundThresholds, GameObject gameObject = null)
+    public Scenario(CardStat domain, CardStat[] roundBonuses, int[] roundThresholds, Dictionary<gameResult, int> finalThresholds, GameObject gameObject = null)
     {
-        if (roundBonuses.Length != 4 || roundThresholds.Length != 4)
+        if (roundBonuses.Length != 4 || roundThresholds.Length != 4 || finalThresholds.Count != 3)
         {
             Debug.Log("Incorrect length for round bonuses or thresholds array");
             throw new FormatException();
@@ -22,6 +23,7 @@ public class Scenario
         this.domain = domain;
         this.roundBonuses = roundBonuses;
         this.roundThresholds = roundThresholds;
+        this.finalThresholds = finalThresholds;
         AssignObject(gameObject);
     }
 
