@@ -51,6 +51,8 @@ public class GameplayManager : MonoBehaviour
 
     public Scenario currentScenario;
 
+    public Dictionary<CharacterCard, List<GameObject>> CPUhands = new();
+
     // Innovator Cards
     public static List<Type> innovatorCards = new()
     {
@@ -226,6 +228,7 @@ public class GameplayManager : MonoBehaviour
     void Start()
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
+        InitializeCPUHands();
         playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(communicatorCards[1]);
     }
@@ -386,6 +389,28 @@ public class GameplayManager : MonoBehaviour
             }
         }
         StateManager.Instance.ChangeState(new TurnState());
+    }
+
+    public void InitializeCPUHands()
+    {
+        foreach (CharacterCard character in characterList)
+        {
+            if (character != playerCharacter)
+            {
+                GameObject obj = character.gameObject;
+
+                List<GameObject> cardList = new();
+                int count = 0;
+                while (count < 4)
+                {
+                    GameObject cardObj;
+                    cardList.Add(cardObj = Instantiate(cardPrefab, obj.transform));
+                    cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+                    count++;
+                }
+                CPUhands.Add(character, cardList);
+            }
+        }
     }
 }
 
