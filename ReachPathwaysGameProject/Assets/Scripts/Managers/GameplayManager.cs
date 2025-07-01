@@ -339,14 +339,21 @@ public class GameplayManager : MonoBehaviour
         pointsUI.DisplayTotalPoints(pointSum);
         // Placeholder - card should be added to discard pile instead of being disabled
         cardObj.SetActive(false);
-        playerHand.Remove(cardObj);
-        cardsPlayedThisTurn++;
 
-        // Disable the player's hand if they have already played 3 cards
-        if (cardsPlayedThisTurn > 2)
+        if (isPlayerTurn)
         {
-            playerHandObj.GetComponent<CanvasGroup>().interactable = false;
+            playerHand.Remove(cardObj);
+            // Disable the player's hand if they have already played 3 cards
+            if (cardsPlayedThisTurn > 2)
+            {
+                playerHandObj.GetComponent<CanvasGroup>().interactable = false;
+            }
         }
+        else
+        {
+            CPUhands[characterList[currentTurn]].Remove(cardObj);
+        }
+        cardsPlayedThisTurn++;
     }
 
     public void AdvanceToDraw()
@@ -411,6 +418,23 @@ public class GameplayManager : MonoBehaviour
                 CPUhands.Add(character, cardList);
             }
         }
+    }
+
+    public void PlayCPUTurn()
+    {
+        CharacterCard character = characterList[currentTurn];
+        CardObj cardObj = CPUhands[character][rng.Next(CPUhands[character].Count)].GetComponent<CardObj>();
+        cardObj.PlayCard();
+
+        GameObject newCard;
+        // Create the new card object & add it to the player's hand
+        CPUhands[character].Add(newCard = Instantiate(cardPrefab, character.gameObject.transform));
+
+        // Draw a random ability card from all possible options
+        newCard.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+
+        AdvanceTurn();
+        
     }
 }
 
