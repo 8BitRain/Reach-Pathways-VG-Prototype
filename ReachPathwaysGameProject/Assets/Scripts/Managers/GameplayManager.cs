@@ -11,6 +11,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class GameplayManager : MonoBehaviour
 {
+    // #region
     public static GameplayManager Instance { get; private set; }
     private System.Random rng = new();
 
@@ -195,6 +196,8 @@ public class GameplayManager : MonoBehaviour
         typeof(TalesFlutterCard),
         typeof(AmplifyEndsCard)
     };
+
+    // #endregion 
 
     void Awake()
     {
