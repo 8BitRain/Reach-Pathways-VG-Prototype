@@ -8,6 +8,7 @@ using AbilityCards;
 using SupportCards;
 using UnityEngine.UI;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using System.Diagnostics.Tracing;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -442,7 +443,7 @@ public class GameplayManager : MonoBehaviour
         // Draw a random ability card from all possible options
         newCard.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
 
-        AdvanceToDraw();
+        StartCoroutine(StateManager.Instance.Delay(2f, done => { AdvanceToDraw(); }));
     }
 }
 
