@@ -242,7 +242,7 @@ public class GameplayManager : MonoBehaviour
         SetScenario(new Scenario(
             CardStat.Creativity,
             new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity },
-            new int[] { 20, 40, 60, 80 },
+            new int[] { 40, 55, 75, 100 },
             new Dictionary<gameResult, int> {
                 { gameResult.extraordinary, 100 },
                 { gameResult.success, 80 },
