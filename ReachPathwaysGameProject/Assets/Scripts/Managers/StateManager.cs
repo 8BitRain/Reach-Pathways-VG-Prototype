@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,6 +24,9 @@ public class StateManager : MonoBehaviour
 
     [SerializeField]
     private bool launchMenuOnStart = true;
+
+    [SerializeField]
+    private FadeTransition fade;
 
     private void Awake()
     {
@@ -55,14 +59,27 @@ public class StateManager : MonoBehaviour
 
     public void ChangeState(State newState)
     {
+        var originalSceneName = "";
+        var newSceneName = "";
+        bool hasNewState = false; 
+        
         // Calls the exit method of the current state, then updates the current state to the new state and calls its enter method
         if (currentState != null)
         {
+            hasNewState = true;
             currentState.Exit();
+            originalSceneName = currentState.SceneName;
         }
 
         currentState = newState;
         currentState.Enter();
+        newSceneName = currentState.SceneName;
+
+        if(hasNewState && originalSceneName != newSceneName)
+        {
+            fade.SwitchScenes(newSceneName, originalSceneName);
+        }
+        
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
@@ -152,13 +169,15 @@ public abstract class State
     public abstract void Enter();
     public abstract void Update();
     public abstract void Exit();
+
+    public string SceneName;
 }
 
 public class MainMenuState : State
 {
     public override bool Pausable => false;
     public override void Enter()
-    {
+    {        
         if (!SceneManager.GetSceneByName("MainMenu").isLoaded)
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
@@ -191,7 +210,8 @@ public class MainMenuState : State
 
     public override void Exit()
     {
-        SceneManager.UnloadSceneAsync("MainMenu");
+        //SceneManager.UnloadSceneAsync("MainMenu");
+        SceneName = "MainMenu";
     }
 }
 
@@ -242,6 +262,7 @@ public class InitialDrawState : State
     private GameObject playerDeckObj, abilityDeck;
     public override void Enter()
     {
+        SceneName = "Gameplay";
         playerDeckObj = GameplayManager.Instance.playerDeckObj;
         abilityDeck = GameplayManager.Instance.abilityDeck;
         
@@ -276,9 +297,10 @@ public class GameInitState : State
         // Load the gameplay scene if not already loaded
         if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
         {
-            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
+            //SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
+            SceneName = "Gameplay";
         }
-        
+
         // GameplayManager's Awake() will handle the transition to ScenarioDrawState
         // once it's fully initialized
     }
@@ -298,6 +320,7 @@ public class ScenarioDrawState : State
     public override bool Pausable => true;
     public override void Enter()
     {
+        SceneName = "Gameplay";
         GameplayManager.Instance.scenarioDeck.SetActive(true);
         GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = true;
     }
@@ -320,6 +343,7 @@ public class TurnState : State
         // This should be doable with .interactable, but this version of Unity has a bug where the cards do not inherit this properly when instantiated
         // For now, we can use blocksRaycasts as a workaround, but updating to a 2022 or 2023 version of Unity would fix this
         // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = true;
+        SceneName = "Gameplay";
         GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().blocksRaycasts = true;
         GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);

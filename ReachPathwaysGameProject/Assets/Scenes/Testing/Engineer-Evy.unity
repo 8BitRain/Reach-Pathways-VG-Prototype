@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeGameObject: {fileID: 1803732984}
-  fadeOutDuration: 0
+  fadeOutDuration: 2
 --- !u!1001 &676366699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3842,11 +3842,11 @@ RectTransform:
   - {fileID: 681255529}
   m_Father: {fileID: 14979360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: -65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 70, y: 24}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &756290912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3893,14 +3893,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 673471560}
         m_TargetAssemblyTypeName: FadeTransition, Assembly-CSharp
-        m_MethodName: FadeIn
-        m_Mode: 4
+        m_MethodName: SwitchScenes
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 2
-          m_StringArgument: 
+          m_StringArgument: Gameplay
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &756290913
@@ -7466,7 +7466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1520256981
 MonoBehaviour:
   m_ObjectHideFlags: 0
