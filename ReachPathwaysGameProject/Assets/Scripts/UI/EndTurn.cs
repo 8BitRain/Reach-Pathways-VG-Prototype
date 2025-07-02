@@ -7,11 +7,11 @@ public class EndTurn : ButtonBase
     {
         if (StateManager.Instance.GetCurrentState() is TurnState)
         {
-            buttonText.text = "End Turn";
             GameplayManager.Instance.AdvanceToDraw();
+            buttonText.text = "End Turn";
             return;
         }
-        buttonText.text = "Advance to Draw";
         GameplayManager.Instance.AdvanceTurn();
+        buttonText.text = "Advance to Draw";
     }
 }

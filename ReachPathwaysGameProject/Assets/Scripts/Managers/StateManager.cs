@@ -66,7 +66,7 @@ public class StateManager : MonoBehaviour
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
-        Debug.Log($"Switched to {newState}");
+        // Debug.Log($"Switched to {newState}");
     }
 
     private void Update()
@@ -342,6 +342,7 @@ public class TurnState : State
     public override bool Pausable => true;
     public override void Enter()
     {
+        Debug.Log(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
         if (GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn] == GameplayManager.Instance.playerCharacter)
         {
             GameplayManager.Instance.isPlayerTurn = true;
@@ -351,9 +352,11 @@ public class TurnState : State
         else
         {
             GameplayManager.Instance.isPlayerTurn = false;
+            GameplayManager.Instance.PlayCPUTurn();
         }
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
+        GameplayManager.Instance.pointsUI.DisplayTotalPoints(GameplayManager.Instance.pointSum);
     }
 
     public override void Update()
@@ -366,6 +369,9 @@ public class TurnState : State
         {
             GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = false;
         }
+        GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
+        GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
+        GameplayManager.Instance.pointsUI.DisplayTotalPoints(GameplayManager.Instance.pointSum);
     }
 }
 
@@ -374,5 +380,14 @@ public class TurnEndDrawState : DrawState
     public override bool Pausable => true;
     public TurnEndDrawState(int drawLimit = 1) : base(drawLimit)
     {
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        if (!GameplayManager.Instance.isPlayerTurn)
+        {
+            GameplayManager.Instance.DrawAbilityCard();
+        }
     }
 }

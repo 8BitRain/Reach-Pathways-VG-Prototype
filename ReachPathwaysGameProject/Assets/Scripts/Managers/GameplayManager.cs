@@ -44,14 +44,11 @@ public class GameplayManager : MonoBehaviour
     public CharacterCard playerCharacter;
     public bool isPlayerTurn = false;
 
-    [SerializeField]
-    private List<GameObject> playerHand = new();
-
     public List<Type> playerDeck = new();
 
     public Scenario currentScenario;
 
-    public Dictionary<CharacterCard, List<GameObject>> CPUhands = new();
+    public Dictionary<CharacterCard, List<GameObject>> hands = new();
 
     // Innovator Cards
     public static List<Type> innovatorCards = new()
@@ -228,7 +225,7 @@ public class GameplayManager : MonoBehaviour
     void Start()
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
-        InitializeCPUHands();
+        InitializeHands();
         playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(communicatorCards[1]);
     }
@@ -266,7 +263,7 @@ public class GameplayManager : MonoBehaviour
             {
                 // Create the new card object & save it in the player's hand
                 GameObject cardObj;
-                playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
+                hands[playerCharacter].Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
                 // Draw a card & remove it from the player's deck
                 int cardIndex = rng.Next(playerDeck.Count);
                 cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
@@ -288,12 +285,13 @@ public class GameplayManager : MonoBehaviour
     public void DrawAbilityCard()
     {
         DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
-
+        // Sets the parent of the new card object to be the player's hand object if we are in the initial draw state or if it is the player's turn. Otherwise it will parent it directly to the character's object
+        GameObject parent = (StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn) ? playerHandObj : characterList[currentTurn].gameObject;
         if (state.cardsDrawn < state.limit)
         {
-            // Create the new card object & add it to the player's hand
+            // Create the new card object & add it to the corresponding hand and object
             GameObject cardObj;
-            playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
+            hands[characterList[currentTurn]].Add(cardObj = Instantiate(cardPrefab, parent.gameObject.transform));
 
             // Draw a random ability card from all possible options
             cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
@@ -301,7 +299,6 @@ public class GameplayManager : MonoBehaviour
             state.cardsDrawn++;
             DrawAdvance(state);
         }
-
     }
 
     private void DrawAdvance(DrawState state)
@@ -315,7 +312,15 @@ public class GameplayManager : MonoBehaviour
                     StateManager.Instance.ChangeState(new TurnState());
                     break;
                 case TurnEndDrawState:
-                    AdvanceTurn();
+                    if (!isPlayerTurn)
+                    {
+                        AdvanceTurn();
+                    }
+                    else
+                    {
+                        playerDeckObj.GetComponent<Button>().interactable = false;
+                        abilityDeck.GetComponent<Button>().interactable = false;
+                    }
                     break;
             }
         }
@@ -339,10 +344,11 @@ public class GameplayManager : MonoBehaviour
         pointsUI.DisplayTotalPoints(pointSum);
         // Placeholder - card should be added to discard pile instead of being disabled
         cardObj.SetActive(false);
+        cardsPlayedThisTurn++;
 
         if (isPlayerTurn)
         {
-            playerHand.Remove(cardObj);
+            hands[playerCharacter].Remove(cardObj);
             // Disable the player's hand if they have already played 3 cards
             if (cardsPlayedThisTurn > 2)
             {
@@ -351,9 +357,8 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
-            CPUhands[characterList[currentTurn]].Remove(cardObj);
+            hands[characterList[currentTurn]].Remove(cardObj);
         }
-        cardsPlayedThisTurn++;
     }
 
     public void AdvanceToDraw()
@@ -398,7 +403,7 @@ public class GameplayManager : MonoBehaviour
         StateManager.Instance.ChangeState(new TurnState());
     }
 
-    public void InitializeCPUHands()
+    public void InitializeHands()
     {
         foreach (CharacterCard character in characterList)
         {
@@ -415,7 +420,11 @@ public class GameplayManager : MonoBehaviour
                     cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
                     count++;
                 }
-                CPUhands.Add(character, cardList);
+                hands.Add(character, cardList);
+            }
+            else
+            {
+                hands.Add(playerCharacter, new List<GameObject>());
             }
         }
     }
@@ -423,18 +432,17 @@ public class GameplayManager : MonoBehaviour
     public void PlayCPUTurn()
     {
         CharacterCard character = characterList[currentTurn];
-        CardObj cardObj = CPUhands[character][rng.Next(CPUhands[character].Count)].GetComponent<CardObj>();
+        CardObj cardObj = hands[character][rng.Next(hands[character].Count)].GetComponent<CardObj>();
         cardObj.PlayCard();
 
         GameObject newCard;
         // Create the new card object & add it to the player's hand
-        CPUhands[character].Add(newCard = Instantiate(cardPrefab, character.gameObject.transform));
+        hands[character].Add(newCard = Instantiate(cardPrefab, character.gameObject.transform));
 
         // Draw a random ability card from all possible options
         newCard.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
 
-        AdvanceTurn();
-        
+        AdvanceToDraw();
     }
 }
 

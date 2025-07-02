@@ -15,7 +15,6 @@ public class CardObj : MonoBehaviour
         if (card == null)
         {
             card = gameObject.AddComponent(cardType) as CardBase;
-            print(card.cardName);
             UpdateCardText($"Name: {card.cardName}\nStat: {card.stat}\nValue: {card.numberEffect}\nEffect: {card.GetType().BaseType.Name.Substring(0, card.GetType().BaseType.Name.Length - 4)}");
         }
     }
