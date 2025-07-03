@@ -22,6 +22,8 @@ public class GameplayManager : MonoBehaviour
     public RoundUI roundUI;
     [SerializeField]
     public PointsUI pointsUI;
+    [SerializeField]
+    public DiceUI diceUI;
 
     [SerializeField]
     private int totalRounds = 4;
