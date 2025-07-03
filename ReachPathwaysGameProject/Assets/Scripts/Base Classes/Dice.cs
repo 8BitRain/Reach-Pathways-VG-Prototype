@@ -72,11 +72,13 @@ public class Dice : MonoBehaviour
         return diceNumber;
     }
 
-    public void AdjustDiceValue(int newValue)
+    public void AdjustDice(int newNumber)
     {
+        int newValue = dice[newNumber];
         GameplayManager.Instance.AddDiceValue(diceValue * -1);
         GameplayManager.Instance.AddDiceValue(newValue);
-        diceUI.GetDice(diceNumber, newValue);
+        diceUI.GetDice(newNumber, newValue);
+        diceNumber = newNumber;
         diceValue = newValue;
     }
 }

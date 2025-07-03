@@ -65,9 +65,9 @@ namespace MemoryCards
             Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
             if (dice.GetRollNumber() >= 8 && dice.GetRollNumber() <= 11)
             {
-                int newValue = Random.Range(12, 16);
-                dice.AdjustDiceValue(newValue);
-                Debug.Log($"Partial failure to success effect triggered, adjusting dice value to {newValue}");
+                int newNumber = Random.Range(12, 16);
+                dice.AdjustDice(newNumber);
+                Debug.Log($"Partial failure to success effect triggered, adjusting dice number to {newNumber}");
             }
         }
     }
@@ -80,9 +80,9 @@ namespace MemoryCards
             Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
             if (dice.GetRollNumber() >= 1 && dice.GetRollNumber() <= 7)
             {
-                int newValue = Random.Range(12, 16);
-                dice.AdjustDiceValue(newValue);
-                Debug.Log($"Failure to success effect triggered, adjusting dice value to {newValue}");
+                int newNumber = Random.Range(12, 16);
+                dice.AdjustDice(newNumber);
+                Debug.Log($"Failure to success effect triggered, adjusting dice number to {newNumber}");
             }
         }
     }
