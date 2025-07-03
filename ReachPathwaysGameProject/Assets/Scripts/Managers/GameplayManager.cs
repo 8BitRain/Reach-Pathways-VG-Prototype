@@ -312,7 +312,7 @@ public class GameplayManager : MonoBehaviour
             switch (state)
             {
                 case InitialDrawState:
-                    StateManager.Instance.ChangeState(new TurnState());
+                    StateManager.Instance.ChangeState(new DiceRollState());
                     break;
                 case TurnEndDrawState:
                     if (!isPlayerTurn)
@@ -402,6 +402,9 @@ public class GameplayManager : MonoBehaviour
                 Debug.Log(result);
                 return;
             }
+            // Go to dice roll state
+            StateManager.Instance.ChangeState(new DiceRollState());
+            return;
         }
         StateManager.Instance.ChangeState(new TurnState());
     }

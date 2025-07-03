@@ -879,6 +879,7 @@ GameObject:
   - component: {fileID: 244356456}
   - component: {fileID: 244356458}
   - component: {fileID: 244356457}
+  - component: {fileID: 244356459}
   m_Layer: 5
   m_Name: Dice UI
   m_TagString: Untagged
@@ -934,6 +935,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceUI: {fileID: 244356457}
+--- !u!225 &244356459
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244356455}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &266313186
 GameObject:
   m_ObjectHideFlags: 0
@@ -3245,7 +3258,7 @@ MonoBehaviour:
   abilityDeck: {fileID: 61081509}
   roundUI: {fileID: 483758576}
   pointsUI: {fileID: 333079922}
-  diceUI: {fileID: 0}
+  diceUI: {fileID: 244356457}
   totalRounds: 4
   currentRound: 1
   characterList: []
@@ -3726,7 +3739,7 @@ CanvasGroup:
   m_GameObject: {fileID: 810829050}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &819715510

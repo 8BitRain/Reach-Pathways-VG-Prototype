@@ -66,7 +66,7 @@ public class StateManager : MonoBehaviour
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
-        // Debug.Log($"Switched to {newState}");
+        Debug.Log($"Switched to {newState}");
     }
 
     private void Update()
@@ -334,6 +334,25 @@ public class ScenarioDrawState : State
     public override void Exit()
     {
         GameplayManager.Instance.scenarioDisplay.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class DiceRollState : State
+{
+    public override bool Pausable => true;
+
+    public override void Enter()
+    {
+        GameplayManager.Instance.diceUI.gameObject.GetComponent<CanvasGroup>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        GameplayManager.Instance.diceUI.gameObject.GetComponent<CanvasGroup>().interactable = false;
     }
 }
 

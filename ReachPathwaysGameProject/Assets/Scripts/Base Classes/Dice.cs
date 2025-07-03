@@ -49,6 +49,8 @@ public class Dice : MonoBehaviour
         diceValue = dice[diceNumber];
 
         diceUI.GetDice(diceNumber, diceValue); //Updates UI to inform player
+
+        StateManager.Instance.ChangeState(new TurnState());
     }
 
     /* Call this method after RollDice to get the 
