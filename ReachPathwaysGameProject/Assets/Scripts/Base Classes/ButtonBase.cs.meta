@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:ReachPathwaysGameProject/Assets/Scripts/UI/EndTurn.cs.meta
-guid: db8a08ac0b5ba4fc3806542982aea179
-========
+<<<<<<<< HEAD:ReachPathwaysGameProject/Assets/Scripts/UI/ButtonBase.cs.meta
 guid: ef7276f40eb5b4a87949ea011de215f9
->>>>>>>> main:ReachPathwaysGameProject/Assets/Scripts/UI/ButtonBase.cs.meta
+========
+guid: 7348cb9d3ca1a314cbe455a6c2a01c60
+>>>>>>>> main:ReachPathwaysGameProject/Assets/Scripts/Managers/Dice.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
