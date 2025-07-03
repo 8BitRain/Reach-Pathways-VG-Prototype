@@ -50,6 +50,8 @@ public class Dice : MonoBehaviour
 
         diceUI.GetDice(diceNumber, diceValue); //Updates UI to inform player
 
+        GameplayManager.Instance.AddDiceValue(diceValue);
+
         StateManager.Instance.ChangeState(new TurnState());
     }
 

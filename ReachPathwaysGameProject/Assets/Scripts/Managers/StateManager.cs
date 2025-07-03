@@ -66,7 +66,7 @@ public class StateManager : MonoBehaviour
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
-        Debug.Log($"Switched to {newState}");
+        // Debug.Log($"Switched to {newState}");
     }
 
     private void Update()

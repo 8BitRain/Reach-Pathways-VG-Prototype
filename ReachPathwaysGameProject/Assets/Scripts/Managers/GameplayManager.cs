@@ -329,6 +329,11 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    public void AddDiceValue(int diceValue)
+    {
+        pointSum += diceValue;
+    }
+
     public void PlayCard(GameObject cardObj, CardBase card)
     {
         pointSum += card.numberEffect;
