@@ -62,7 +62,13 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Partial failure becomes a success
-            Debug.Log(cardName + " effect not yet implemented.");
+            Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
+            if (dice.GetRollNumber() >= 8 && dice.GetRollNumber() <= 11)
+            {
+                int newValue = Random.Range(12, 16);
+                dice.AdjustDiceValue(newValue);
+                Debug.Log($"Partial failure to success effect triggered, adjusting dice value to {newValue}");
+            }
         }
     }
 
@@ -71,7 +77,13 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Failure becomes a success
-            Debug.Log(cardName + " effect not yet implemented.");
+            Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
+            if (dice.GetRollNumber() >= 1 && dice.GetRollNumber() <= 7)
+            {
+                int newValue = Random.Range(12, 16);
+                dice.AdjustDiceValue(newValue);
+                Debug.Log($"Failure to success effect triggered, adjusting dice value to {newValue}");
+            }
         }
     }
 

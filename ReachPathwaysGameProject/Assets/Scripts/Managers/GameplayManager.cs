@@ -229,8 +229,8 @@ public class GameplayManager : MonoBehaviour
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
         InitializeHands();
-        playerDeck.Add(innovatorCards[0]);
-        playerDeck.Add(communicatorCards[1]);
+        playerDeck.Add(innovatorCards[6]);
+        playerDeck.Add(communicatorCards[8]);
     }
 
     public void SetScenario(Scenario scenario)
@@ -332,6 +332,7 @@ public class GameplayManager : MonoBehaviour
     public void AddDiceValue(int diceValue)
     {
         pointSum += diceValue;
+        pointsUI.DisplayTotalPoints(pointSum);
     }
 
     public void PlayCard(GameObject cardObj, CardBase card)
