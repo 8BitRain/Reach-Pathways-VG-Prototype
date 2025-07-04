@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{c6af2a9b-962e-46ca-804d-eceacf6b22c2}">
+		<property name="assetPath">
+			<value>SFX_BabbleSpeech_08.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.34666666666666668</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7e02d121-b9cc-438f-be13-5f1b2c8d662a}</destination>
+		</relationship>
+	</object>
+</objects>

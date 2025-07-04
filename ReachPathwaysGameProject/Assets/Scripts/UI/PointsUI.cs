@@ -10,6 +10,6 @@ public class PointsUI : MonoBehaviour
 
     public void DisplayTotalPoints(int points)
     {
-        pointsDisplay.text = "Total points: " + points.ToString();
+        pointsDisplay.text = "Points: " + points.ToString();
     }
 }

@@ -36,7 +36,7 @@ public class Dice : MonoBehaviour
 
     private void Start()
     {
-        if(diceUI == null)
+        if (diceUI == null)
         {
             diceUI = GetComponent<DiceUI>();
         }
@@ -49,6 +49,10 @@ public class Dice : MonoBehaviour
         diceValue = dice[diceNumber];
 
         diceUI.GetDice(diceNumber, diceValue); //Updates UI to inform player
+
+        GameplayManager.Instance.AddDiceValue(diceValue);
+
+        StateManager.Instance.ChangeState(new TurnState());
     }
 
     /* Call this method after RollDice to get the 
@@ -61,5 +65,20 @@ public class Dice : MonoBehaviour
     public int GetRollValue()
     {
         return diceValue;
+    }
+
+    public int GetRollNumber()
+    {
+        return diceNumber;
+    }
+
+    public void AdjustDice(int newNumber)
+    {
+        int newValue = dice[newNumber];
+        GameplayManager.Instance.AddDiceValue(diceValue * -1);
+        GameplayManager.Instance.AddDiceValue(newValue);
+        diceUI.GetDice(newNumber, newValue);
+        diceNumber = newNumber;
+        diceValue = newValue;
     }
 }

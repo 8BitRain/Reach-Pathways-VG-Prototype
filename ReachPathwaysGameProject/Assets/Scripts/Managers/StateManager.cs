@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,9 +23,6 @@ public class StateManager : MonoBehaviour
 
     [SerializeField]
     private bool launchMenuOnStart = true;
-
-    [SerializeField]
-    private FadeTransition fade;
 
     private void Awake()
     {
@@ -59,31 +55,18 @@ public class StateManager : MonoBehaviour
 
     public void ChangeState(State newState)
     {
-        var originalSceneName = "";
-        var newSceneName = "";
-        bool hasNewState = false; 
-        
         // Calls the exit method of the current state, then updates the current state to the new state and calls its enter method
         if (currentState != null)
         {
-            hasNewState = true;
             currentState.Exit();
-            originalSceneName = currentState.SceneName;
         }
 
         currentState = newState;
         currentState.Enter();
-        newSceneName = currentState.SceneName;
-
-        if(hasNewState && originalSceneName != newSceneName)
-        {
-            fade.SwitchScenes(newSceneName, originalSceneName);
-        }
-        
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
-        Debug.Log($"Switched to {newState}");
+        // Debug.Log($"Switched to {newState}");
     }
 
     private void Update()
@@ -169,15 +152,13 @@ public abstract class State
     public abstract void Enter();
     public abstract void Update();
     public abstract void Exit();
-
-    public string SceneName;
 }
 
 public class MainMenuState : State
 {
     public override bool Pausable => false;
     public override void Enter()
-    {        
+    {
         if (!SceneManager.GetSceneByName("MainMenu").isLoaded)
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
@@ -210,8 +191,7 @@ public class MainMenuState : State
 
     public override void Exit()
     {
-        //SceneManager.UnloadSceneAsync("MainMenu");
-        SceneName = "MainMenu";
+        SceneManager.UnloadSceneAsync("MainMenu");
     }
 }
 
@@ -256,38 +236,6 @@ public class OverworldState : State
     }
 }
 
-public class InitialDrawState : State
-{
-    public override bool Pausable => true;
-    private GameObject playerDeckObj, abilityDeck;
-    public override void Enter()
-    {
-        SceneName = "Gameplay";
-        playerDeckObj = GameplayManager.Instance.playerDeckObj;
-        abilityDeck = GameplayManager.Instance.abilityDeck;
-        
-        if (GameplayManager.Instance.playerDeck.Count > 0)
-        {
-            playerDeckObj.GetComponent<Button>().interactable = true;
-            abilityDeck.GetComponent<Button>().interactable = false;
-        }
-        else
-        {
-            playerDeckObj.GetComponent<Button>().interactable = false;
-        }
-    }
-
-    public override void Update()
-    {
-    }
-
-    public override void Exit()
-    {
-        playerDeckObj.GetComponent<Button>().interactable = false;
-        abilityDeck.GetComponent<Button>().interactable = false; 
-    }
-}
-
 public class GameInitState : State
 {
     public override bool Pausable => false;
@@ -297,10 +245,9 @@ public class GameInitState : State
         // Load the gameplay scene if not already loaded
         if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
         {
-            //SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
-            SceneName = "Gameplay";
+            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
         }
-
+        
         // GameplayManager's Awake() will handle the transition to ScenarioDrawState
         // once it's fully initialized
     }
@@ -314,15 +261,26 @@ public class GameInitState : State
     }
 }
 
-
-public class ScenarioDrawState : State
+public abstract class DrawState : State
 {
-    public override bool Pausable => true;
+    public int limit { get; private set; }
+    public int cardsDrawn = 0;
+
+    public DrawState(int drawLimit)
+    {
+        limit = drawLimit;
+    }
+    
     public override void Enter()
     {
-        SceneName = "Gameplay";
-        GameplayManager.Instance.scenarioDeck.SetActive(true);
-        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = true;
+        if (GameplayManager.Instance.isPlayerTurn)
+        {
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = true;
+            if (GameplayManager.Instance.playerDeck.Count > 0)
+            {
+                GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = true;
+            }
+        }
     }
 
     public override void Update()
@@ -331,7 +289,70 @@ public class ScenarioDrawState : State
 
     public override void Exit()
     {
-        GameplayManager.Instance.scenarioDeck.GetComponent<Button>().interactable = false;
+        GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = false;
+        GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = false;
+        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
+    }
+}
+
+public class InitialDrawState : DrawState
+{
+    public override bool Pausable => true;
+
+    public InitialDrawState(int drawLimit = 4) : base(drawLimit)
+    {
+    }
+
+    public override void Enter()
+    {
+        if (GameplayManager.Instance.playerDeck.Count > 0)
+        {
+            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = true;
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = false;
+            GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = true;
+        }
+    }
+}
+
+public class ScenarioDrawState : State
+{
+    public override bool Pausable => true;
+    public override void Enter()
+    {
+        GameplayManager.Instance.scenarioDisplay.SetActive(true);
+        GameplayManager.Instance.scenarioDisplay.GetComponent<Button>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        GameplayManager.Instance.scenarioDisplay.GetComponent<Button>().interactable = false;
+    }
+}
+
+public class DiceRollState : State
+{
+    public override bool Pausable => true;
+
+    public override void Enter()
+    {
+        GameplayManager.Instance.diceUI.gameObject.GetComponent<CanvasGroup>().interactable = true;
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+        GameplayManager.Instance.diceUI.gameObject.GetComponent<CanvasGroup>().interactable = false;
     }
 }
 
@@ -340,14 +361,21 @@ public class TurnState : State
     public override bool Pausable => true;
     public override void Enter()
     {
-        // This should be doable with .interactable, but this version of Unity has a bug where the cards do not inherit this properly when instantiated
-        // For now, we can use blocksRaycasts as a workaround, but updating to a 2022 or 2023 version of Unity would fix this
-        // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = true;
-        SceneName = "Gameplay";
-        GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
+        Debug.Log(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
+        if (GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn] == GameplayManager.Instance.playerCharacter)
+        {
+            GameplayManager.Instance.isPlayerTurn = true;
+            GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = true;
+            GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = true;
+        }
+        else
+        {
+            GameplayManager.Instance.isPlayerTurn = false;
+            GameplayManager.Instance.PlayCPUTurn();
+        }
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
+        GameplayManager.Instance.pointsUI.DisplayTotalPoints(GameplayManager.Instance.pointSum);
     }
 
     public override void Update()
@@ -356,8 +384,29 @@ public class TurnState : State
 
     public override void Exit()
     {
-        // GameplayManager.Instance.hand.GetComponent<CanvasGroup>().interactable = false;
-        GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
+        if (GameplayManager.Instance.isPlayerTurn)
+        {
+            GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = false;
+        }
+        GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
+        GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
+        GameplayManager.Instance.pointsUI.DisplayTotalPoints(GameplayManager.Instance.pointSum);
+    }
+}
+
+public class TurnEndDrawState : DrawState
+{
+    public override bool Pausable => true;
+    public TurnEndDrawState(int drawLimit = 1) : base(drawLimit)
+    {
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        if (!GameplayManager.Instance.isPlayerTurn)
+        {
+            GameplayManager.Instance.DrawAbilityCard();
+        }
     }
 }

@@ -16,6 +16,6 @@ public class DiceUI : MonoBehaviour
     {
         diceNumber.text = number.ToString();
 
-        diceValue.text = value.ToString();
+        diceValue.text = $"Result: {value}";
     }
 }

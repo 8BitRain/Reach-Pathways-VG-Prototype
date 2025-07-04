@@ -609,7 +609,6 @@ GameObject:
   - component: {fileID: 8456886299242859199}
   - component: {fileID: 8456886299242859198}
   - component: {fileID: 8456886299242859185}
-  - component: {fileID: 8456886299242859197}
   - component: {fileID: 2112166120019199960}
   - component: {fileID: 3713367882262640296}
   m_Layer: 0
@@ -706,30 +705,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8456886299242859197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8456886299242859184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61cedae822cbb7d46b7efe1993e9ae6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardColor: 0
-  characterType: 0
-  specialty: 0
-  meshRenderer: {fileID: 0}
-  colorForCard:
-  - {fileID: 2100000, guid: 4fbdd75629c4a1f4fb99aa576abb8731, type: 2}
-  - {fileID: 2100000, guid: 5aa25970e2081ec4a8cb7bd272ba65d9, type: 2}
-  - {fileID: 2100000, guid: 92aa885b970115b42992aa97069cacda, type: 2}
-  - {fileID: 2100000, guid: d51056ec121b57e449d2402b52145bdc, type: 2}
-  - {fileID: 2100000, guid: 91c3ed60a1efa5f4dbf416b2d7e17a95, type: 2}
-  - {fileID: 2100000, guid: 9b93694842ba0ed4cab6ae6df06200ed, type: 2}
-  pointSymbol: 
 --- !u!114 &2112166120019199960
 MonoBehaviour:
   m_ObjectHideFlags: 0
