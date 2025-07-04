@@ -1,12 +1,12 @@
 using UnityEngine;
 using Yarn.Unity;
 
-public enum TimeSlot { Morning, Lunchtime, Afternoon, SunSet, Evening}
+public enum TimeSlot { Morning, Lunchtime, Afternoon, SunSet, Evening }
 
 public class TimeManager : MonoBehaviour
 {
     TimeSlot currentTime;
-    
+
     Calendar calendar;
 
     [SerializeField]
@@ -17,7 +17,7 @@ public class TimeManager : MonoBehaviour
 
     void Start()
     {
-        if(timeUI == null) { timeUI = GetComponent<TimeUI>(); }
+        if (timeUI == null) { timeUI = GetComponent<TimeUI>(); }
 
         calendar = new Calendar(startingMonth);
         currentTime = TimeSlot.Morning;
@@ -27,11 +27,12 @@ public class TimeManager : MonoBehaviour
     //Handles the time change based on the parameter increments
     public void AdvanceTimeBySlots(int num)
     {
+        //Testing
         int timeIndex = (int)currentTime;
 
-        while(num > 0)
+        while (num > 0)
         {
-            if(timeIndex == System.Enum.GetValues(typeof(TimeSlot)).Length - 1)
+            if (timeIndex == System.Enum.GetValues(typeof(TimeSlot)).Length - 1)
             {
                 timeIndex = 0;
             }
@@ -40,11 +41,11 @@ public class TimeManager : MonoBehaviour
                 timeIndex++;
             }
 
-            
+
             num--;
 
             currentTime = (TimeSlot)timeIndex;
-            if(currentTime == TimeSlot.Morning)
+            if (currentTime == TimeSlot.Morning)
             {
                 calendar.ChangeDate();
             }
@@ -69,7 +70,7 @@ public class TimeManager : MonoBehaviour
     }
 }
 
-public class Calendar 
+public class Calendar
 {
     private int maxDays; //30, 31, and 28
 
@@ -79,18 +80,18 @@ public class Calendar
     public Calendar(int getMonth)
     {
         currentMonth = getMonth;
-        
+
         SetMaxDaysForMonth(currentMonth);
         currentDay = 1;
-        
+
     }
 
     public void ChangeDate()
     {
-        if(currentDay == maxDays)
+        if (currentDay == maxDays)
         {
             currentDay = 1;
-            if(currentMonth == 12)
+            if (currentMonth == 12)
             {
                 currentMonth = 1;
             }

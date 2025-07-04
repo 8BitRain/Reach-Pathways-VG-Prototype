@@ -406,6 +406,7 @@ public class GameplayManager : MonoBehaviour
                     result = gameResult.failure;
                 }
                 Debug.Log(result);
+                StateManager.Instance.ChangeState(new OverworldState());
                 return;
             }
             // Go to dice roll state
