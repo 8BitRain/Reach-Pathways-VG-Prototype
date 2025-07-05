@@ -66,7 +66,6 @@ public class Confidant : MonoBehaviour
         conRank++;
         Debug.Log($"{confidantName} rank increased to {conRank}");
         UpdateYarnVariables();
-        
         if (autoSave)
             SaveConfidantData();
     }
@@ -172,7 +171,20 @@ public class Confidant : MonoBehaviour
             
         Debug.Log($"Reset {confidantName} to default values");
     }
-    
+
+    [YarnCommand("AdvanceTimeSlot")]
+    public void YarnAdvanceTime(int num)
+    {
+        /*
+         * 1 slot = rest
+         * 2 slots = Skill-based activity
+         * 2 slots = confidant interaction
+         * 5 slots = Scenario (card game)
+         * 5 slots = major confidant event
+         */
+        TimeManager.Instance.AdvanceTimeBySlots(num);
+    }
+
     // Manual save command that can be called from Yarn
     [YarnCommand]
     public void SaveData()

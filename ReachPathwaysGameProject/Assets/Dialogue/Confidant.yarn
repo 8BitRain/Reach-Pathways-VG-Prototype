@@ -48,6 +48,7 @@ PersonA: What would you like to do?
     <<jump ConfidantMenu>>
 -> I want to set our rank to 5.
     <<SetRank Confidant 5>>
+    <<AdvanceTimeSlot Confidant 1>>
     PersonA: Okay, I've set our rank to {$conRank}.
     <<jump ConfidantMenu>>
 -> Lock our relationship.

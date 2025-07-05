@@ -15,6 +15,22 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private int startingMonth;
 
+    public static TimeManager Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        
+    }
+
     void Start()
     {
         if (timeUI == null) { timeUI = GetComponent<TimeUI>(); }
@@ -25,9 +41,9 @@ public class TimeManager : MonoBehaviour
     }
 
     //Handles the time change based on the parameter increments
+    //Call this within a scene that isn't being handles through Yarnspinner
     public void AdvanceTimeBySlots(int num)
     {
-        //Testing
         int timeIndex = (int)currentTime;
 
         while (num > 0)
@@ -40,8 +56,6 @@ public class TimeManager : MonoBehaviour
             {
                 timeIndex++;
             }
-
-
             num--;
 
             currentTime = (TimeSlot)timeIndex;
@@ -54,19 +68,6 @@ public class TimeManager : MonoBehaviour
         currentTime = (TimeSlot)timeIndex;
 
         timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime);
-    }
-
-    [YarnCommand("AdvanceTimeSlot")]
-    public void YarnAdvanceTime(int num)
-    {
-        /*
-         * 1 slot = rest
-         * 2 slots = Skill-based activity
-         * 2 slots = confidant interaction
-         * 5 slots = Scenario (card game)
-         * 5 slots = major confidant event
-         */
-        AdvanceTimeBySlots(num);
     }
 }
 
@@ -111,16 +112,6 @@ public class Calendar
     {
         switch (getMonth)
         {
-            //31 days
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                maxDays = 31;
-                break;
             //30 days
             case 4:
             case 6:
@@ -131,6 +122,10 @@ public class Calendar
             //28 days
             case 2:
                 maxDays = 28;
+                break;
+            //31 days
+            default:
+                maxDays = 31;
                 break;
         }
     }
