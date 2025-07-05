@@ -52,6 +52,7 @@ public class GameplayManager : MonoBehaviour
     public Scenario currentScenario;
 
     public Dictionary<CharacterCard, List<GameObject>> hands = new();
+    public Dictionary<CharacterCard, List<GameObject>> discards = new();
 
     // Innovator Cards
     public static List<Type> innovatorCards = new()
@@ -232,7 +233,7 @@ public class GameplayManager : MonoBehaviour
         playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(innovatorCards[6]);
         playerDeck.Add(innovatorCards[7]);
-        playerDeck.Add(communicatorCards[8]);
+        playerDeck.Add(strategistCards[7]);
     }
 
     public void SetScenario(Scenario scenario)
@@ -365,9 +366,6 @@ public class GameplayManager : MonoBehaviour
             pointSum++;
             Debug.Log("Adding scenario domain bonus");
         }
-        // Placeholder - card should be added to discard pile instead of being disabled
-        cardObj.SetActive(false);
-        cardsPlayedThisTurn++;
 
         if (isPlayerTurn)
         {
@@ -384,6 +382,9 @@ public class GameplayManager : MonoBehaviour
         }
 
         card.SpecialEffect();
+        cardObj.SetActive(false);
+        cardsPlayedThisTurn++;
+        discards[characterList[currentTurn]].Add(cardObj);
         pointsUI.DisplayTotalPoints(pointSum);
     }
 
@@ -450,10 +451,12 @@ public class GameplayManager : MonoBehaviour
                     count++;
                 }
                 hands.Add(character, cardList);
+                discards.Add(character, new List<GameObject>());
             }
             else
             {
                 hands.Add(playerCharacter, new List<GameObject>());
+                discards.Add(playerCharacter, new List<GameObject>());
             }
         }
     }

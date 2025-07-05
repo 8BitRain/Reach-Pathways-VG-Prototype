@@ -10,6 +10,10 @@ public abstract class CardBase : MonoBehaviour
     public abstract CardStat stat { get; }
     public abstract int numberEffect { get; }
     public abstract void SpecialEffect();
+    public CharacterCard GetCardOwner()
+    {
+        return GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn];
+    }
 }
 
 public enum CardStat
@@ -37,11 +41,7 @@ namespace MemoryCards
             // Give card method - gives a random card to a random teammate
 
             // Get the card owner - if no owner is found in parent, the owner is the player since they have their own separate Hand object
-            CharacterCard owner = gameObject.GetComponentInParent<CharacterCard>();
-            if (owner == null)
-            {
-                owner = GameplayManager.Instance.playerCharacter;
-            }
+            CharacterCard owner = GetCardOwner();
 
             // Get the owner's hand and a random card to give (note that this GiveCard has already been removed by the PlayCard() method)
             List<GameObject> hand = GameplayManager.Instance.hands[owner];
@@ -72,7 +72,6 @@ namespace MemoryCards
             // Draws a random card
             GameplayManager.Instance.DrawAbilityCard();
             Debug.Log($"Drew a new card due to deck search effect");
-
         }
     }
 
@@ -84,17 +83,14 @@ namespace MemoryCards
             // Discard one card and draw a random ability card
 
             // Get the card's owner
-            CharacterCard owner = gameObject.GetComponentInParent<CharacterCard>();
-            if (owner == null)
-            {
-                owner = GameplayManager.Instance.playerCharacter;
-            }
+            CharacterCard owner = GetCardOwner();
 
             // Choose a random card from the owner's hand, remove it from their hand list, and disable its object
             List<GameObject> hand = GameplayManager.Instance.hands[owner];
             GameObject cardToDiscard = hand[Random.Range(0, hand.Count)];
             GameplayManager.Instance.hands[owner].Remove(cardToDiscard);
             cardToDiscard.SetActive(false);
+            GameplayManager.Instance.discards[owner].Add(cardToDiscard);
 
             // Draw a random new ability card using the usual method, which has specific logic to handle this usage by checking if we are in the Turn state
             GameplayManager.Instance.DrawAbilityCard();
@@ -164,7 +160,17 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Recover any discarded card
-            Debug.Log(cardName + " effect not yet implemented.");
+            CharacterCard owner = GetCardOwner();
+            List<GameObject> ownerDiscards = GameplayManager.Instance.discards[owner];
+            if (ownerDiscards.Count > 0)
+            {
+                GameObject recoverCard = ownerDiscards[Random.Range(0, ownerDiscards.Count)];
+                recoverCard.SetActive(true);
+                GameplayManager.Instance.discards[owner].Remove(recoverCard);
+                Debug.Log($"{owner.Character} recovered {recoverCard.GetComponent<CardBase>().cardName} via card recovery special effect");
+                return;
+            }
+            Debug.Log("No cards to recover from discard");
         }
     }
 
