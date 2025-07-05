@@ -479,8 +479,6 @@ public class GameplayManager : MonoBehaviour
         CardObj cardObj = hands[character][rng.Next(hands[character].Count)].GetComponent<CardObj>();
         cardObj.PlayCard();
 
-        DrawCardBase(character.gameObject);
-
         StartCoroutine(StateManager.Instance.Delay(2f, done => { AdvanceToDraw(); }));
     }
 }
