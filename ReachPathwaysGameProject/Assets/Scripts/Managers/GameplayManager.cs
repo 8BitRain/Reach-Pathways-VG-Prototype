@@ -231,6 +231,7 @@ public class GameplayManager : MonoBehaviour
         InitializeHands();
         playerDeck.Add(innovatorCards[2]);
         playerDeck.Add(innovatorCards[6]);
+        playerDeck.Add(innovatorCards[7]);
         playerDeck.Add(communicatorCards[8]);
     }
 
@@ -288,9 +289,23 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawAbilityCard()
     {
+        GameObject parent = (StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn) ? playerHandObj : characterList[currentTurn].gameObject;
+
+        // Special use case for HandDiscardDrawCard effect
+        if (StateManager.Instance.GetCurrentState() is TurnState)
+        {
+            // Create the new card object & add it to the corresponding hand and object
+            GameObject cardObj;
+            hands[characterList[currentTurn]].Add(cardObj = Instantiate(cardPrefab, parent.gameObject.transform));
+
+            // Draw a random ability card from all possible options
+            cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+            return;
+        }
+
         DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
         // Sets the parent of the new card object to be the player's hand object if we are in the initial draw state or if it is the player's turn. Otherwise it will parent it directly to the character's object
-        GameObject parent = (StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn) ? playerHandObj : characterList[currentTurn].gameObject;
+        
         if (state.cardsDrawn < state.limit)
         {
             // Create the new card object & add it to the corresponding hand and object

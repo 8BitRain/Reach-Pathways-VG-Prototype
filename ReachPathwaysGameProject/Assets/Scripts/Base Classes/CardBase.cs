@@ -77,8 +77,25 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Discard as many cards in your hand as you like, then draw that many cards
-            Debug.Log(cardName + " effect not yet implemented.");
+            // Original effect: Discard as many cards in your hand as you like, then draw that many cards
+            // Discard one card and draw a random ability card
+
+            // Get the card's owner
+            CharacterCard owner = gameObject.GetComponentInParent<CharacterCard>();
+            if (owner == null)
+            {
+                owner = GameplayManager.Instance.playerCharacter;
+            }
+
+            // Choose a random card from the owner's hand, remove it from their hand list, and disable its object
+            List<GameObject> hand = GameplayManager.Instance.hands[owner];
+            GameObject cardToDiscard = hand[Random.Range(0, hand.Count)];
+            GameplayManager.Instance.hands[owner].Remove(cardToDiscard);
+            cardToDiscard.SetActive(false);
+
+            // Draw a random new ability card using the usual method, which has specific logic to handle this usage by checking if we are in the Turn state
+            GameplayManager.Instance.DrawAbilityCard();
+            Debug.Log($"Discarded {cardToDiscard.GetComponent<CardBase>().cardName} from {owner.Character}'s hand");
         }
     }
 
