@@ -142,8 +142,10 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Shuffle the deck
-            Debug.Log(cardName + " effect not yet implemented.");
+            // Original effect: Shuffle the deck
+            // Resets the revealed cards so it is random again
+            GameplayManager.Instance.revealedCards = new List<Type>();
+            Debug.Log("Revealed cards re-randomized due to deck shuffle effect");
         }
     }
 
@@ -152,7 +154,6 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Look at the top three cards in the deck and share with your teammates
-            // Debug.Log(cardName + " effect not yet implemented.");
             List<Type> revealedCards = new();
             int x = 0;
             while (x < 3)

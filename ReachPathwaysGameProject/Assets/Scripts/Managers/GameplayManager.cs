@@ -233,9 +233,9 @@ public class GameplayManager : MonoBehaviour
         InitializeHands();
         playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(innovatorCards[6]);
-        playerDeck.Add(innovatorCards[7]);
         playerDeck.Add(strategistCards[2]);
-        playerDeck.Add(strategistCards[7]);
+        playerDeck.Add(strategistCards[6]);
+        // playerDeck.Add(innovatorCards[7]);
     }
 
     public void SetScenario(Scenario scenario)
