@@ -41,7 +41,7 @@ namespace MemoryCards
         {
             // Give card method - gives a random card to a random teammate
 
-            // Get the card owner - if no owner is found in parent, the owner is the player since they have their own separate Hand object
+            // Get the owner of this card who will be giving a card to a teammate
             CharacterCard owner = GetCardOwner();
 
             // Get the owner's hand and a random card to give (note that this GiveCard has already been removed by the PlayCard() method)
@@ -134,7 +134,53 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Ask a teammate for a card from their hand
-            Debug.Log(cardName + " effect not yet implemented.");
+
+            // Get the owner of this card who will be taking a card from a teammate
+            CharacterCard taker = GetCardOwner();
+
+            // Get a list of teammates and remove the owner from it to avoid self-taking
+            List<CharacterCard> givers = new List<CharacterCard>(GameplayManager.Instance.hands.Keys);
+            givers.Remove(taker);
+
+            CharacterCard giver = null;
+            List<GameObject> giverHand = null;
+
+            bool exit = false;
+
+            // Find a teammate who has cards available to give
+            while (!exit)
+            {
+                if (givers.Count < 1)
+                {
+                    Debug.Log("No teammates have any cards to take");
+                    return;
+                }
+
+                giver = givers[GameplayManager.Instance.rng.Next(0, givers.Count)];
+                giverHand = GameplayManager.Instance.hands[giver];
+                if (giverHand.Count > 0)
+                {
+                    exit = true;
+                    Debug.Log($"Found {giver.Character} to take card from");
+                }
+                else
+                {
+                    Debug.Log($"{giver.Character}'s hand had no cards to take from, removing them & checking for a different teammate");
+                    givers.Remove(giver);
+                }
+            }
+
+            GameObject cardToGive = GameplayManager.Instance.hands[giver][GameplayManager.Instance.rng.Next(0, giverHand.Count)];
+
+            // Reparent the card to the taker
+            // If the taker is the player, reparent it to their Hand object. Otherwise just parent it to the recipient's object
+            Transform newParent = taker == GameplayManager.Instance.playerCharacter ? GameplayManager.Instance.playerHandObj.transform : taker.gameObject.transform;
+            cardToGive.transform.SetParent(newParent);
+
+            // Transfer the card from the owner's hand list to the taker's
+            GameplayManager.Instance.hands[giver].Remove(cardToGive);
+            GameplayManager.Instance.hands[taker].Add(cardToGive);
+            Debug.Log($"Transferred {cardToGive.GetComponent<CardBase>().cardName} from {giver} to {taker}");
         }
     }
 

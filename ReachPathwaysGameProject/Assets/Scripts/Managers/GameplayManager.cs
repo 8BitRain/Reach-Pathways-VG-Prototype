@@ -234,7 +234,8 @@ public class GameplayManager : MonoBehaviour
         playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(innovatorCards[6]);
         playerDeck.Add(strategistCards[2]);
-        playerDeck.Add(strategistCards[6]);
+        playerDeck.Add(innovatorCards[8]);
+        // playerDeck.Add(strategistCards[6]);
         // playerDeck.Add(innovatorCards[7]);
     }
 
@@ -379,25 +380,22 @@ public class GameplayManager : MonoBehaviour
             Debug.Log("Adding scenario domain bonus");
         }
 
+        card.SpecialEffect();
+        cardObj.SetActive(false);
+        hands[characterList[currentTurn]].Remove(cardObj);
+        discards[characterList[currentTurn]].Add(cardObj);
+        cardsPlayedThisTurn++;
+        pointsUI.DisplayTotalPoints(pointSum);
+
         if (isPlayerTurn)
         {
-            hands[playerCharacter].Remove(cardObj);
             // Disable the player's hand if they have already played 3 cards
             if (cardsPlayedThisTurn > 2)
             {
                 playerHandObj.GetComponent<CanvasGroup>().interactable = false;
             }
         }
-        else
-        {
-            hands[characterList[currentTurn]].Remove(cardObj);
-        }
 
-        card.SpecialEffect();
-        cardObj.SetActive(false);
-        cardsPlayedThisTurn++;
-        discards[characterList[currentTurn]].Add(cardObj);
-        pointsUI.DisplayTotalPoints(pointSum);
     }
 
     public void AdvanceToDraw()
