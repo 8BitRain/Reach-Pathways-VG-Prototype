@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
 
     // Place all events you want to have stored as comma separated EventReference variables, then assign them to the corresponding FMOD events in the inspector
     [SerializeField]
-    public EventReference menuMusic, gameplayMusic, overworldMusic;
+    public EventReference menuMusic, gameplayMusic, overworldMusic, menuSelect, menuBack, mouseOver, playCard, drawCard, scenarioCard, negEffect, posEffect, roundFail, roundSucceed;
     private EventInstance musicInst;
 
     private string cont = "Continue";
