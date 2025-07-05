@@ -34,8 +34,33 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Give card method
-            Debug.Log(cardName + " effect not yet implemented.");
+            // Give card method - gives a random card to a random teammate
+
+            // Get the card owner - if no owner is found in parent, the owner is the player since they have their own separate Hand object
+            CharacterCard owner = gameObject.GetComponentInParent<CharacterCard>();
+            if (owner == null)
+            {
+                owner = GameplayManager.Instance.playerCharacter;
+            }
+
+            // Get the owner's hand and a random card to give (note that this GiveCard has already been removed by the PlayCard() method)
+            List<GameObject> hand = GameplayManager.Instance.hands[owner];
+            GameObject cardToGive = hand[Random.Range(0, hand.Count)];
+
+            // Get a list of teammates and remove the owner from it to avoid self-giving
+            List<CharacterCard> recipients = new List<CharacterCard>(GameplayManager.Instance.hands.Keys);
+            recipients.Remove(owner);
+            CharacterCard recipient = recipients[Random.Range(0, recipients.Count)];
+
+            // Reparent the card to the recipient
+            // If the recipient is the player, reparent it to their Hand object. Otherwise just parent it to the recipient's object
+            Transform newParent = recipient == GameplayManager.Instance.playerCharacter ? GameplayManager.Instance.playerHandObj.transform : recipient.gameObject.transform;
+            cardToGive.transform.SetParent(newParent);
+
+            // Transfer the card from the owner's hand list to the recipient's
+            GameplayManager.Instance.hands[owner].Remove(cardToGive);
+            GameplayManager.Instance.hands[recipient].Add(cardToGive);
+            Debug.Log($"Transferred {cardToGive.GetComponent<CardBase>().cardName} from {owner} to {recipient}");
         }
     }
 

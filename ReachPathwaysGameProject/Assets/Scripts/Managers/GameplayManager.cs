@@ -229,6 +229,7 @@ public class GameplayManager : MonoBehaviour
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
         InitializeHands();
+        playerDeck.Add(innovatorCards[2]);
         playerDeck.Add(innovatorCards[6]);
         playerDeck.Add(communicatorCards[8]);
     }
@@ -349,8 +350,6 @@ public class GameplayManager : MonoBehaviour
             pointSum++;
             Debug.Log("Adding scenario domain bonus");
         }
-        card.SpecialEffect();
-        pointsUI.DisplayTotalPoints(pointSum);
         // Placeholder - card should be added to discard pile instead of being disabled
         cardObj.SetActive(false);
         cardsPlayedThisTurn++;
@@ -368,6 +367,9 @@ public class GameplayManager : MonoBehaviour
         {
             hands[characterList[currentTurn]].Remove(cardObj);
         }
+
+        card.SpecialEffect();
+        pointsUI.DisplayTotalPoints(pointSum);
     }
 
     public void AdvanceToDraw()
