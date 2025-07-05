@@ -240,7 +240,7 @@ namespace MemoryCards
         public override int numberEffect => 2;
     }
 
-    public class UnconventionalHackCard : CardBase
+    public class UnconventionalHackCard : DeckSearchCard
     {
         public override string cardName => "Unconventional Hack";
         public override string description => "You recall a time your unconventional solution saved Kaharaba's main building.";
@@ -249,7 +249,8 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Draw 2 cards after playing.
-            Debug.Log(cardName + " effect not yet implemented.");
+            base.SpecialEffect();
+            base.SpecialEffect();
         }
     }
 
@@ -405,11 +406,6 @@ namespace MemoryCards
         public override string description => "You recall a time when you followed through with a commitment, securing the trust of your team.";
         public override CardStat stat => CardStat.Integrity;
         public override int numberEffect => 2;
-        public override void SpecialEffect()
-        {
-            // Recover a random card from the discard pile.
-            Debug.Log(cardName + " effect not yet implemented.");
-        }
     }
 
     public class ElephantInTheRoomCard : NeutralCard
@@ -499,11 +495,9 @@ namespace MemoryCards
         public override string description => "You recall a time when you stepped up as leader in a situation, working with teammates and making decisions that reflect the group as a whole.";
         public override CardStat stat => CardStat.Teamwork;
         public override int numberEffect => 2;
-        public override void SpecialEffect()
-        {
-            // Help a teammate recover a discarded card.
-            Debug.Log(cardName + " effect not yet implemented.");
-        }
+        // Original effect: Help a teammate recover a discarded card
+        // Refactored to just recover a card from your own discard
+        // The original effect shouldn't be too hard to implement by reusing logic from RecoverDiscardedCard & AskTeammateForCard, but for now it's been scoped down
     }
 
     public class DungeonsAndDelegationsCard : NeutralCard
