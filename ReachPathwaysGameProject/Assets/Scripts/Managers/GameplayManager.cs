@@ -14,7 +14,7 @@ public class GameplayManager : MonoBehaviour
 {
     // #region
     public static GameplayManager Instance { get; private set; }
-    private System.Random rng = new();
+    public System.Random rng = new();
 
     [SerializeField]
     public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDisplay, abilityDeck;
@@ -53,6 +53,7 @@ public class GameplayManager : MonoBehaviour
 
     public Dictionary<CharacterCard, List<GameObject>> hands = new();
     public Dictionary<CharacterCard, List<GameObject>> discards = new();
+    public List<Type> revealedCards = new();
 
     // Innovator Cards
     public static List<Type> innovatorCards = new()
@@ -233,6 +234,7 @@ public class GameplayManager : MonoBehaviour
         playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(innovatorCards[6]);
         playerDeck.Add(innovatorCards[7]);
+        playerDeck.Add(strategistCards[2]);
         playerDeck.Add(strategistCards[7]);
     }
 
@@ -295,12 +297,7 @@ public class GameplayManager : MonoBehaviour
         // Special use case for HandDiscardDrawCard & DeckSearch card effects
         if (StateManager.Instance.GetCurrentState() is TurnState)
         {
-            // Create the new card object & add it to the corresponding hand and object
-            GameObject cardObj;
-            hands[characterList[currentTurn]].Add(cardObj = Instantiate(cardPrefab, parent.gameObject.transform));
-
-            // Draw a random ability card from all possible options
-            cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+            DrawCardBase(parent);
             return;
         }
 
@@ -309,16 +306,31 @@ public class GameplayManager : MonoBehaviour
         
         if (state.cardsDrawn < state.limit)
         {
-            // Create the new card object & add it to the corresponding hand and object
-            GameObject cardObj;
-            hands[characterList[currentTurn]].Add(cardObj = Instantiate(cardPrefab, parent.gameObject.transform));
-
-            // Draw a random ability card from all possible options
-            cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
-
+            DrawCardBase(parent);
             state.cardsDrawn++;
             DrawAdvance(state);
         }
+    }
+
+    private void DrawCardBase(GameObject parent)
+    {
+        // Create the new card object & add it to the corresponding hand and object
+        GameObject cardObj;
+        hands[characterList[currentTurn]].Add(cardObj = Instantiate(cardPrefab, parent.gameObject.transform));
+
+        // Draw a random ability card from all possible options, or from the revealed cards if they exist
+        Type cardToDraw;
+        if (revealedCards.Count > 0)
+        {
+            cardToDraw = revealedCards[0];
+            revealedCards.Remove(cardToDraw);
+        }
+        else
+        {
+            cardToDraw = abilityCards[rng.Next(abilityCards.Count)];
+        }
+        cardObj.GetComponent<CardObj>().Init(cardToDraw);
+        Debug.Log($"Drew {cardToDraw}");
     }
 
     private void DrawAdvance(DrawState state)
@@ -467,12 +479,7 @@ public class GameplayManager : MonoBehaviour
         CardObj cardObj = hands[character][rng.Next(hands[character].Count)].GetComponent<CardObj>();
         cardObj.PlayCard();
 
-        GameObject newCard;
-        // Create the new card object & add it to the player's hand
-        hands[character].Add(newCard = Instantiate(cardPrefab, character.gameObject.transform));
-
-        // Draw a random ability card from all possible options
-        newCard.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+        DrawCardBase(character.gameObject);
 
         StartCoroutine(StateManager.Instance.Delay(2f, done => { AdvanceToDraw(); }));
     }

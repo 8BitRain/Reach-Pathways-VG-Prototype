@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MemoryCards;
@@ -45,12 +46,12 @@ namespace MemoryCards
 
             // Get the owner's hand and a random card to give (note that this GiveCard has already been removed by the PlayCard() method)
             List<GameObject> hand = GameplayManager.Instance.hands[owner];
-            GameObject cardToGive = hand[Random.Range(0, hand.Count)];
+            GameObject cardToGive = hand[GameplayManager.Instance.rng.Next(0, hand.Count)];
 
             // Get a list of teammates and remove the owner from it to avoid self-giving
             List<CharacterCard> recipients = new List<CharacterCard>(GameplayManager.Instance.hands.Keys);
             recipients.Remove(owner);
-            CharacterCard recipient = recipients[Random.Range(0, recipients.Count)];
+            CharacterCard recipient = recipients[GameplayManager.Instance.rng.Next(0, recipients.Count)];
 
             // Reparent the card to the recipient
             // If the recipient is the player, reparent it to their Hand object. Otherwise just parent it to the recipient's object
@@ -87,7 +88,7 @@ namespace MemoryCards
 
             // Choose a random card from the owner's hand, remove it from their hand list, and disable its object
             List<GameObject> hand = GameplayManager.Instance.hands[owner];
-            GameObject cardToDiscard = hand[Random.Range(0, hand.Count)];
+            GameObject cardToDiscard = hand[GameplayManager.Instance.rng.Next(0, hand.Count)];
             GameplayManager.Instance.hands[owner].Remove(cardToDiscard);
             cardToDiscard.SetActive(false);
             GameplayManager.Instance.discards[owner].Add(cardToDiscard);
@@ -106,7 +107,7 @@ namespace MemoryCards
             Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
             if (dice.GetRollNumber() >= 8 && dice.GetRollNumber() <= 11)
             {
-                int newNumber = Random.Range(12, 16);
+                int newNumber = GameplayManager.Instance.rng.Next(12, 16);
                 dice.AdjustDice(newNumber);
                 Debug.Log($"Partial failure to success effect triggered, adjusting dice number to {newNumber}");
             }
@@ -121,7 +122,7 @@ namespace MemoryCards
             Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
             if (dice.GetRollNumber() >= 1 && dice.GetRollNumber() <= 7)
             {
-                int newNumber = Random.Range(12, 16);
+                int newNumber = GameplayManager.Instance.rng.Next(12, 16);
                 dice.AdjustDice(newNumber);
                 Debug.Log($"Failure to success effect triggered, adjusting dice number to {newNumber}");
             }
@@ -151,7 +152,16 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Look at the top three cards in the deck and share with your teammates
-            Debug.Log(cardName + " effect not yet implemented.");
+            // Debug.Log(cardName + " effect not yet implemented.");
+            List<Type> revealedCards = new();
+            int x = 0;
+            while (x < 3)
+            {
+                revealedCards.Add(GameplayManager.abilityCards[GameplayManager.Instance.rng.Next(GameplayManager.abilityCards.Count)]);
+                Debug.Log($"Revealed {revealedCards[^1]}");
+                x++;
+            }
+            GameplayManager.Instance.revealedCards = revealedCards;
         }
     }
 
@@ -164,7 +174,7 @@ namespace MemoryCards
             List<GameObject> ownerDiscards = GameplayManager.Instance.discards[owner];
             if (ownerDiscards.Count > 0)
             {
-                GameObject recoverCard = ownerDiscards[Random.Range(0, ownerDiscards.Count)];
+                GameObject recoverCard = ownerDiscards[GameplayManager.Instance.rng.Next(0, ownerDiscards.Count)];
                 recoverCard.SetActive(true);
                 GameplayManager.Instance.discards[owner].Remove(recoverCard);
                 Debug.Log($"{owner.Character} recovered {recoverCard.GetComponent<CardBase>().cardName} via card recovery special effect");
