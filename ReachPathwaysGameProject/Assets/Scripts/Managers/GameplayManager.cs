@@ -229,7 +229,7 @@ public class GameplayManager : MonoBehaviour
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
         InitializeHands();
-        playerDeck.Add(innovatorCards[2]);
+        playerDeck.Add(innovatorCards[0]);
         playerDeck.Add(innovatorCards[6]);
         playerDeck.Add(innovatorCards[7]);
         playerDeck.Add(communicatorCards[8]);
@@ -291,7 +291,7 @@ public class GameplayManager : MonoBehaviour
     {
         GameObject parent = (StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn) ? playerHandObj : characterList[currentTurn].gameObject;
 
-        // Special use case for HandDiscardDrawCard effect
+        // Special use case for HandDiscardDrawCard & DeckSearch card effects
         if (StateManager.Instance.GetCurrentState() is TurnState)
         {
             // Create the new card object & add it to the corresponding hand and object

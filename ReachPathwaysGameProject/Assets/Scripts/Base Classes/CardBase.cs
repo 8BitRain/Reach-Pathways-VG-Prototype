@@ -68,8 +68,11 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Look through the deck, and choose any one card before reshuffling
-            Debug.Log(cardName + " effect not yet implemented.");
+            // Original effect: Look through the deck, and choose any one card before reshuffling
+            // Draws a random card
+            GameplayManager.Instance.DrawAbilityCard();
+            Debug.Log($"Drew a new card due to deck search effect");
+
         }
     }
 
