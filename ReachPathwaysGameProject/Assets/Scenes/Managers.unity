@@ -288,6 +288,13 @@ MonoBehaviour:
       Data3: 1054437552
       Data4: 1457991544
     Path: event:/UI/UI_RoundSucceed
+  diceRoll:
+    Guid:
+      Data1: 1999094014
+      Data2: 1208217127
+      Data3: -773410934
+      Data4: 686639676
+    Path: event:/UI/UI_Ambiguous
 --- !u!4 &1024968430
 Transform:
   m_ObjectHideFlags: 0
