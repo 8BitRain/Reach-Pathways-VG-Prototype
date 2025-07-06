@@ -436,6 +436,23 @@ public class GameplayManager : MonoBehaviour
                 Debug.Log(result);
                 return;
             }
+            
+            Debug.Log($"Checking if point total of {pointSum} passes the threshold of {currentScenario.roundThresholds[currentRound - 2]}");
+            if (pointSum < currentScenario.roundThresholds[currentRound - 2])
+            {
+                Debug.Log("Round threshold was not met - players have to discard a card");
+                foreach (KeyValuePair<CharacterCard, List<GameObject>> player in hands)
+                {
+                    if (player.Value.Count > 0)
+                    {
+                        GameObject cardToDiscard = player.Value[rng.Next(0, player.Value.Count)];
+                        cardToDiscard.SetActive(false);
+                        hands[player.Key].Remove(cardToDiscard);
+                        discards[player.Key].Add(cardToDiscard);
+                        Debug.Log($"Discarded {cardToDiscard.GetComponent<CardBase>().cardName} from player {player.Key}");
+                    }
+                }
+            }
             // Go to dice roll state
             StateManager.Instance.ChangeState(new DiceRollState());
             return;
