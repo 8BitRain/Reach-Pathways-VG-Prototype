@@ -9397,7 +9397,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a9b2d806891948d0b789c1a73a344499",
     "m_Id": 0,
-    "m_DisplayName": "Texture Movement Scale",
+    "m_DisplayName": "Foam Scale (1)",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
