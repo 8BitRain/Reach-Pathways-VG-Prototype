@@ -7,16 +7,23 @@ using MemoryCards;
 using AbilityCards;
 using SupportCards;
 using UnityEngine.UI;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using System.Diagnostics.Tracing;
 
 public class GameplayManager : MonoBehaviour
 {
+    // #region
     public static GameplayManager Instance { get; private set; }
     private System.Random rng = new();
 
     [SerializeField]
-    public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDeck, abilityDeck;
+    public GameObject cardPrefab, characterParent, actionsMenu, playerHandObj, playerDeckObj, scenarioDisplay, abilityDeck;
     [SerializeField]
     public RoundUI roundUI;
+    [SerializeField]
+    public PointsUI pointsUI;
+    [SerializeField]
+    public DiceUI diceUI;
 
     [SerializeField]
     private int totalRounds = 4;
@@ -24,17 +31,28 @@ public class GameplayManager : MonoBehaviour
     // Note that currentRound will start at 1 instead of 0 for text display purposes
     public int currentRound = 1;
 
+    private int cardsPlayedThisTurn = 0;
+
+    public int pointSum { get; private set; } = 0;
+
     public int currentTurn { get; private set; } = 0;
+
+    public gameResult result { get; private set; }
 
     public bool endAllRounds { get; private set; }
 
     [SerializeField]
     public List<CharacterCard> characterList = new();
-
-    private List<GameObject> playerHand = new();
+    [SerializeField]
+    public CharacterCard playerCharacter;
+    public bool isPlayerTurn = false;
 
     public List<Type> playerDeck = new();
-    
+
+    public Scenario currentScenario;
+
+    public Dictionary<CharacterCard, List<GameObject>> hands = new();
+
     // Innovator Cards
     public static List<Type> innovatorCards = new()
     {
@@ -181,6 +199,8 @@ public class GameplayManager : MonoBehaviour
         typeof(AmplifyEndsCard)
     };
 
+    // #endregion
+
     void Awake()
     {
         // Singleton enforcement
@@ -193,12 +213,12 @@ public class GameplayManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
-        scenarioDeck.SetActive(false);
-        
+
+        scenarioDisplay.SetActive(false);
+
         // Check if we're in GameInitState and transition to ScenarioDrawState
         // This ensures GameplayManager is fully initialized before ScenarioDrawState is entered
-        if (StateManager.Instance != null && 
+        if (StateManager.Instance != null &&
             StateManager.Instance.GetCurrentState() is GameInitState)
         {
             StateManager.Instance.ChangeState(new ScenarioDrawState());
@@ -208,92 +228,261 @@ public class GameplayManager : MonoBehaviour
     void Start()
     {
         characterList = characterParent.GetComponentsInChildren<CharacterCard>().ToList();
-        playerDeck.Add(innovatorCards[0]);
-        playerDeck.Add(innovatorCards[1]);
+        InitializeHands();
+        playerDeck.Add(innovatorCards[6]);
+        playerDeck.Add(communicatorCards[8]);
+    }
+
+    public void SetScenario(Scenario scenario)
+    {
+        currentScenario = scenario;
+        scenario.AssignObject(scenarioDisplay);
+    }
+
+    public void DrawScenarioCard()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.scenarioCard, transform.position);
+        
+        SetScenario(new Scenario(
+            CardStat.Creativity,
+            new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity },
+            new int[] { 40, 55, 75, 100 },
+            new Dictionary<gameResult, int> {
+                { gameResult.extraordinary, 100 },
+                { gameResult.success, 80 },
+                { gameResult.partialFailure, 61 } },
+            scenarioDisplay));
+        StateManager.Instance.ChangeState(new InitialDrawState());
     }
 
     public void DrawPlayerCard()
     {
+        DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
         if (!(playerDeck.Count > 0))
         {
             Debug.Log("Player is out of cards!");
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.negEffect, transform.position);
         }
         else
         {
-            // Create the new card object & save it in the player's hand
-            GameObject cardObj;
-            playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
-            // Draw a card & remove it from the player's deck
-            int cardIndex = rng.Next(playerDeck.Count);
-            cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
-            playerDeck.RemoveAt(cardIndex);
-        }
-        
-        // Advances to the starting turn once the player has drawn 4 cards
-        if (StateManager.Instance.GetCurrentState() is InitialDrawState)
-        {
-            // Enables drawing from the ability deck if the player ran out of cards in their deck on the initial draw
-            if (playerDeck.Count < 1)
+            if (state.cardsDrawn < state.limit)
             {
-                playerDeckObj.GetComponent<Button>().interactable = false;
-                abilityDeck.GetComponent<Button>().interactable = true;
-            }
+                // Create the new card object & save it in the player's hand
+                GameObject cardObj;
+                hands[playerCharacter].Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
+                // Draw a card & remove it from the player's deck
+                int cardIndex = rng.Next(playerDeck.Count);
+                cardObj.GetComponent<CardObj>().Init(playerDeck[cardIndex]);
+                playerDeck.RemoveAt(cardIndex);
 
-            if (playerHandObj.GetComponentsInChildren<CardObj>().Length > 3)
+                // Enables drawing from the ability deck if the player ran out of cards in their deck on the initial draw
+                if (playerDeck.Count < 1)
                 {
-                    StateManager.Instance.ChangeState(new TurnState());
+                    playerDeckObj.GetComponent<Button>().interactable = false;
+                    abilityDeck.GetComponent<Button>().interactable = true;
                 }
+
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
+
+                state.cardsDrawn++;
+                DrawAdvance(state);
+            }
         }
     }
 
     public void DrawAbilityCard()
     {
-        // Create the new card object & add it to the player's hand
-        GameObject cardObj;
-        playerHand.Add(cardObj = Instantiate(cardPrefab, playerHandObj.transform));
-
-        // Draw a random ability card from all possible options
-        cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
-
-        // Advances to the starting turn once the player has drawn 4 cards or if they have no cards left in the deck
-        if (StateManager.Instance.GetCurrentState() is InitialDrawState)
+        DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
+        // Sets the parent of the new card object to be the player's hand object if we are in the initial draw state or if it is the player's turn. Otherwise it will parent it directly to the character's object
+        GameObject parent = (StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn) ? playerHandObj : characterList[currentTurn].gameObject;
+        if (state.cardsDrawn < state.limit)
         {
-            Debug.Log(playerHandObj.GetComponentsInChildren<CardObj>().Length);
-            if (playerHandObj.GetComponentsInChildren<CardObj>().Length > 3)
+            // Create the new card object & add it to the corresponding hand and object
+            GameObject cardObj;
+            hands[characterList[currentTurn]].Add(cardObj = Instantiate(cardPrefab, parent.gameObject.transform));
+
+            // Draw a random ability card from all possible options
+            cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+
+            if(StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn)
             {
-                StateManager.Instance.ChangeState(new TurnState());
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
+            }
+
+            state.cardsDrawn++;
+            DrawAdvance(state);
+        }
+    }
+
+    private void DrawAdvance(DrawState state)
+    {
+        // Moves to next state if the draw limit has been reached
+        if (state.cardsDrawn >= state.limit)
+        {
+            switch (state)
+            {
+                case InitialDrawState:
+                    StateManager.Instance.ChangeState(new DiceRollState());
+                    break;
+                case TurnEndDrawState:
+                    if (!isPlayerTurn)
+                    {
+                        AdvanceTurn();
+                    }
+                    else
+                    {
+                        playerDeckObj.GetComponent<Button>().interactable = false;
+                        abilityDeck.GetComponent<Button>().interactable = false;
+                    }
+                    break;
             }
         }
     }
 
-    public void DrawScenarioCard()
+    public void AddDiceValue(int diceValue)
     {
-        // Instantiate(cardPrefab, eventDisplay.transform);
-        scenarioDeck.GetComponentInChildren<TextMeshProUGUI>().text = "CURRENT SCENARIO";
-        StateManager.Instance.ChangeState(new InitialDrawState());
+        pointSum += diceValue;
+        pointsUI.DisplayTotalPoints(pointSum);
+
+        //AudioManager.CheckPlayback(AudioManager.Instance.playCard);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.diceRoll, transform.position);
+    }
+
+    public void PlayCard(GameObject cardObj, CardBase card)
+    {
+
+        pointSum += card.numberEffect;
+        Debug.Log($"Adding card value of {card.numberEffect}");
+        if (card.stat == currentScenario.roundBonuses[currentRound - 1])
+        {
+            pointSum++;
+            Debug.Log("Adding round stat bonus");
+        }
+        if (card.stat == currentScenario.domain)
+        {
+            pointSum++;
+            Debug.Log("Adding scenario domain bonus");
+        }
+        card.SpecialEffect();
+        pointsUI.DisplayTotalPoints(pointSum);
+        // Placeholder - card should be added to discard pile instead of being disabled
+        cardObj.SetActive(false);
+        cardsPlayedThisTurn++;
+
+        if (isPlayerTurn)
+        {
+            hands[playerCharacter].Remove(cardObj);
+            // Disable the player's hand if they have already played 3 cards
+            if (cardsPlayedThisTurn > 2)
+            {
+                playerHandObj.GetComponent<CanvasGroup>().interactable = false;
+            }
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.playCard, transform.position);
+        }
+        else
+        {
+            hands[characterList[currentTurn]].Remove(cardObj);
+        }
+    }
+
+    public void AdvanceToDraw()
+    {
+        StateManager.Instance.ChangeState(new TurnEndDrawState());
+
+        if (isPlayerTurn)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
+        }
     }
 
     public void AdvanceTurn()
     {
-        if (currentTurn < characterList.Count - 1)
+        // Increase the current turn then modulo by the number of players to reset to 0 once the end of the turn order is reached
+        currentTurn = (currentTurn + 1) % characterList.Count;
+        cardsPlayedThisTurn = 0;
+
+        if (currentTurn == 0)
         {
-            currentTurn++;
-            roundUI.UpdateTurnText(characterList[currentTurn]);
-        }
-        else
-        {
-            // currentRound starts at 1, not 0, for text display purposes
-            if (currentRound < totalRounds)
+            // Increment the round whenever the turn order wraps back around
+            currentRound++;
+            if (currentRound > totalRounds)
             {
-                currentTurn = 0;
-                currentRound++;
-                roundUI.UpdateRoundText(currentRound);
-                roundUI.UpdateTurnText(characterList[currentTurn]);
+                // End the game once the current round is incremented past the last round
+                roundUI.EndRounds();
+                if (pointSum >= currentScenario.finalThresholds[gameResult.extraordinary])
+                {
+                    result = gameResult.extraordinary;
+                }
+                else if (pointSum >= currentScenario.finalThresholds[gameResult.success])
+                {
+                    result = gameResult.success;
+                }
+                else if (pointSum >= currentScenario.finalThresholds[gameResult.partialFailure])
+                {
+                    result = gameResult.partialFailure;
+                }
+                else
+                {
+                    result = gameResult.failure;
+                }
+                Debug.Log(result);
+                return;
+            }
+            // Go to dice roll state
+            StateManager.Instance.ChangeState(new DiceRollState());
+            return;
+        }
+        StateManager.Instance.ChangeState(new TurnState());
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.roundFail, transform.position);
+    }
+
+    public void InitializeHands()
+    {
+        foreach (CharacterCard character in characterList)
+        {
+            if (character != playerCharacter)
+            {
+                GameObject obj = character.gameObject;
+
+                List<GameObject> cardList = new();
+                int count = 0;
+                while (count < 4)
+                {
+                    GameObject cardObj;
+                    cardList.Add(cardObj = Instantiate(cardPrefab, obj.transform));
+                    cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+                    count++;
+                }
+                hands.Add(character, cardList);
             }
             else
             {
-                roundUI.EndRounds();
+                hands.Add(playerCharacter, new List<GameObject>());
             }
         }
     }
+
+    public void PlayCPUTurn()
+    {
+        CharacterCard character = characterList[currentTurn];
+        CardObj cardObj = hands[character][rng.Next(hands[character].Count)].GetComponent<CardObj>();
+        cardObj.PlayCard();
+
+        GameObject newCard;
+        // Create the new card object & add it to the player's hand
+        hands[character].Add(newCard = Instantiate(cardPrefab, character.gameObject.transform));
+
+        // Draw a random ability card from all possible options
+        newCard.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+
+        StartCoroutine(StateManager.Instance.Delay(2f, done => { AdvanceToDraw(); }));
+    }
+}
+
+public enum gameResult
+{
+    extraordinary, success, partialFailure, failure
 }

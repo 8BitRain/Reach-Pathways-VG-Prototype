@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class InputManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         StateManager.Instance.OnGamePausedChanged += OnGamePausedChanged;
     }
+
+    /*
+    private void Update()
+    {
+
+        PlayMouseOver();
+    }
+    */
 
     void OnGamePausedChanged(bool gamePaused)
     {
@@ -35,4 +44,14 @@ public class InputManager : MonoBehaviour
     {
         StateManager.Instance.SetGamePaused(false);
     }
+
+    /*
+    void PlayMouseOver()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.mouseOver);
+        }
+    }
+    */
 }
