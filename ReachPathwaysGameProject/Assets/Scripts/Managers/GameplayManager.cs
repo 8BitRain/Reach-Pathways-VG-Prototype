@@ -315,6 +315,12 @@ public class GameplayManager : MonoBehaviour
 
     private void DrawCardBase(GameObject parent)
     {
+        if (hands[characterList[currentTurn]].Count > 7)
+        {
+            Debug.Log($"{hands[characterList[currentTurn]]}'s hand is full, they cannot draw a new card.");
+            return;
+        }
+
         // Create the new card object & add it to the corresponding hand and object
         GameObject cardObj;
         hands[characterList[currentTurn]].Add(cardObj = Instantiate(cardPrefab, parent.gameObject.transform));
