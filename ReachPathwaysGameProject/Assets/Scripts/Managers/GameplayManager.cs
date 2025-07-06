@@ -9,6 +9,8 @@ using SupportCards;
 using UnityEngine.UI;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
+using Unity.Mathematics;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -377,13 +379,19 @@ public class GameplayManager : MonoBehaviour
         Debug.Log($"Adding card value of {card.numberEffect}");
         if (card.stat == currentScenario.roundBonuses[currentRound - 1])
         {
+            if (card.numberEffect < 0)
+            {
+                // If the card was negative, add twice the positive number to undo the previous addition and add the correct one
+                pointSum += 2 * math.abs(card.numberEffect);
+                Debug.Log("Applying negative -> positive effect to card due to round stat bonus");
+            }
             pointSum++;
-            Debug.Log("Adding round stat bonus");
+            Debug.Log("Adding round stat bonus of +1");
         }
         if (card.stat == currentScenario.domain)
         {
             pointSum++;
-            Debug.Log("Adding scenario domain bonus");
+            Debug.Log("Adding scenario domain bonus of +1");
         }
 
         card.SpecialEffect();
