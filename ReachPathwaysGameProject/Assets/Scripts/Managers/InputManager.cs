@@ -15,14 +15,6 @@ public class InputManager : MonoBehaviour
         StateManager.Instance.OnGamePausedChanged += OnGamePausedChanged;
     }
 
-    /*
-    private void Update()
-    {
-
-        PlayMouseOver();
-    }
-    */
-
     void OnGamePausedChanged(bool gamePaused)
     {
         if (gamePaused)
@@ -44,14 +36,4 @@ public class InputManager : MonoBehaviour
     {
         StateManager.Instance.SetGamePaused(false);
     }
-
-    /*
-    void PlayMouseOver()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.mouseOver);
-        }
-    }
-    */
 }

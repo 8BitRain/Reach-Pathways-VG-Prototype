@@ -47,6 +47,8 @@ public class Confidant : MonoBehaviour
 
     public void ConfidantInteract()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
+
         if (dialogueRunner != null)
         {
             // Update variables before starting dialogue
@@ -63,6 +65,8 @@ public class Confidant : MonoBehaviour
     [YarnCommand]
     public void IncreaseRank()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.roundSucceed, transform.position);
+
         conRank++;
         Debug.Log($"{confidantName} rank increased to {conRank}");
         UpdateYarnVariables();
@@ -74,6 +78,8 @@ public class Confidant : MonoBehaviour
     [YarnCommand]
     public void SetRank(int rank)
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.roundSucceed, transform.position);
+
         conRank = rank;
         Debug.Log($"{confidantName} rank set to {rank}");
         UpdateYarnVariables();
@@ -85,6 +91,8 @@ public class Confidant : MonoBehaviour
     [YarnCommand]
     public void UnlockConfidant()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.posEffect, transform.position);
+
         isUnlocked = true;
         Debug.Log($"{confidantName} unlocked!");
         UpdateYarnVariables();
@@ -96,6 +104,8 @@ public class Confidant : MonoBehaviour
     [YarnCommand]
     public void LockConfidant()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
+
         isUnlocked = false;
         Debug.Log($"{confidantName} locked!");
         UpdateYarnVariables();
@@ -118,6 +128,8 @@ public class Confidant : MonoBehaviour
     // Save confidant data to PlayerPrefs
     public void SaveConfidantData()
     {
+        //AudioManager.Instance.PlaySFX(AudioManager.Instance.playCard, transform.position);
+
         ConfidantSaveData saveData = new ConfidantSaveData(confidantName, conRank, isUnlocked);
         string jsonData = JsonUtility.ToJson(saveData);
         string saveKey = $"Confidant_{confidantName}";
@@ -152,6 +164,7 @@ public class Confidant : MonoBehaviour
     // Delete saved data for this confidant
     public void DeleteSaveData()
     {
+
         string saveKey = $"Confidant_{confidantName}";
         PlayerPrefs.DeleteKey(saveKey);
         PlayerPrefs.Save();
@@ -163,6 +176,8 @@ public class Confidant : MonoBehaviour
     [YarnCommand]
     public void ResetConfidant()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.negEffect, transform.position);
+
         conRank = 0;
         isUnlocked = true;
         UpdateYarnVariables();
@@ -177,6 +192,8 @@ public class Confidant : MonoBehaviour
     [YarnCommand]
     public void SaveData()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.playCard, transform.position);
+
         SaveConfidantData();
     }
     
@@ -196,6 +213,7 @@ public class Confidant : MonoBehaviour
     // Public setters for other C# scripts
     public void SetConfidantRank(int rank)
     {
+
         conRank = rank;
         UpdateYarnVariables();
         
@@ -205,6 +223,7 @@ public class Confidant : MonoBehaviour
     
     public void SetConfidantUnlocked(bool unlocked)
     {
+
         isUnlocked = unlocked;
         UpdateYarnVariables();
         
@@ -231,6 +250,7 @@ public class Confidant : MonoBehaviour
     
     private void OnDestroy()
     {
+
         if (autoSave)
         {
             SaveConfidantData();

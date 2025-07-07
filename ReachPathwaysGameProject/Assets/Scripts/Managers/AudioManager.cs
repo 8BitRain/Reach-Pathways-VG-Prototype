@@ -120,6 +120,16 @@ public class AudioManager : MonoBehaviour
         Debug.Log(state.ToString());
     }
 
+    public void OnPointerEnter()
+    {
+
+    }
+
+    private void Update()
+    {
+        OnPointerEnter();
+    }
+
     void OnDestroy()
     {
         ClearInstances();
