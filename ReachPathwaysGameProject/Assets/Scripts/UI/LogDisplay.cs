@@ -22,7 +22,6 @@ public class LogDisplay : MonoBehaviour
         string newText = "";
         Array.Copy(lineArray, 0, newLineArray, 1, lineArray.Length - 1);
         newLineArray[0] = newLine;
-        Debug.Log(newLineArray);
         foreach (string line in newLineArray)
         {
             newText += $"> {line}\n";
