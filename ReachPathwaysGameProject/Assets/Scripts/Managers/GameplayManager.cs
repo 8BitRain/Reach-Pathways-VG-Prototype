@@ -199,7 +199,7 @@ public class GameplayManager : MonoBehaviour
         typeof(AmplifyEndsCard)
     };
 
-    // #endregion 
+    // #endregion
 
     void Awake()
     {
@@ -241,6 +241,8 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawScenarioCard()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.scenarioCard, transform.position);
+        
         SetScenario(new Scenario(
             CardStat.Creativity,
             new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity },
@@ -259,6 +261,8 @@ public class GameplayManager : MonoBehaviour
         if (!(playerDeck.Count > 0))
         {
             Debug.Log("Player is out of cards!");
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.negEffect, transform.position);
         }
         else
         {
@@ -279,6 +283,8 @@ public class GameplayManager : MonoBehaviour
                     abilityDeck.GetComponent<Button>().interactable = true;
                 }
 
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
+
                 state.cardsDrawn++;
                 DrawAdvance(state);
             }
@@ -298,6 +304,11 @@ public class GameplayManager : MonoBehaviour
 
             // Draw a random ability card from all possible options
             cardObj.GetComponent<CardObj>().Init(abilityCards[rng.Next(abilityCards.Count)]);
+
+            if(StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn)
+            {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
+            }
 
             state.cardsDrawn++;
             DrawAdvance(state);
@@ -333,10 +344,13 @@ public class GameplayManager : MonoBehaviour
     {
         pointSum += diceValue;
         pointsUI.DisplayTotalPoints(pointSum);
+
+        StartCoroutine(StateManager.Instance.Delay(0.5f, done => { AudioManager.Instance.PlaySFX(AudioManager.Instance.diceRoll, transform.position); ; }));
     }
 
     public void PlayCard(GameObject cardObj, CardBase card)
     {
+
         pointSum += card.numberEffect;
         Debug.Log($"Adding card value of {card.numberEffect}");
         if (card.stat == currentScenario.roundBonuses[currentRound - 1])
@@ -363,6 +377,9 @@ public class GameplayManager : MonoBehaviour
             {
                 playerHandObj.GetComponent<CanvasGroup>().interactable = false;
             }
+
+            //AudioManager.Instance.PlaySFX(AudioManager.Instance.playCard, transform.position);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.playCard, AudioManager.Instance.transform.position, AudioManager.Instance.gameObject, true);
         }
         else
         {
@@ -373,6 +390,11 @@ public class GameplayManager : MonoBehaviour
     public void AdvanceToDraw()
     {
         StateManager.Instance.ChangeState(new TurnEndDrawState());
+
+        if (isPlayerTurn)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
+        }
     }
 
     public void AdvanceTurn()
@@ -414,6 +436,8 @@ public class GameplayManager : MonoBehaviour
             return;
         }
         StateManager.Instance.ChangeState(new TurnState());
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.roundFail, transform.position);
     }
 
     public void InitializeHands()

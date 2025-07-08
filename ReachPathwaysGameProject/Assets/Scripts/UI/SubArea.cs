@@ -24,11 +24,17 @@ public class SubArea : MonoBehaviour
 
     public void ReturnToOverworld()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuBack);
+
         FadeTransition fadeTransition = FindObjectOfType<FadeTransition>();
-        fadeTransition.SwitchScenes("Overworld", "SubArea");
+
+        if (fadeTransition != null)
+        {
+            fadeTransition.SwitchScenes("Overworld", "SubArea");
         /*
          SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
          SceneManager.UnloadSceneAsync("SubArea");
          */
+        }
     }
 }
