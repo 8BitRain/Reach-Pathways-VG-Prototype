@@ -36,11 +36,13 @@ tags:
 PersonA: What would you like to do?
 
 -> I want to check my rank with you.
+    <<AdvanceTimeSlot Confidant 1>>
     PersonA: Our current rank is {$conRank}.
     <<jump ConfidantMenu>>
 -> I want to increase our rank again.
     <<if $conRank < 10>>
         <<IncreaseRank Confidant>>
+        <<AdvanceTimeSlot Confidant 1>>
         PersonA: Great! Our rank is now {$conRank}.
     <<else>>
         PersonA: We're already at maximum rank!
@@ -48,6 +50,7 @@ PersonA: What would you like to do?
     <<jump ConfidantMenu>>
 -> I want to set our rank to 5.
     <<SetRank Confidant 5>>
+    <<AdvanceTimeSlot Confidant 2>>
     PersonA: Okay, I've set our rank to {$conRank}.
     <<jump ConfidantMenu>>
 -> Lock our relationship.

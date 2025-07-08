@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:ReachPathwaysGameProject/Assets/Scripts/UI/DiceUI.cs.meta
 guid: 46033817c2561404faba75c0c564b98a
+========
+guid: add90da61a5534bda919381f878ed18a
+>>>>>>>> main:ReachPathwaysGameProject/Assets/Scripts/Managers/TimeManager.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
