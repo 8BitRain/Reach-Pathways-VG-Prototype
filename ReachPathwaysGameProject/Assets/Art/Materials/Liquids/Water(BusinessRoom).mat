@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water(Flood_GameMat)
+  m_Name: Water(BusinessRoom)
   m_Shader: {fileID: -6465566751694194690, guid: e14b3c70d77282246b19a3aa1cd76cf0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -81,13 +81,13 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _Displacement: 0.105
-    - _Distance: 0.2
+    - _Distance: 0.27
     - _DstBlend: 10
-    - _FoamAmount: 1.33
-    - _FoamCutoff: 23.66
+    - _FoamAmount: 0.9
+    - _FoamCutoff: 8.5
     - _FoamScale: 1.04
     - _FoamSpeed: 0.1
-    - _Horizon_Distance: 2.77
+    - _Horizon_Distance: 2.72
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -101,13 +101,13 @@ Material:
     - _ZWriteControl: 0
     - _refraction_Scale: 4
     - _refraction_Speed: 0.05
-    - _refraction_Strenght: 0.4
+    - _refraction_Strenght: 0.1
     m_Colors:
-    - _Depth_Color: {r: 0, g: 1, b: 0.7686274, a: 1}
+    - _Depth_Color: {r: 0.054902077, g: 0, b: 1, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _Horizon_Color: {r: 1, g: 0.8657131, b: 0, a: 1}
     - _RefractionScale: {r: 1, g: 1, b: 0, a: 0}
-    - _Refraction_Scale: {r: 10, g: 10, b: 0, a: 0}
-    - _SurfaceColor: {r: 0, g: 0.4894854, b: 0.5377358, a: 1}
+    - _Refraction_Scale: {r: 1, g: 1, b: 0, a: 0}
+    - _SurfaceColor: {r: 0, g: 1, b: 0.992157, a: 1}
     - _xgfn: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
