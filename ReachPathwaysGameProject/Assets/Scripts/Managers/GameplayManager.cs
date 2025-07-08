@@ -26,6 +26,8 @@ public class GameplayManager : MonoBehaviour
     public PointsUI pointsUI;
     [SerializeField]
     public DiceUI diceUI;
+    [SerializeField]
+    public LogDisplay log;
 
     [SerializeField]
     private int totalRounds = 4;
@@ -266,7 +268,7 @@ public class GameplayManager : MonoBehaviour
         DrawState state = StateManager.Instance.GetCurrentState() as DrawState;
         if (!(playerDeck.Count > 0))
         {
-            Debug.Log("Player is out of cards!");
+            log.UpdateLog("Player is out of cards!");
         }
         else
         {
@@ -319,7 +321,7 @@ public class GameplayManager : MonoBehaviour
     {
         if (hands[characterList[currentTurn]].Count > 7)
         {
-            Debug.Log($"{hands[characterList[currentTurn]]}'s hand is full, they cannot draw a new card.");
+            log.UpdateLog($"{hands[characterList[currentTurn]]}'s hand is full, they cannot draw a new card.");
             return;
         }
 
@@ -339,7 +341,7 @@ public class GameplayManager : MonoBehaviour
             cardToDraw = abilityCards[rng.Next(abilityCards.Count)];
         }
         cardObj.GetComponent<CardObj>().Init(cardToDraw);
-        Debug.Log($"Drew {cardToDraw}");
+        log.UpdateLog($"{characterList[currentTurn]} drew {cardObj.GetComponent<CardBase>().cardName}");
     }
 
     private void DrawAdvance(DrawState state)
@@ -376,22 +378,22 @@ public class GameplayManager : MonoBehaviour
     public void PlayCard(GameObject cardObj, CardBase card)
     {
         pointSum += card.numberEffect;
-        Debug.Log($"Adding card value of {card.numberEffect}");
+        log.UpdateLog($"Playing card {card.cardName}, adding card value of {card.numberEffect}");
         if (card.stat == currentScenario.roundBonuses[currentRound - 1])
         {
             if (card.numberEffect < 0)
             {
                 // If the card was negative, add twice the positive number to undo the previous addition and add the correct one
                 pointSum += 2 * math.abs(card.numberEffect);
-                Debug.Log("Applying negative -> positive effect to card due to round stat bonus");
+                log.UpdateLog("Applying negative -> positive effect to card due to round stat bonus");
             }
             pointSum++;
-            Debug.Log("Adding round stat bonus of +1");
+            log.UpdateLog("Adding round stat bonus of +1");
         }
         if (card.stat == currentScenario.domain)
         {
             pointSum++;
-            Debug.Log("Adding scenario domain bonus of +1");
+            log.UpdateLog("Adding scenario domain bonus of +1");
         }
 
         card.SpecialEffect();
@@ -447,14 +449,14 @@ public class GameplayManager : MonoBehaviour
                 {
                     result = gameResult.failure;
                 }
-                Debug.Log(result);
+                log.UpdateLog("Game Result: " + result.ToString());
                 return;
             }
-            
-            Debug.Log($"Checking if point total of {pointSum} passes the threshold of {currentScenario.roundThresholds[currentRound - 2]}");
+
+            log.UpdateLog($"Checking if point total of {pointSum} passes the threshold of {currentScenario.roundThresholds[currentRound - 2]}");
             if (pointSum < currentScenario.roundThresholds[currentRound - 2])
             {
-                Debug.Log("Round threshold was not met - players have to discard a card");
+                log.UpdateLog("Round threshold was not met - players have to discard a card");
                 foreach (KeyValuePair<CharacterCard, List<GameObject>> player in hands)
                 {
                     if (player.Value.Count > 0)
@@ -463,11 +465,12 @@ public class GameplayManager : MonoBehaviour
                         cardToDiscard.SetActive(false);
                         hands[player.Key].Remove(cardToDiscard);
                         discards[player.Key].Add(cardToDiscard);
-                        Debug.Log($"Discarded {cardToDiscard.GetComponent<CardBase>().cardName} from player {player.Key}");
+                        log.UpdateLog($"Discarded {cardToDiscard.GetComponent<CardBase>().cardName} from player {player.Key}");
                     }
                 }
             }
             // Go to dice roll state
+            log.UpdateLog($"Beginning round {currentRound}");
             StateManager.Instance.ChangeState(new DiceRollState());
             return;
         }

@@ -376,6 +376,7 @@ public class TurnState : State
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
         GameplayManager.Instance.pointsUI.DisplayTotalPoints(GameplayManager.Instance.pointSum);
+        GameplayManager.Instance.log.UpdateLog($"Beginning {GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]}'s turn");
     }
 
     public override void Update()
