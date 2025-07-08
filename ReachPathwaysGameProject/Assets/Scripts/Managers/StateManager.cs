@@ -24,9 +24,6 @@ public class StateManager : MonoBehaviour
     [SerializeField]
     private bool launchMenuOnStart = true;
 
-    [SerializeField]
-    private FadeTransition fade;
-
     private void Awake()
     {
         // Singleton enforcement
@@ -58,26 +55,14 @@ public class StateManager : MonoBehaviour
 
     public void ChangeState(State newState)
     {
-        var originalSceneName = "";
-        var newSceneName = "";
-        bool hasNesState = false;
-
         // Calls the exit method of the current state, then updates the current state to the new state and calls its enter method
         if (currentState != null)
         {
-            hasNesState = true;
             currentState.Exit();
-            originalSceneName = currentState.SceneName;
         }
 
         currentState = newState;
         currentState.Enter();
-        newSceneName = currentState.SceneName;
-
-        if(hasNesState && originalSceneName != newSceneName)
-        {
-            fade.SwitchScenes(newSceneName, originalSceneName);
-        }
 
         // Broadcast the state change event
         OnStateChanged?.Invoke(newState);
@@ -167,8 +152,6 @@ public abstract class State
     public abstract void Enter();
     public abstract void Update();
     public abstract void Exit();
-
-    public string SceneName;
 }
 
 public class MainMenuState : State
@@ -176,7 +159,6 @@ public class MainMenuState : State
     public override bool Pausable => false;
     public override void Enter()
     {
-        TimeManager.Instance.TimeCanvasDisplay(false);
         if (!SceneManager.GetSceneByName("MainMenu").isLoaded)
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
@@ -209,8 +191,7 @@ public class MainMenuState : State
 
     public override void Exit()
     {
-        //SceneManager.UnloadSceneAsync("MainMenu");
-        SceneName = "MainMenu";
+        SceneManager.UnloadSceneAsync("MainMenu");
     }
 }
 
@@ -219,11 +200,9 @@ public class OverworldState : State
     public override bool Pausable => false;
     public override void Enter()
     {
-        TimeManager.Instance.TimeCanvasDisplay(true);
         if (!SceneManager.GetSceneByName("Overworld").isLoaded)
         {
-            //SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
-            SceneName = "Overworld";
+            SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
         }
 
         if (SceneManager.GetSceneByName("Pause").isLoaded)
@@ -231,22 +210,20 @@ public class OverworldState : State
             SceneManager.UnloadSceneAsync("Pause");
         }
 
-        /*
         if (SceneManager.GetSceneByName("SubArea").isLoaded)
         {
             SceneManager.UnloadSceneAsync("SubArea");
-        }*/
+        }
 
         if (SceneManager.GetSceneByName("MainMenu").isLoaded)
         {
             SceneManager.UnloadSceneAsync("MainMenu");
         }
 
-        /*
         if (SceneManager.GetSceneByName("Gameplay").isLoaded)
         {
-            //SceneManager.UnloadSceneAsync("Gameplay");
-        }*/
+            SceneManager.UnloadSceneAsync("Gameplay");
+        }
     }
 
     public override void Update()
@@ -255,8 +232,7 @@ public class OverworldState : State
 
     public override void Exit()
     {
-        SceneName = "Overworld";
-        //SceneManager.UnloadSceneAsync("Overworld");
+        SceneManager.UnloadSceneAsync("Overworld");
     }
 }
 
@@ -266,12 +242,10 @@ public class GameInitState : State
     
     public override void Enter()
     {
-        TimeManager.Instance.TimeCanvasDisplay(false);
         // Load the gameplay scene if not already loaded
         if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
         {
-            SceneName = "Gameplay";
-            //SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Gameplay", LoadSceneMode.Additive);
         }
         
         // GameplayManager's Awake() will handle the transition to ScenarioDrawState
@@ -284,7 +258,6 @@ public class GameInitState : State
 
     public override void Exit()
     {
-        SceneName = "Gameplay";
     }
 }
 
@@ -300,7 +273,6 @@ public abstract class DrawState : State
     
     public override void Enter()
     {
-        SceneName = "Gameplay";
         if (GameplayManager.Instance.isPlayerTurn)
         {
             GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = true;
@@ -317,7 +289,6 @@ public abstract class DrawState : State
 
     public override void Exit()
     {
-        SceneName = "Gameplay";
         GameplayManager.Instance.abilityDeck.GetComponent<Button>().interactable = false;
         GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = false;
         GameplayManager.Instance.actionsMenu.GetComponent<CanvasGroup>().interactable = false;
@@ -334,7 +305,6 @@ public class InitialDrawState : DrawState
 
     public override void Enter()
     {
-        SceneName = "Gameplay";
         if (GameplayManager.Instance.playerDeck.Count > 0)
         {
             GameplayManager.Instance.playerDeckObj.GetComponent<Button>().interactable = true;
@@ -353,7 +323,6 @@ public class ScenarioDrawState : State
     public override bool Pausable => true;
     public override void Enter()
     {
-        SceneName = "Gameplay";
         GameplayManager.Instance.scenarioDisplay.SetActive(true);
         GameplayManager.Instance.scenarioDisplay.GetComponent<Button>().interactable = true;
     }
@@ -364,7 +333,6 @@ public class ScenarioDrawState : State
 
     public override void Exit()
     {
-        SceneName = "Gameplay";
         GameplayManager.Instance.scenarioDisplay.GetComponent<Button>().interactable = false;
     }
 }
@@ -375,7 +343,6 @@ public class DiceRollState : State
 
     public override void Enter()
     {
-        SceneName = "Gameplay";
         GameplayManager.Instance.diceUI.gameObject.GetComponent<CanvasGroup>().interactable = true;
     }
 
@@ -385,7 +352,6 @@ public class DiceRollState : State
 
     public override void Exit()
     {
-        SceneName = "Gameplay";
         GameplayManager.Instance.diceUI.gameObject.GetComponent<CanvasGroup>().interactable = false;
     }
 }
@@ -395,7 +361,6 @@ public class TurnState : State
     public override bool Pausable => true;
     public override void Enter()
     {
-        SceneName = "Gameplay";
         Debug.Log(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
         if (GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn] == GameplayManager.Instance.playerCharacter)
         {
@@ -411,6 +376,7 @@ public class TurnState : State
         GameplayManager.Instance.roundUI.UpdateRoundText(GameplayManager.Instance.currentRound);
         GameplayManager.Instance.roundUI.UpdateTurnText(GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]);
         GameplayManager.Instance.pointsUI.DisplayTotalPoints(GameplayManager.Instance.pointSum);
+        GameplayManager.Instance.log.UpdateLog($"Beginning {GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn]}'s turn");
     }
 
     public override void Update()
@@ -419,7 +385,6 @@ public class TurnState : State
 
     public override void Exit()
     {
-        SceneName = "Gameplay";
         if (GameplayManager.Instance.isPlayerTurn)
         {
             GameplayManager.Instance.playerHandObj.GetComponent<CanvasGroup>().interactable = false;

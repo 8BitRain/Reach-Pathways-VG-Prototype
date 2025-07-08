@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:ReachPathwaysGameProject/Assets/Resources/Fonts.meta
 guid: dbcfdbd3937589b4b91c00198d1711b8
 folderAsset: yes
 DefaultImporter:
+========
+guid: 1908ede87681e314f93d253ed52b3d47
+PrefabImporter:
+>>>>>>>> Engineering-Ricky:ReachPathwaysGameProject/Assets/Prefabs/DiceCanvas.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

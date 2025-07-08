@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:ReachPathwaysGameProject/Assets/ContinueButton.cs.meta
 guid: 4256459f27ae3473caab739909e388f0
+========
+guid: ed0aa9123b663480c9ed5a5e21cce181
+>>>>>>>> Engineering-Ricky:ReachPathwaysGameProject/Assets/Scripts/Base Classes/Scenario.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
