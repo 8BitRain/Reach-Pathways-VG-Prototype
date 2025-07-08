@@ -382,7 +382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &46144850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,15 +478,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 46144849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0949062e00bc5e94b88a0013ab21a1b8, type: 3}
+  m_Script: {fileID: 11500000, guid: e823de2b6a13e334c8dd16d3b6158f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 46144849}
-  flexParent: {fileID: 588992781}
+  Canvas: {fileID: 0}
+  flexParent: {fileID: 0}
   CollectedCards: []
-  gridLayout: {fileID: 588992783}
-  bLeft: {fileID: 1162639792}
-  bRight: {fileID: 1644200457}
+  gridLayout: {fileID: 0}
+  bLeft: {fileID: 0}
+  bRight: {fileID: 0}
 --- !u!1001 &62182195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -855,7 +855,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 46144854}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: OpenInventory
         m_Mode: 1
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1563599405}
+      - m_Target: {fileID: 1563599407}
         m_TargetAssemblyTypeName: TimeManager, Assembly-CSharp
         m_MethodName: AdvanceTimeBySlots
         m_Mode: 3
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeGameObject: {fileID: 1803732984}
-  fadeOutDuration: 0
+  fadeOutDuration: 2
 --- !u!1001 &676366699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3842,11 +3842,11 @@ RectTransform:
   - {fileID: 681255529}
   m_Father: {fileID: 14979360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: -65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 70, y: 24}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &756290912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3893,14 +3893,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 673471560}
         m_TargetAssemblyTypeName: FadeTransition, Assembly-CSharp
-        m_MethodName: FadeIn
-        m_Mode: 4
+        m_MethodName: SwitchScenes
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 2
-          m_StringArgument: 
+          m_StringArgument: Gameplay
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &756290913
@@ -4729,7 +4729,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1563599405}
+      - m_Target: {fileID: 1563599407}
         m_TargetAssemblyTypeName: TimeManager, Assembly-CSharp
         m_MethodName: AdvanceTimeBySlots
         m_Mode: 3
@@ -5524,7 +5524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae0b2d6b26fbd447b3e54cdff81f898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 46144854}
+  inventory: {fileID: 0}
   skillCard: {fileID: 0}
 --- !u!4 &1078993823
 Transform:
@@ -6663,7 +6663,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 46144854}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: ShowLeftPageInventory
         m_Mode: 1
@@ -7580,6 +7580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1563599406}
   - component: {fileID: 1563599405}
+  - component: {fileID: 1563599407}
   m_Layer: 0
   m_Name: TimeTest
   m_TagString: Untagged
@@ -7594,13 +7595,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563599404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e823de2b6a13e334c8dd16d3b6158f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeUI: {fileID: 1520256985}
-  startingMonth: 2
+  Canvas: {fileID: 0}
+  flexParent: {fileID: 0}
+  CollectedCards: []
+  gridLayout: {fileID: 0}
+  bLeft: {fileID: 0}
+  bRight: {fileID: 0}
 --- !u!4 &1563599406
 Transform:
   m_ObjectHideFlags: 0
@@ -7616,6 +7621,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1563599407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563599404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add90da61a5534bda919381f878ed18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeUI: {fileID: 1520256985}
+  startingMonth: 2
 --- !u!1 &1581532168
 GameObject:
   m_ObjectHideFlags: 0
@@ -8123,7 +8142,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 46144854}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
         m_MethodName: ShowRightPageInventory
         m_Mode: 1
@@ -9625,7 +9644,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1563599405}
+      - m_Target: {fileID: 1563599407}
         m_TargetAssemblyTypeName: TimeManager, Assembly-CSharp
         m_MethodName: AdvanceTimeBySlots
         m_Mode: 3
