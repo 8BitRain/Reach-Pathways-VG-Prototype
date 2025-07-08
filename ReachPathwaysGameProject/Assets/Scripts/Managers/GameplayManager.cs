@@ -252,7 +252,7 @@ public class GameplayManager : MonoBehaviour
         SetScenario(new Scenario(
             CardStat.Creativity,
             new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity },
-            new int[] { 40, 55, 75, 100 },
+            new int[] { 30, 45, 65, 90 },
             new Dictionary<gameResult, int> {
                 { gameResult.extraordinary, 100 },
                 { gameResult.success, 80 },
@@ -507,6 +507,11 @@ public class GameplayManager : MonoBehaviour
         CharacterCard character = characterList[currentTurn];
         CardObj cardObj = hands[character][rng.Next(hands[character].Count)].GetComponent<CardObj>();
         cardObj.PlayCard();
+        if (rng.Next(0, 1) == 1)
+        {
+            // Randomly play a second card with a 50% chance
+            cardObj.PlayCard();
+        }
 
         StartCoroutine(StateManager.Instance.Delay(2f, done => { AdvanceToDraw(); }));
     }
