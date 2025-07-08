@@ -176,6 +176,7 @@ public class MainMenuState : State
     public override bool Pausable => false;
     public override void Enter()
     {
+        TimeManager.Instance.TimeCanvasDisplay(false);
         if (!SceneManager.GetSceneByName("MainMenu").isLoaded)
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
@@ -218,6 +219,7 @@ public class OverworldState : State
     public override bool Pausable => false;
     public override void Enter()
     {
+        TimeManager.Instance.TimeCanvasDisplay(true);
         if (!SceneManager.GetSceneByName("Overworld").isLoaded)
         {
             //SceneManager.LoadScene("Overworld", LoadSceneMode.Additive);
@@ -264,6 +266,7 @@ public class GameInitState : State
     
     public override void Enter()
     {
+        TimeManager.Instance.TimeCanvasDisplay(false);
         // Load the gameplay scene if not already loaded
         if (!SceneManager.GetSceneByName("Gameplay").isLoaded)
         {

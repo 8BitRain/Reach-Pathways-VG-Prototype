@@ -191,11 +191,11 @@ public class Confidant : MonoBehaviour
     public void YarnAdvanceTime(int num)
     {
         /*
-         * 1 slot = rest
-         * 2 slots = Skill-based activity
-         * 2 slots = confidant interaction
-         * 5 slots = Scenario (card game)
-         * 5 slots = major confidant event
+         * 1 slot = rest {button interaction]
+         * 2 slots = Skill-based activity [through yarn script: +1 XP to social state]
+         * 2 slots = confidant interaction [through yarn script: "Deepens relationship, grants +1 to representing Guild stat"]
+         * 5 slots = Scenario (card game)  [after gameplay ends]
+         * 5 slots = major confidant event [through yarn script: "Narrative milestone linked to Confidants or story forks"]
          */
         TimeManager.Instance.AdvanceTimeBySlots(num);
     }

@@ -428,6 +428,7 @@ public class GameplayManager : MonoBehaviour
                     result = gameResult.failure;
                 }
                 Debug.Log(result);
+                TimeManager.Instance.AdvanceTimeBySlots(5); //takes up entire day
                 StateManager.Instance.ChangeState(new OverworldState());
                 return;
             }

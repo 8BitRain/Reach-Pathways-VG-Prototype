@@ -15,6 +15,19 @@ public class FadeTransition : MonoBehaviour
     [SerializeField]
     private float fadeOutDuration;
 
+    public float fadeTimer
+    {
+        get
+        {
+            return fadeOutDuration;
+        }
+        set
+        {
+            fadeTimer = value;
+        }
+
+    }
+
     private Image image;
 
     private void Awake()
@@ -26,9 +39,10 @@ public class FadeTransition : MonoBehaviour
         }
         else
         {
-            Instance = this;
+            Instance = this; 
+            DontDestroyOnLoad(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        
     }
 
     void Start()
