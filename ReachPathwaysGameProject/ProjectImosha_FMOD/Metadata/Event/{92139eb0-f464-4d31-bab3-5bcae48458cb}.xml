@@ -55,7 +55,7 @@
 			<destination>{554b8082-d835-4161-90e0-b8addd61674d}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{a8f110bd-658a-4d45-9c9b-aafdbc1898a9}</destination>
+			<destination>{33c99b06-4ff8-4467-908c-975677b0988b}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{3a5413f6-e5df-45cb-98cb-51385060e374}" />
@@ -79,13 +79,11 @@
 			<destination>{0d8f7288-866f-41df-af47-7bf02fdf578e}</destination>
 			<destination>{16aa6289-ce47-4f30-b6fc-4235ad956d6e}</destination>
 			<destination>{7ceea654-ea9b-4de2-b9aa-46bc27938cd2}</destination>
-			<destination>{068f8361-3337-42b6-8e48-e24e0de54519}</destination>
-			<destination>{1a482ec5-2a89-4c09-8d4f-bf487d7b1d1c}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{e5c0cf2a-65b9-47ce-8dbc-2507247376ae}">
 		<property name="volume">
-			<value>-22</value>
+			<value>-12</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{2796a6db-97d9-4ec7-ac87-aa40af6dd3b4}</destination>
@@ -199,43 +197,12 @@
 			<destination>{a8ce2172-c2d2-4810-ab5d-8e740f1852a4}</destination>
 		</relationship>
 	</object>
-	<object class="NamedMarker" id="{068f8361-3337-42b6-8e48-e24e0de54519}">
-		<property name="position">
-			<value>11.052631578947368</value>
-		</property>
-		<property name="name">
-			<value>Start</value>
-		</property>
-		<relationship name="timeline">
-			<destination>{342b2147-98bc-46fd-b1e9-f8c308b10593}</destination>
-		</relationship>
-		<relationship name="markerTrack">
-			<destination>{a8ce2172-c2d2-4810-ab5d-8e740f1852a4}</destination>
-		</relationship>
-	</object>
-	<object class="TransitionMarker" id="{1a482ec5-2a89-4c09-8d4f-bf487d7b1d1c}">
-		<property name="position">
-			<value>0</value>
-		</property>
-		<relationship name="timeline">
-			<destination>{342b2147-98bc-46fd-b1e9-f8c308b10593}</destination>
-		</relationship>
-		<relationship name="markerTrack">
-			<destination>{a8ce2172-c2d2-4810-ab5d-8e740f1852a4}</destination>
-		</relationship>
-		<relationship name="destination">
-			<destination>{068f8361-3337-42b6-8e48-e24e0de54519}</destination>
-		</relationship>
-	</object>
 	<object class="ADSRModulator" id="{2796a6db-97d9-4ec7-ac87-aa40af6dd3b4}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>volume</value>
 		</property>
 		<property name="initialValue">
 			<value>-80</value>
-		</property>
-		<property name="attackTime">
-			<value>2000</value>
 		</property>
 		<property name="finalValue">
 			<value>-80</value>

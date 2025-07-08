@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Snapshot" id="{3c4b835e-fb81-4730-b877-1a086faabee1}">
+		<property name="name">
+			<value>Pause</value>
+		</property>
+		<relationship name="mixer">
+			<destination>{6d97b521-51c9-4cce-bbab-bd5eb6c81f2f}</destination>
+		</relationship>
+		<relationship name="automatableProperties">
+			<destination>{ebc8988d-15ea-44f5-b52c-c17e9368fce9}</destination>
+		</relationship>
+		<relationship name="markerTracks">
+			<destination>{c8cefef3-fd9b-4792-ab99-3f3efe937293}</destination>
+		</relationship>
+		<relationship name="timeline">
+			<destination>{c007f780-e00c-4bbf-a4b8-415a8f058a28}</destination>
+		</relationship>
+		<relationship name="snapshotMasterTrack">
+			<destination>{4fd12ced-e86d-4679-8e8c-cf9e38b5e85c}</destination>
+		</relationship>
+		<relationship name="snapshotProperties">
+			<destination>{5bef9963-fbef-4430-bfff-7e767bb03a8c}</destination>
+			<destination>{de12d1b5-6253-4139-bbdd-2f9fc4c67178}</destination>
+			<destination>{57196a4e-e39e-45b2-8982-3c7fa366f2e9}</destination>
+			<destination>{94b97077-edb4-4b63-908d-7f2317637199}</destination>
+			<destination>{44c83aa2-f0ea-4759-87c0-b471861375dc}</destination>
+		</relationship>
+		<relationship name="snapshotTracks">
+			<destination>{1f890806-ec52-45a7-ab8e-3e9df2b3258e}</destination>
+			<destination>{da9e8667-b770-4b2c-bad1-e9da315f0cfa}</destination>
+		</relationship>
+	</object>
+	<object class="EventAutomatableProperties" id="{ebc8988d-15ea-44f5-b52c-c17e9368fce9}" />
+	<object class="MarkerTrack" id="{c8cefef3-fd9b-4792-ab99-3f3efe937293}" />
+	<object class="Timeline" id="{c007f780-e00c-4bbf-a4b8-415a8f058a28}" />
+	<object class="SnapshotMasterTrack" id="{4fd12ced-e86d-4679-8e8c-cf9e38b5e85c}" />
+	<object class="SnapshotProperty" id="{5bef9963-fbef-4430-bfff-7e767bb03a8c}">
+		<property name="propertyName">
+			<value>volume</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{33c99b06-4ff8-4467-908c-975677b0988b}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{de12d1b5-6253-4139-bbdd-2f9fc4c67178}">
+		<property name="propertyName">
+			<value>volume</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{0c61f1a6-1326-4b4b-a327-3454cd525398}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{57196a4e-e39e-45b2-8982-3c7fa366f2e9}">
+		<property name="propertyName">
+			<value>frequencyA</value>
+		</property>
+		<property name="value">
+			<value>660</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{a8779c9d-04fa-42cf-8943-58a085d6700a}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{94b97077-edb4-4b63-908d-7f2317637199}">
+		<property name="propertyName">
+			<value>qualityA</value>
+		</property>
+		<property name="value">
+			<value>0.707000017</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{a8779c9d-04fa-42cf-8943-58a085d6700a}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{44c83aa2-f0ea-4759-87c0-b471861375dc}">
+		<property name="propertyName">
+			<value>gainA</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{a8779c9d-04fa-42cf-8943-58a085d6700a}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotTrack" id="{1f890806-ec52-45a7-ab8e-3e9df2b3258e}">
+		<relationship name="mixerStrip">
+			<destination>{33c99b06-4ff8-4467-908c-975677b0988b}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotTrack" id="{da9e8667-b770-4b2c-bad1-e9da315f0cfa}">
+		<relationship name="mixerStrip">
+			<destination>{0c61f1a6-1326-4b4b-a327-3454cd525398}</destination>
+		</relationship>
+	</object>
+</objects>

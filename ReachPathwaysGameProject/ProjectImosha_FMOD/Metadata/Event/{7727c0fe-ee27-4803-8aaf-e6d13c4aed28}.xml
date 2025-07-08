@@ -53,7 +53,7 @@
 			<destination>{fc1ae771-1f71-41f6-9dd1-c5ec382e2032}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{3d9f350b-446b-4740-8efd-eb7c3efcbae4}</destination>
+			<destination>{33c99b06-4ff8-4467-908c-975677b0988b}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{783a86e4-7115-4d45-8d2e-46900da9bf3a}" />
@@ -73,7 +73,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{c9054292-b015-4107-b94e-c218784b5573}">
 		<property name="volume">
-			<value>-3</value>
+			<value>-5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{e55797a4-5a8e-4ca4-a582-3c37ce27a93d}</destination>
@@ -124,7 +124,6 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{e55797a4-5a8e-4ca4-a582-3c37ce27a93d}">
 		<relationship name="effects">
-			<destination>{9bcac2c4-7399-42f9-bbf1-c6f36b8ca2f7}</destination>
 			<destination>{e0090f83-d645-400d-a10a-ec59e2796a4f}</destination>
 		</relationship>
 	</object>
@@ -152,38 +151,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{d52e1a8e-dc3d-4764-9c12-5da61c5891e7}" />
-	<object class="MultibandEqEffect" id="{9bcac2c4-7399-42f9-bbf1-c6f36b8ca2f7}">
-		<property name="filterTypeA">
-			<value>8</value>
-		</property>
-		<property name="filterTypeB">
-			<value>9</value>
-		</property>
-		<property name="filterTypeC">
-			<value>1</value>
-		</property>
-		<property name="frequencyA">
-			<value>1398.49707</value>
-		</property>
-		<property name="frequencyB">
-			<value>395.158386</value>
-		</property>
-		<property name="frequencyC">
-			<value>8000</value>
-		</property>
-		<property name="qualityB">
-			<value>1</value>
-		</property>
-		<property name="qualityC">
-			<value>0.999781132</value>
-		</property>
-		<property name="gainA">
-			<value>-6.92307663</value>
-		</property>
-		<property name="gainB">
-			<value>-7</value>
-		</property>
-	</object>
 	<object class="MixerBusFader" id="{e0090f83-d645-400d-a10a-ec59e2796a4f}" />
 	<object class="AutomationPoint" id="{c3f52266-b7d8-4929-a96e-4ab6b9a1e5d7}">
 		<property name="position">

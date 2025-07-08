@@ -251,7 +251,6 @@ public class GameplayManager : MonoBehaviour
 
     public void DrawScenarioCard()
     {
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.scenarioCard, transform.position);
         SetScenario(new Scenario(
             CardStat.Creativity,
             new CardStat[] { CardStat.Creativity, CardStat.Communication, CardStat.Awareness, CardStat.Integrity },
@@ -289,8 +288,6 @@ public class GameplayManager : MonoBehaviour
                     playerDeckObj.GetComponent<Button>().interactable = false;
                     abilityDeck.GetComponent<Button>().interactable = true;
                 }
-
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
 
                 state.cardsDrawn++;
                 DrawAdvance(state);
@@ -345,7 +342,6 @@ public class GameplayManager : MonoBehaviour
         }
         cardObj.GetComponent<CardObj>().Init(cardToDraw);
         log.UpdateLog($"{characterList[currentTurn]} drew {cardObj.GetComponent<CardBase>().cardName}");
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
     }
 
     private void DrawAdvance(DrawState state)
@@ -377,8 +373,6 @@ public class GameplayManager : MonoBehaviour
     {
         pointSum += diceValue;
         pointsUI.DisplayTotalPoints(pointSum);
-
-        StartCoroutine(StateManager.Instance.Delay(0.5f, done => { AudioManager.Instance.PlaySFX(AudioManager.Instance.diceRoll, transform.position); ; }));
     }
 
     public void PlayCard(GameObject cardObj, CardBase card)
@@ -417,19 +411,12 @@ public class GameplayManager : MonoBehaviour
                 playerHandObj.GetComponent<CanvasGroup>().interactable = false;
             }
         }
-        
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.playCard, AudioManager.Instance.transform.position, AudioManager.Instance.gameObject, true);
 
     }
 
     public void AdvanceToDraw()
     {
         StateManager.Instance.ChangeState(new TurnEndDrawState());
-
-        if (isPlayerTurn)
-        {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
-        }
     }
 
     public void AdvanceTurn()
@@ -470,7 +457,6 @@ public class GameplayManager : MonoBehaviour
             if (pointSum < currentScenario.roundThresholds[currentRound - 2])
             {
                 log.UpdateLog("Round threshold was not met - players have to discard a card");
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.roundFail, transform.position);
                 foreach (KeyValuePair<CharacterCard, List<GameObject>> player in hands)
                 {
                     if (player.Value.Count > 0)

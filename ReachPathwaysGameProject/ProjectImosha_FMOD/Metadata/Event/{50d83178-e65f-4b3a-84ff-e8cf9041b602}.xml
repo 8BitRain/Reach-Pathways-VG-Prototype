@@ -53,7 +53,7 @@
 			<destination>{5ffff623-4966-46ea-b234-e98dae2dfbcb}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{3d9f350b-446b-4740-8efd-eb7c3efcbae4}</destination>
+			<destination>{33c99b06-4ff8-4467-908c-975677b0988b}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{6c791fd5-6164-4933-8be1-e5b32adb18a2}" />
@@ -156,20 +156,11 @@
 		<property name="filterTypeA">
 			<value>7</value>
 		</property>
-		<property name="filterTypeB">
-			<value>8</value>
-		</property>
 		<property name="frequencyA">
 			<value>102.775131</value>
 		</property>
-		<property name="frequencyB">
-			<value>9604.93359</value>
-		</property>
 		<property name="gainA">
 			<value>-7.44312096</value>
-		</property>
-		<property name="gainB">
-			<value>-12.6435547</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{b0148623-1724-4324-bad0-3a360b676d94}" />

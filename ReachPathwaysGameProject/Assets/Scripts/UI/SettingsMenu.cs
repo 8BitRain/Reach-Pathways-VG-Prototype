@@ -8,7 +8,5 @@ public class SettingsMenu : MonoBehaviour
     public void Back()
     {
         SceneManager.UnloadSceneAsync("Settings");
-
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuBack);
     }
 }
