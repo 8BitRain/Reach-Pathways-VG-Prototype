@@ -43,6 +43,22 @@ public class Tutorial : MonoBehaviour
             case DiceRollState:
                 ChangeDialog("DiceRollDialog");
                 break;
+            case TurnState:
+                if (GameplayManager.Instance.isPlayerTurn)
+                {
+                    ChangeDialog("TurnDialog");
+                }
+                else
+                {
+                    DisableDialog();
+                }
+                break;
+            case TurnEndDrawState:
+                if (GameplayManager.Instance.isPlayerTurn)
+                {
+                    ChangeDialog("TurnEndDrawDialog");
+                }
+                break;
         }
     }
 
@@ -55,6 +71,14 @@ public class Tutorial : MonoBehaviour
 
         activeDialog = dialogs[dialogName];
         activeDialog.SetActive(true);
+    }
+
+    private void DisableDialog()
+    {
+        if (activeDialog != null)
+        {
+            activeDialog.SetActive(false);
+        }
     }
 
     void OnDestroy()
