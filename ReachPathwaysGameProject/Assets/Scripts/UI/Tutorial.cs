@@ -39,7 +39,9 @@ public class Tutorial : MonoBehaviour
         {
             case InitialDrawState:
                 ChangeDialog("InitialDrawDialog");
-                Debug.Log("akshdais;uhdka;s");
+                break;
+            case DiceRollState:
+                ChangeDialog("DiceRollDialog");
                 break;
         }
     }
