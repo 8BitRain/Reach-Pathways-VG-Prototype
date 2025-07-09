@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Displacement: 1
-    - _Distance: 11.18
+    - _Distance: 3
     - _FoamAmount: 10.02
     - _FoamCutoff: 1.21
     - _FoamScale: 1
