@@ -9,16 +9,15 @@ public class Tutorial : MonoBehaviour
     public bool tutorialActive = true;
 
     [SerializeField]
-    private RectTransform[] dialogs;
+    private Dictionary<string, GameObject> dialogs = new();
 
     // Start is called before the first frame update
     void Start()
     {
-        // Get an array of all the dialogs present under the parent Tutorial object
-        dialogs = GetComponentsInChildren<RectTransform>()[1..^0];
-        foreach (RectTransform t in dialogs)
+        // Get a dictionary of all the dialogs present under the parent Tutorial object with their name and the object
+        foreach (RectTransform t in GetComponentsInChildren<RectTransform>()[1..^0])
         {
-            Debug.Log(t.gameObject.name);
+            dialogs.Add(t.gameObject.name, t.gameObject);
         }
     }
 
