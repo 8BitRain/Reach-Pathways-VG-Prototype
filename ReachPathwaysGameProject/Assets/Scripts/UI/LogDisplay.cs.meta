@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:ReachPathwaysGameProject/Assets/Scripts/UI/LogDisplay.cs.meta
 guid: 851cfad4d42ce423d9986b4e2b6454b6
+========
+guid: ed0aa9123b663480c9ed5a5e21cce181
+>>>>>>>> main:ReachPathwaysGameProject/Assets/Scripts/Base Classes/Scenario.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

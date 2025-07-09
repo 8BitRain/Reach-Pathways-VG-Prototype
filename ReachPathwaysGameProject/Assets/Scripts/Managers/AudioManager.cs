@@ -10,8 +10,9 @@ public class AudioManager : MonoBehaviour
 
     // Place all events you want to have stored as comma separated EventReference variables, then assign them to the corresponding FMOD events in the inspector
     [SerializeField]
-    public EventReference menuMusic, gameplayMusic, overworldMusic;
+    public EventReference menuMusic, gameplayMusic, overworldMusic, menuSelect, menuBack, mouseOver, playCard, drawCard, scenarioCard, negEffect, posEffect, roundFail, roundSucceed, diceRoll;
     private EventInstance musicInst;
+    public EventInstance pauseSnapshot;
 
     private string cont = "Continue";
 
@@ -29,6 +30,8 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             StateManager.Instance.OnStateChanged += OnStateChanged;
         }
+
+        pauseSnapshot = FMODUnity.RuntimeManager.CreateInstance("snapshot:/Pause");
     }
 
     // Primary function for audio playback - overloaded method that allows for playback of both one-shots and instances. Returns the instance if an instance is made for future reference, and returns null if it plays a one-shot.
@@ -109,6 +112,22 @@ public class AudioManager : MonoBehaviour
                 ChangeBGM(overworldMusic);
                 break;
         }
+    }
+
+    public void CheckPlayback(FMOD.Studio.EventInstance instance)
+    {
+        instance.getPlaybackState(out PLAYBACK_STATE state);
+        Debug.Log(state.ToString());
+    }
+
+    public void OnPointerEnter()
+    {
+
+    }
+
+    private void Update()
+    {
+        OnPointerEnter();
     }
 
     void OnDestroy()

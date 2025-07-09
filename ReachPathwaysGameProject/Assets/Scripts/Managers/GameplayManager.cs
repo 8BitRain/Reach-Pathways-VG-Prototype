@@ -205,7 +205,7 @@ public class GameplayManager : MonoBehaviour
         typeof(AmplifyEndsCard)
     };
 
-    // #endregion 
+    // #endregion
 
     void Awake()
     {
@@ -269,6 +269,7 @@ public class GameplayManager : MonoBehaviour
         if (!(playerDeck.Count > 0))
         {
             log.UpdateLog("Player is out of cards!");
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.negEffect, transform.position);
         }
         else
         {
@@ -288,6 +289,8 @@ public class GameplayManager : MonoBehaviour
                     playerDeckObj.GetComponent<Button>().interactable = false;
                     abilityDeck.GetComponent<Button>().interactable = true;
                 }
+
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
 
                 state.cardsDrawn++;
                 DrawAdvance(state);
@@ -342,6 +345,11 @@ public class GameplayManager : MonoBehaviour
         }
         cardObj.GetComponent<CardObj>().Init(cardToDraw);
         log.UpdateLog($"{characterList[currentTurn]} drew {cardObj.GetComponent<CardBase>().cardName}");
+        
+        if (StateManager.Instance.GetCurrentState() is InitialDrawState || isPlayerTurn)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.drawCard, transform.position);
+        }
     }
 
     private void DrawAdvance(DrawState state)
@@ -373,6 +381,8 @@ public class GameplayManager : MonoBehaviour
     {
         pointSum += diceValue;
         pointsUI.DisplayTotalPoints(pointSum);
+
+        StartCoroutine(StateManager.Instance.Delay(0.5f, done => { AudioManager.Instance.PlaySFX(AudioManager.Instance.diceRoll, transform.position); ; }));
     }
 
     public void PlayCard(GameObject cardObj, CardBase card)
@@ -410,6 +420,8 @@ public class GameplayManager : MonoBehaviour
             {
                 playerHandObj.GetComponent<CanvasGroup>().interactable = false;
             }
+            
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.playCard, AudioManager.Instance.transform.position, AudioManager.Instance.gameObject, true);
         }
 
     }
@@ -417,6 +429,11 @@ public class GameplayManager : MonoBehaviour
     public void AdvanceToDraw()
     {
         StateManager.Instance.ChangeState(new TurnEndDrawState());
+
+        if (isPlayerTurn)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
+        }
     }
 
     public void AdvanceTurn()
@@ -450,6 +467,8 @@ public class GameplayManager : MonoBehaviour
                     result = gameResult.failure;
                 }
                 log.UpdateLog("Game Result: " + result.ToString());
+                TimeManager.Instance.AdvanceTimeBySlots(5); //takes up entire day
+                StateManager.Instance.ChangeState(new OverworldState());
                 return;
             }
 
@@ -475,6 +494,8 @@ public class GameplayManager : MonoBehaviour
             return;
         }
         StateManager.Instance.ChangeState(new TurnState());
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.roundFail, transform.position);
     }
 
     public void InitializeHands()

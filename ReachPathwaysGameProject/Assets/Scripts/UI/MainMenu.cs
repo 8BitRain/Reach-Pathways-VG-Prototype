@@ -15,12 +15,16 @@ public class MainMenu : MonoBehaviour
     {
         StateManager.Instance.ChangeState(new GameInitState());
         // StateManager.Instance.ChangeState(new OverworldState());
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect);
     }
 
     public void OpenSettings()
     {
         mainMenu.SetActive(false);
         SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect);
     }
 
     void OnSceneUnload(Scene scene)
@@ -35,10 +39,14 @@ public class MainMenu : MonoBehaviour
     {   
         mainMenu.SetActive(false);
         quitMenu.SetActive(true);
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect);
     }
 
     public void QuitConfirm()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect);
+
         #if UNITY_STANDALONE
             Application.Quit();
         #endif
@@ -51,6 +59,8 @@ public class MainMenu : MonoBehaviour
     {
         quitMenu.SetActive(false);
         mainMenu.SetActive(true);
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuBack);
     }
 
     void OnDestroy()
