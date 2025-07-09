@@ -133,6 +133,16 @@ public class TimeManager : MonoBehaviour
         UICanvas.SetActive(condition);
     }
 
+    public TimeSlot GetTime()
+    {
+        return currentTime;
+    }    
+
+    public string GetWeekday()
+    {
+        return calendar.currentWeekday;
+    }
+
     //Updating data
     private void SaveTimeData()
     {
