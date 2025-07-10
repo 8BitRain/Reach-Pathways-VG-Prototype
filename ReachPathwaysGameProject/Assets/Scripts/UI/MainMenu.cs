@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainMenu, quitMenu;
+    private GameObject mainMenu, quitMenu, credits;
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void QuitSelect()
-    {   
+    {
         mainMenu.SetActive(false);
         quitMenu.SetActive(true);
 
@@ -47,12 +47,12 @@ public class MainMenu : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect);
 
-        #if UNITY_STANDALONE
-            Application.Quit();
-        #endif
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#if UNITY_STANDALONE
+        Application.Quit();
+#endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     public void QuitCancel()
@@ -66,5 +66,17 @@ public class MainMenu : MonoBehaviour
     void OnDestroy()
     {
         SceneManager.sceneUnloaded -= OnSceneUnload;
+    }
+
+    public void OpenCredits()
+    {
+        mainMenu.SetActive(false);
+        credits.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        credits.SetActive(false);
+        mainMenu.SetActive(true);
     }
 }
