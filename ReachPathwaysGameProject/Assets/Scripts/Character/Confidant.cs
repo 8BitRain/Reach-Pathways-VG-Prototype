@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Yarn.Unity;
+using System.Linq;
 
 [System.Serializable]
 public class ConfidantSaveData
@@ -25,6 +26,12 @@ public class Confidant : MonoBehaviour
     [SerializeField] private string confidantName = "DefaultConfidant";
     [SerializeField] private int conRank = 0;
     [SerializeField] private bool isUnlocked = true;
+    [SerializeField] private bool isSpeaking = false;
+
+    [Tooltip("Enter the node name from any yarn script for the confidant to start speaking")]
+    [SerializeField] private string nodeName = "Confidant";
+
+    public bool speaking { get { return isSpeaking; } set { isSpeaking = value; } }
     
     [Header("Dialogue System")]
     [SerializeField] private DialogueRunner dialogueRunner;
@@ -32,6 +39,16 @@ public class Confidant : MonoBehaviour
     [Header("Save/Load Settings")]
     [SerializeField] private bool autoSave = true;
     [SerializeField] private bool autoLoad = true;
+
+    [Header("Confidant time availability")]
+    [SerializeField] private TimeSlot[] timeAvailable;
+    [SerializeField] private string[] weekdayAvailable;
+    
+    
+    public TimeSlot[] tAvailable { get { return timeAvailable; } private set { tAvailable = value; } }
+    public string[] wdayAvailable { get { return weekdayAvailable; } private set { wdayAvailable = value; } }
+
+
 
     private void Start()
     {
@@ -53,12 +70,14 @@ public class Confidant : MonoBehaviour
         {
             // Update variables before starting dialogue
             UpdateYarnVariables();
-            dialogueRunner.StartDialogue("Confidant");
+            dialogueRunner.StartDialogue(nodeName);
         }
         else
         {
             Debug.LogError("DialogueRunner is not assigned!");
         }
+
+        isSpeaking = true;
     }
 
     // Simple YarnCommand that doesn't return a value to avoid source generator issues
@@ -86,7 +105,7 @@ public class Confidant : MonoBehaviour
         if (autoSave)
             SaveConfidantData();
     }
-    
+
     [YarnCommand]
     public void UnlockConfidant()
     {
@@ -121,6 +140,7 @@ public class Confidant : MonoBehaviour
             dialogueRunner.VariableStorage.SetValue("$conRank", (float)conRank);
             dialogueRunner.VariableStorage.SetValue("$conName", confidantName);
             dialogueRunner.VariableStorage.SetValue("$conUnlocked", isUnlocked);
+            dialogueRunner.VariableStorage.SetValue("$conisSpeaking", isSpeaking);
         }
     }
     
@@ -198,7 +218,20 @@ public class Confidant : MonoBehaviour
          * 5 slots = major confidant event [through yarn script: "Narrative milestone linked to Confidants or story forks"]
          */
         TimeManager.Instance.AdvanceTimeBySlots(num);
+
+        UpdateYarnVariables();
     }
+
+    [YarnCommand("HideConfidant")]
+    public void DeactivateConfidant()
+    {
+        gameObject.SetActive(false);
+        UpdateYarnVariables();
+
+        if (autoSave)
+            SaveConfidantData();
+    }
+
 
     // Manual save command that can be called from Yarn
     [YarnCommand]
@@ -208,7 +241,7 @@ public class Confidant : MonoBehaviour
 
         SaveConfidantData();
     }
-    
+
     // Manual load command that can be called from Yarn
     [YarnCommand]
     public void LoadData()

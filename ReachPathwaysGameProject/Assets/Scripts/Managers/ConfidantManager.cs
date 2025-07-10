@@ -6,20 +6,45 @@ using System.Linq;
 public class ConfidantManager : MonoBehaviour
 {
     [SerializeField]
-    private TimeSlot[] timeAvailable;
-    
-    [SerializeField]
-    private string[] weekdayAvailable;
+    private List<Confidant> confidantsList;
 
-    public void UpdateConfidant()
+    private void Start()
     {
-        if (timeAvailable.Contains(TimeManager.Instance.GetTime()) && weekdayAvailable.Contains(TimeManager.Instance.GetWeekday()))
+        UpdateAllConfidants();
+    }
+
+    private void OnEnable()
+    {
+        TimeManager.TimeChanged += UpdateAllConfidants;
+    }
+
+    private void OnDisable()
+    {
+        TimeManager.TimeChanged -= UpdateAllConfidants;
+
+    }
+
+    private void UpdateAllConfidants()
+    {
+        foreach(var c in confidantsList)
         {
-            Debug.Log("Display confidant");
-        }
-        else
-        {
-            Debug.Log("hide confidant");
+            if (c.tAvailable.Contains(TimeManager.Instance.GetTime()) && c.wdayAvailable.Contains(TimeManager.Instance.GetWeekday()))
+            {
+                if (!c.gameObject.activeInHierarchy) //ensures if the object has been disabled to set true 
+                    c.gameObject.SetActive(true);
+            }
+            else
+            {
+                if (!c.speaking)//If they are not speaking to the player
+                {
+                    c.gameObject.SetActive(false);
+                }
+                else
+                {
+                    c.speaking = false;
+                }
+                
+            }         
         }
     }
 }

@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64bb6f941cf7f42b5a824add835cf3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchMenuOnStart: 1
+  launchMenuOnStart: 0
   fade: {fileID: 1854177775}
 --- !u!4 &943736834
 Transform:
@@ -1408,7 +1408,7 @@ MonoBehaviour:
   timeUI: {fileID: 1659490934}
   startingMonth: 2
   UICanvas: {fileID: 0}
-  resetTime: 0
+  resetTime: 1
   canRest: 0
 --- !u!114 &1825435922
 MonoBehaviour:
