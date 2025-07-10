@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:ReachPathwaysGameProject/Assets/Scripts/UI/DiceUI.cs.meta
+guid: fed9578e98a764afe86354b4617c9ad0
+========
 guid: 5ee59b9844a174c9d88dfa2cbeb10885
+>>>>>>>> main:ReachPathwaysGameProject/Assets/GoodbyeButton.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
