@@ -72,11 +72,15 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         credits.SetActive(true);
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect);
     }
 
     public void CloseCredits()
     {
         credits.SetActive(false);
         mainMenu.SetActive(true);
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuBack);
     }
 }
