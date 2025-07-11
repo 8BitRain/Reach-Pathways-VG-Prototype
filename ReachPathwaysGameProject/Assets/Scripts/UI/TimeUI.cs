@@ -1,28 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class TimeUI : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI timeSlotText, dateText, weekText;
+    private TextMeshProUGUI timeSlotText, dateText;
 
-    [SerializeField]
-    private Button restButton;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-    public void SetTimeAndDate(int month, int day, TimeSlot time, string week)
+    public void SetTimeAndDate(int month, int day, TimeSlot time)
     {
         timeSlotText.text = time.ToString();
 
         dateText.text = $"{month}/{day}";
-
-        weekText.text = week;
-    }
-
-    public void SetButtonCondition(bool condition)
-    {
-        restButton.interactable = condition;
     }
 }
