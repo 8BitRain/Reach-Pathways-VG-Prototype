@@ -2489,9 +2489,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ringo
+  m_text: 'Kara Zamora
 
-    Kara'
+    Ringo'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25c090f4459f0a947955a8d9f9850177, type: 2}
   m_sharedMaterial: {fileID: 5795996148291447528, guid: 25c090f4459f0a947955a8d9f9850177, type: 2}
