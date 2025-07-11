@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Toon_Ground
+  m_Shader: {fileID: -6465566751694194690, guid: fc4b51798a883334f998d4a5fd74ef40, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 6e8c8e71eec1f1543b06bdc9b99d3fd6, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap_Dry:
+        m_Texture: {fileID: 2800000, guid: e02a609f66951fb4d95dafefd8c56a6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Base_Map_Dry:
+        m_Texture: {fileID: 2800000, guid: e02a609f66951fb4d95dafefd8c56a6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Basemap_Dry:
+        m_Texture: {fileID: 2800000, guid: e02a609f66951fb4d95dafefd8c56a6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Basemap_Dry_2:
+        m_Texture: {fileID: 2800000, guid: ed82492175b2928478b17113f86f1035, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Basemap_Lush:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emmissive:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTexture:
+        m_Texture: {fileID: 2800000, guid: a1a4108227a8a8b4f9067f80f37c33ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_026d61ff96d44355a9982e5820104054_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: e02a609f66951fb4d95dafefd8c56a6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_0d50e891b1414a87bcbd09933b491965_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 5ffbc9824e2da0d4d919e3ce79cf333e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ade8f29be77445c8a5dd8b80b4cad4fa_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: ed82492175b2928478b17113f86f1035, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_092c9133646b4007ba3781460129439b_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fd4ba274c615d5c48b6bed9bfd6e486b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_efd34586e937461489aa6553bdef2e52_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: fd4ba274c615d5c48b6bed9bfd6e486b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _AlphaClipThreshold: 0.5
+    - _AlphaToMask: 0
+    - _BaseMap_Tiling: 0.1
+    - _Basemap_Tiling: 0.8
+    - _Blend: 0
+    - _Blend_Tiling: 0.15
+    - _CastShadows: 1
+    - _Cull: 2
+    - _Displacement: 2.25
+    - _Displacement_Seed: 11.1
+    - _Distortion_Intensity: 1
+    - _Distortion_Scale: 10
+    - _Drought_Level: 1.25
+    - _DstBlend: 0
+    - _Ground_Scale: 500
+    - _Noise_Scale: 10
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _SPECULAR: 1
+    - _Smoothness: 1
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
+    m_Colors:
+    - _Base_Map_Tiling: {r: 5, g: 5, b: 0, a: 0}
+    - _DiffuseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Dry_Color: {r: 0.7725491, g: 0.7058824, b: 0.4156863, a: 0}
+    - _Dryest_Color: {r: 0.54901963, g: 0.45098042, b: 0.39607847, a: 0}
+    - _Lush_Color: {r: 0.427451, g: 0.7176471, b: 0.39607847, a: 0}
+    - _SpecularColour: {r: 1, g: 1, b: 1, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &6673905943543694543
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

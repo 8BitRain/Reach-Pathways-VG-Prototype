@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using MemoryCards;
@@ -11,10 +10,6 @@ public abstract class CardBase : MonoBehaviour
     public abstract CardStat stat { get; }
     public abstract int numberEffect { get; }
     public abstract void SpecialEffect();
-    public CharacterCard GetCardOwner()
-    {
-        return GameplayManager.Instance.characterList[GameplayManager.Instance.currentTurn];
-    }
 }
 
 public enum CardStat
@@ -39,29 +34,8 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Give card method - gives a random card to a random teammate
-
-            // Get the owner of this card who will be giving a card to a teammate
-            CharacterCard owner = GetCardOwner();
-
-            // Get the owner's hand and a random card to give (note that this GiveCard has already been removed by the PlayCard() method)
-            List<GameObject> hand = GameplayManager.Instance.hands[owner];
-            GameObject cardToGive = hand[GameplayManager.Instance.rng.Next(0, hand.Count)];
-
-            // Get a list of teammates and remove the owner from it to avoid self-giving
-            List<CharacterCard> recipients = new List<CharacterCard>(GameplayManager.Instance.hands.Keys);
-            recipients.Remove(owner);
-            CharacterCard recipient = recipients[GameplayManager.Instance.rng.Next(0, recipients.Count)];
-
-            // Reparent the card to the recipient
-            // If the recipient is the player, reparent it to their Hand object. Otherwise just parent it to the recipient's object
-            Transform newParent = recipient == GameplayManager.Instance.playerCharacter ? GameplayManager.Instance.playerHandObj.transform : recipient.gameObject.transform;
-            cardToGive.transform.SetParent(newParent);
-
-            // Transfer the card from the owner's hand list to the recipient's
-            GameplayManager.Instance.hands[owner].Remove(cardToGive);
-            GameplayManager.Instance.hands[recipient].Add(cardToGive);
-            GameplayManager.Instance.log.UpdateLog($"Transferred {cardToGive.GetComponent<CardBase>().cardName} from {owner} to {recipient}");
+            // Give card method
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -69,10 +43,8 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Original effect: Look through the deck, and choose any one card before reshuffling
-            // Draws a random card
-            GameplayManager.Instance.DrawAbilityCard();
-            GameplayManager.Instance.log.UpdateLog($"Drew a new card due to deck search effect");
+            // Look through the deck, and choose any one card before reshuffling
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -80,22 +52,8 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Original effect: Discard as many cards in your hand as you like, then draw that many cards
-            // Discard one card and draw a random ability card
-
-            // Get the card's owner
-            CharacterCard owner = GetCardOwner();
-
-            // Choose a random card from the owner's hand, remove it from their hand list, and disable its object
-            List<GameObject> hand = GameplayManager.Instance.hands[owner];
-            GameObject cardToDiscard = hand[GameplayManager.Instance.rng.Next(0, hand.Count)];
-            GameplayManager.Instance.hands[owner].Remove(cardToDiscard);
-            cardToDiscard.SetActive(false);
-            GameplayManager.Instance.discards[owner].Add(cardToDiscard);
-
-            // Draw a random new ability card using the usual method, which has specific logic to handle this usage by checking if we are in the Turn state
-            GameplayManager.Instance.DrawAbilityCard();
-            GameplayManager.Instance.log.UpdateLog($"Discarded {cardToDiscard.GetComponent<CardBase>().cardName} from {owner.Character}'s hand");
+            // Discard as many cards in your hand as you like, then draw that many cards
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -107,9 +65,9 @@ namespace MemoryCards
             Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
             if (dice.GetRollNumber() >= 8 && dice.GetRollNumber() <= 11)
             {
-                int newNumber = GameplayManager.Instance.rng.Next(12, 16);
+                int newNumber = Random.Range(12, 16);
                 dice.AdjustDice(newNumber);
-                GameplayManager.Instance.log.UpdateLog($"Partial failure to success effect triggered, adjusting dice number to {newNumber}");
+                Debug.Log($"Partial failure to success effect triggered, adjusting dice number to {newNumber}");
             }
         }
     }
@@ -122,9 +80,9 @@ namespace MemoryCards
             Dice dice = GameplayManager.Instance.diceUI.GetComponent<Dice>();
             if (dice.GetRollNumber() >= 1 && dice.GetRollNumber() <= 7)
             {
-                int newNumber = GameplayManager.Instance.rng.Next(12, 16);
+                int newNumber = Random.Range(12, 16);
                 dice.AdjustDice(newNumber);
-                GameplayManager.Instance.log.UpdateLog($"Failure to success effect triggered, adjusting dice number to {newNumber}");
+                Debug.Log($"Failure to success effect triggered, adjusting dice number to {newNumber}");
             }
         }
     }
@@ -134,53 +92,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Ask a teammate for a card from their hand
-
-            // Get the owner of this card who will be taking a card from a teammate
-            CharacterCard taker = GetCardOwner();
-
-            // Get a list of teammates and remove the owner from it to avoid self-taking
-            List<CharacterCard> givers = new List<CharacterCard>(GameplayManager.Instance.hands.Keys);
-            givers.Remove(taker);
-
-            CharacterCard giver = null;
-            List<GameObject> giverHand = null;
-
-            bool exit = false;
-
-            // Find a teammate who has cards available to give
-            while (!exit)
-            {
-                if (givers.Count < 1)
-                {
-                    GameplayManager.Instance.log.UpdateLog("No teammates have any cards to take");
-                    return;
-                }
-
-                giver = givers[GameplayManager.Instance.rng.Next(0, givers.Count)];
-                giverHand = GameplayManager.Instance.hands[giver];
-                if (giverHand.Count > 0)
-                {
-                    exit = true;
-                    GameplayManager.Instance.log.UpdateLog($"Found {giver.Character} to take card from");
-                }
-                else
-                {
-                    GameplayManager.Instance.log.UpdateLog($"{giver.Character}'s hand had no cards to take from, removing them & checking for a different teammate");
-                    givers.Remove(giver);
-                }
-            }
-
-            GameObject cardToGive = GameplayManager.Instance.hands[giver][GameplayManager.Instance.rng.Next(0, giverHand.Count)];
-
-            // Reparent the card to the taker
-            // If the taker is the player, reparent it to their Hand object. Otherwise just parent it to the recipient's object
-            Transform newParent = taker == GameplayManager.Instance.playerCharacter ? GameplayManager.Instance.playerHandObj.transform : taker.gameObject.transform;
-            cardToGive.transform.SetParent(newParent);
-
-            // Transfer the card from the owner's hand list to the taker's
-            GameplayManager.Instance.hands[giver].Remove(cardToGive);
-            GameplayManager.Instance.hands[taker].Add(cardToGive);
-            GameplayManager.Instance.log.UpdateLog($"Transferred {cardToGive.GetComponent<CardBase>().cardName} from {giver} to {taker}");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -188,10 +100,8 @@ namespace MemoryCards
     {
         public override void SpecialEffect()
         {
-            // Original effect: Shuffle the deck
-            // Resets the revealed cards so it is random again
-            GameplayManager.Instance.revealedCards = new List<Type>();
-            GameplayManager.Instance.log.UpdateLog("Revealed cards re-randomized due to deck shuffle effect");
+            // Shuffle the deck
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -200,15 +110,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Look at the top three cards in the deck and share with your teammates
-            List<Type> revealedCards = new();
-            int x = 0;
-            while (x < 3)
-            {
-                revealedCards.Add(GameplayManager.abilityCards[GameplayManager.Instance.rng.Next(GameplayManager.abilityCards.Count)]);
-                GameplayManager.Instance.log.UpdateLog($"Revealed {revealedCards[^1]}");
-                x++;
-            }
-            GameplayManager.Instance.revealedCards = revealedCards;
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -217,17 +119,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Recover any discarded card
-            CharacterCard owner = GetCardOwner();
-            List<GameObject> ownerDiscards = GameplayManager.Instance.discards[owner];
-            if (ownerDiscards.Count > 0)
-            {
-                GameObject recoverCard = ownerDiscards[GameplayManager.Instance.rng.Next(0, ownerDiscards.Count)];
-                recoverCard.SetActive(true);
-                GameplayManager.Instance.discards[owner].Remove(recoverCard);
-                GameplayManager.Instance.log.UpdateLog($"{owner.Character} recovered {recoverCard.GetComponent<CardBase>().cardName} via card recovery special effect");
-                return;
-            }
-            GameplayManager.Instance.log.UpdateLog("No cards to recover from discard");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -240,7 +132,7 @@ namespace MemoryCards
         public override int numberEffect => 2;
     }
 
-    public class UnconventionalHackCard : DeckSearchCard
+    public class UnconventionalHackCard : CardBase
     {
         public override string cardName => "Unconventional Hack";
         public override string description => "You recall a time your unconventional solution saved Kaharaba's main building.";
@@ -249,8 +141,7 @@ namespace MemoryCards
         public override void SpecialEffect()
         {
             // Draw 2 cards after playing.
-            base.SpecialEffect();
-            base.SpecialEffect();
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -406,6 +297,11 @@ namespace MemoryCards
         public override string description => "You recall a time when you followed through with a commitment, securing the trust of your team.";
         public override CardStat stat => CardStat.Integrity;
         public override int numberEffect => 2;
+        public override void SpecialEffect()
+        {
+            // Recover a random card from the discard pile.
+            Debug.Log(cardName + " effect not yet implemented.");
+        }
     }
 
     public class ElephantInTheRoomCard : NeutralCard
@@ -495,9 +391,11 @@ namespace MemoryCards
         public override string description => "You recall a time when you stepped up as leader in a situation, working with teammates and making decisions that reflect the group as a whole.";
         public override CardStat stat => CardStat.Teamwork;
         public override int numberEffect => 2;
-        // Original effect: Help a teammate recover a discarded card
-        // Refactored to just recover a card from your own discard
-        // The original effect shouldn't be too hard to implement by reusing logic from RecoverDiscardedCard & AskTeammateForCard, but for now it's been scoped down
+        public override void SpecialEffect()
+        {
+            // Help a teammate recover a discarded card.
+            Debug.Log(cardName + " effect not yet implemented.");
+        }
     }
 
     public class DungeonsAndDelegationsCard : NeutralCard
@@ -672,7 +570,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Reduce stress by 1 for the round
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -684,7 +582,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Reroll dice once this round
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -696,7 +594,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Discard 1 bad memory and draw 1 good memory card
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -708,7 +606,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Discard entire hand and draw 4 new cards
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -721,7 +619,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Add +1 to a card if it is tied to Creativity
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -733,7 +631,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Choose a player. They recover 1 chosen card from their discard pile
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -745,7 +643,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // If you have 3+ Stress, reduce it to 2 for this Scenario
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -757,7 +655,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // If the team fails this round, you do not discard a memory
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -770,7 +668,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Draw 2 cards, then discard 1
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -782,7 +680,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Skip your turn this round to reduce your Stress by 2
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -794,7 +692,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Every player may play 1 additional card this round
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -806,7 +704,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Next round, the dice cannot result in a Failure (1–7 becomes 8)
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -819,7 +717,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Everyone discards 1 card, then draws 1 card
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -831,7 +729,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Add +1 to every teammate's next card played this round
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -843,7 +741,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Look at the top 2 cards of any player's deck. Rearrange or discard one
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -855,7 +753,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // All players may draw 1 card OR discard a bad memory
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -868,7 +766,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Choose two players. They may coordinate cards this round
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -880,7 +778,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Make one teammate's negative card neutral
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -892,7 +790,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Choose a teammate. They draw 1 card and reduce Stress by 1
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 
@@ -904,7 +802,7 @@ namespace AbilityCards
         public override void SpecialEffect()
         {
             // Everyone may look at the top card of their inventory deck
-            GameplayManager.Instance.log.UpdateLog(cardName + " effect not yet implemented.");
+            Debug.Log(cardName + " effect not yet implemented.");
         }
     }
 }
