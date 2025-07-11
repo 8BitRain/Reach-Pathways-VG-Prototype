@@ -13,8 +13,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        StateManager.Instance.ChangeState(new GameInitState());
-        // StateManager.Instance.ChangeState(new OverworldState());
+        //StateManager.Instance.ChangeState(new GameInitState());
+        StateManager.Instance.ChangeState(new OverworldState());
 
         AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect);
     }

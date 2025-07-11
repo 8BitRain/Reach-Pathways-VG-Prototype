@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64bb6f941cf7f42b5a824add835cf3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchMenuOnStart: 0
+  launchMenuOnStart: 1
   fade: {fileID: 1854177775}
 --- !u!4 &943736834
 Transform:

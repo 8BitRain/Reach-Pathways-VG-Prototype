@@ -24,7 +24,7 @@ tags:
         PersonA: I've reset our relationship data to default values.
         <<jump MenuOption>>
     -> I want to hangout with you
-        <<AdvanceTimeSlot Confidant2 1>>
+        <<AdvanceTimeSlot Confidant2 2>>
         <<Hangout Confidant2>>
         PersonB: That was cool.
         <<jump MenuOption>>

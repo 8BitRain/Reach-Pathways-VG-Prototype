@@ -43,6 +43,7 @@ public class Overworld : MonoBehaviour
 
         if (fadeTransition != null)
         {
+            
             fadeTransition.SwitchScenes("SubArea", "Overworld");
             NextLocation = area;
         }

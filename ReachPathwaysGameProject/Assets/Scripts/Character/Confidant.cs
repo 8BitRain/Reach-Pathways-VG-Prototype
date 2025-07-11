@@ -63,6 +63,7 @@ public class Confidant : MonoBehaviour
     public TimeSlot[] tAvailable { get { return timeAvailable; } private set { tAvailable = value; } }
     public string[] wdayAvailable { get { return weekdayAvailable; } private set { wdayAvailable = value; } }
 
+    public bool hasCompletedTask { get { return isTaskCompleted; } private set { isTaskCompleted = value; } }
 
     private void Start()
     {
@@ -74,12 +75,6 @@ public class Confidant : MonoBehaviour
         
         // Initialize Yarn variables with current confidant data
         UpdateYarnVariables();
-
-        var yarnNodes = dialogueRunner.Dialogue.NodeNames;
-        foreach (var node in yarnNodes)
-        {
-            Debug.Log($"Yarn node: {node}");
-        }
     }
 
     public void ConfidantInteract()

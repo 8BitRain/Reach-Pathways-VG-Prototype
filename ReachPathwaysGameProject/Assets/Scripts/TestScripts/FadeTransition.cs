@@ -56,18 +56,17 @@ public class FadeTransition : MonoBehaviour
         if (image.color.a == 1) { FadeOut(fadeOutDuration); }
     }
 
-    //Call this when it's within a scene
-    public void FadeIn(float secondsDuration)
+    private void FadeIn(float secondsDuration)
     {
         image.DOFade(1, secondsDuration);
     }
 
-    public void FadeOut(float secondsDuration)
+    private void FadeOut(float secondsDuration)
     {
         image.DOFade(0, secondsDuration).OnComplete(() => Debug.Log("fade out completed")); //Remove OnComplete
     }
     
-    //Call this when it's for different scenes
+    //Used for overworld and sub area scene switches
     public void SwitchScenes(string nextScene, string currentScene)
     {
         StartCoroutine(TransitionsTimer(nextScene, currentScene));
@@ -97,6 +96,34 @@ public class FadeTransition : MonoBehaviour
 
         FadeOut(fadeOutDuration);
 
+    }
+    
+    //UPDATED: For the different states in StateManager call this for completing the fade in or fade out
+    public void EnterScene(string loadScene)
+    {
+        StartCoroutine(WaitEnterScene(loadScene));
+    }    
+
+    private IEnumerator WaitEnterScene(string loadScene)
+    {
+        yield return new WaitForSeconds(fadeOutDuration);
+
+        SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);
+        FadeOut(fadeOutDuration);
+    }
+
+    /********************************************************************************/
+
+    public void ExitScene(string currentScene)
+    {
+        StartCoroutine(WaitExitScene(currentScene));
+    }
+
+    private IEnumerator WaitExitScene(string loadScene)
+    {
+        FadeIn(fadeOutDuration);
+        yield return new WaitForSeconds(fadeOutDuration);
+        SceneManager.UnloadSceneAsync(loadScene);
     }
 }
 
