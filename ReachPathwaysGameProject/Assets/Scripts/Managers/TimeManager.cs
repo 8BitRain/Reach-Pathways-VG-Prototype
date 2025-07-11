@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
 
-public enum TimeSlot { Morning, Afternoon, Evening, Night, Midnight }
+public enum TimeSlot { Morning, Lunchtime, Afternoon, SunSet, Evening}
 
 public class TimeManager : MonoBehaviour
 {
     TimeSlot currentTime;
-
+    
     Calendar calendar;
 
     [SerializeField]
@@ -17,89 +15,36 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     private int startingMonth;
 
-    public static TimeManager Instance;
-
-    [SerializeField]
-    private GameObject UICanvas;
-
-    [SerializeField]
-    private bool resetTime, canRest;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        
-    }
-
     void Start()
     {
-        if(resetTime)
-        {
-            ResetTimeData();
-        }
+        if(timeUI == null) { timeUI = GetComponent<TimeUI>(); }
 
-        if( UICanvas == null) { UICanvas = transform.GetChild(0).gameObject; }
-        if (timeUI == null) { timeUI = GetComponent<TimeUI>(); }
-
-        int temp = 0;
-        LoadTimeData(ref temp);
-        calendar = new Calendar(temp);
-
-        timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime, calendar.currentWeekday);
-
-        UICanvas.SetActive(false);
-
-        canRest = true;
-    }
-
-    private void OnDestroy()
-    {
-        if (resetTime)
-        {
-            ResetTimeData();
-        }
-        SaveTimeData();
+        calendar = new Calendar(startingMonth);
+        currentTime = TimeSlot.Morning;
+        timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime);
     }
 
     //Handles the time change based on the parameter increments
-    //Call this within a scene that isn't being handles through Yarnspinner
     public void AdvanceTimeBySlots(int num)
     {
         int timeIndex = (int)currentTime;
 
-        while (num > 0)
+        while(num > 0)
         {
-            if (timeIndex == System.Enum.GetValues(typeof(TimeSlot)).Length - 1)
+            if(timeIndex == System.Enum.GetValues(typeof(TimeSlot)).Length - 1)
             {
                 timeIndex = 0;
-                if(canRest)
-                {
-                    Stress.Instance.IncreaseStress();
-                    //TODO: if stress is max, skip to next day and reset stress to 0
-                }
-                else
-                {
-                    canRest = true;
-                }
-                
-                timeUI.SetButtonCondition(true);
             }
             else
             {
                 timeIndex++;
             }
+
+            
             num--;
 
             currentTime = (TimeSlot)timeIndex;
-            if (currentTime == TimeSlot.Morning)
+            if(currentTime == TimeSlot.Morning)
             {
                 calendar.ChangeDate();
             }
@@ -107,112 +52,45 @@ public class TimeManager : MonoBehaviour
 
         currentTime = (TimeSlot)timeIndex;
 
-        timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime, calendar.currentWeekday);
+        timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime);
     }
 
-    public void Rest()
+    [YarnCommand("AdvanceTimeSlot")]
+    public void YarnAdvanceTime(int num)
     {
-        if(canRest)
-        {
-            AdvanceTimeBySlots(1);
-            Stress.Instance.DescreaseStress();
-            timeUI.SetButtonCondition(false);
-            canRest = false;
-        }
-        
+        /*
+         * 1 slot = rest
+         * 2 slots = Skill-based activity
+         * 2 slots = confidant interaction
+         * 5 slots = Scenario (card game)
+         * 5 slots = major confidant event
+         */
+        AdvanceTimeBySlots(num);
     }
-
-    public void TimeCanvasDisplay(bool condition)
-    {
-        StartCoroutine(WaitTimer(condition));
-    }
-
-    private IEnumerator WaitTimer(bool condition)
-    {
-        yield return new WaitForSeconds(FadeTransition.Instance.fadeTimer);
-        UICanvas.SetActive(condition);
-    }
-
-    //Updating data
-    private void SaveTimeData()
-    {
-        TimeData timeData = new TimeData(calendar.currentMonth, calendar.currentDay, currentTime, calendar.currentWeekday);
-        string jsonData = JsonUtility.ToJson(timeData);
-        string timeKey = "TimeDataFile";
-
-        PlayerPrefs.SetString(timeKey, jsonData);
-        PlayerPrefs.Save();
-    }
-
-    private void LoadTimeData(ref int getMonth)
-    {
-        string timeKey = "TimeDataFile";
-        if (PlayerPrefs.HasKey(timeKey))
-        {
-            string jsonData = PlayerPrefs.GetString(timeKey);
-            TimeData timeData = JsonUtility.FromJson<TimeData>(jsonData);
-
-            calendar = new Calendar(timeData.monthNum);
-
-            calendar.currentMonth = timeData.monthNum;
-            calendar.currentDay = timeData.dayNum;
-            currentTime = timeData.timeName;
-
-            getMonth = timeData.monthNum;
-        }
-        else
-        {
-            calendar = new Calendar(startingMonth);
-            currentTime = TimeSlot.Morning;
-            getMonth = startingMonth;
-        }
-    }
-
-    private void ResetTimeData()
-    {
-        calendar = new Calendar(startingMonth);
-        currentTime = TimeSlot.Morning;
-
-        SaveTimeData();
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveTimeData();
-    }
-
 }
 
-public class Calendar
+public class Calendar 
 {
     private int maxDays; //30, 31, and 28
 
-    public int currentDay { get; set; }
-    public int currentMonth { get; set; }
-
-    string[] week = new string[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"  };
-    
-    public string currentWeekday { get; set; }
-
-    private int position;
+    public int currentDay { get; private set; }
+    public int currentMonth { get; private set; }
 
     public Calendar(int getMonth)
     {
         currentMonth = getMonth;
-
+        
         SetMaxDaysForMonth(currentMonth);
         currentDay = 1;
-        position = 0;
-        currentWeekday = week[position];
+        
     }
 
     public void ChangeDate()
     {
-        if (currentDay == maxDays)
+        if(currentDay == maxDays)
         {
             currentDay = 1;
-            
-            if (currentMonth == 12)
+            if(currentMonth == 12)
             {
                 currentMonth = 1;
             }
@@ -226,21 +104,22 @@ public class Calendar
         {
             currentDay++;
         }
-
-        ChangeWeekDay();
-    }
-
-    private void ChangeWeekDay()
-    {
-        position = (position + 1) % week.Length;
-
-        currentWeekday = week[position];
     }
 
     private void SetMaxDaysForMonth(int getMonth)
     {
         switch (getMonth)
         {
+            //31 days
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                maxDays = 31;
+                break;
             //30 days
             case 4:
             case 6:
@@ -252,27 +131,6 @@ public class Calendar
             case 2:
                 maxDays = 28;
                 break;
-            //31 days
-            default:
-                maxDays = 31;
-                break;
         }
-    }
-}
-
-[System.Serializable]
-public class TimeData
-{
-    public int monthNum;
-    public int dayNum;
-    public TimeSlot timeName;
-    public string weekDay;
-
-    public TimeData(int month, int day, TimeSlot time, string week)
-    {
-        monthNum = month;
-        dayNum = day;
-        timeName = time;
-        weekDay = week;
     }
 }
