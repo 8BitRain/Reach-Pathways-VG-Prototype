@@ -49,4 +49,10 @@ public class Overworld : MonoBehaviour
         }
         AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
     }
+
+    public void LoadGame()
+    {
+        StateManager.Instance.ChangeState(new GameInitState());
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
+    }
 }
