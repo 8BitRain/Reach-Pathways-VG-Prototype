@@ -91,7 +91,7 @@ Material:
     - _ZWriteControl: 0
     - _vertexOffset: 0.05
     m_Colors:
-    - _Basecolor: {r: 0.7647059, g: 0.7162698, b: 0.24313724, a: 0}
+    - _Basecolor: {r: 0.3726415, g: 1, b: 0.94811326, a: 0}
     - _Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 0}
     - _Fresnel_Color: {r: 4, g: 4, b: 4, a: 0.3921569}
     - _ScanLinePosition: {r: 0.23, g: 1.3, b: -2.1, a: 0}
@@ -100,7 +100,7 @@ Material:
     - _ScanLinesSpeed: {r: 0, g: -1, b: 0, a: 0}
     - _ScanLinesTiling: {r: 1, g: 1, b: 0, a: 0}
     - _ScreenLinePosition: {r: 1, g: 1, b: 1, a: 0}
-    - _mult: {r: 0.9357196, g: 1, b: 0.3443396, a: 1}
+    - _mult: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5059766812186098914
 MonoBehaviour:
