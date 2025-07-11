@@ -27,12 +27,18 @@ public class Confidant : MonoBehaviour
     [SerializeField] private int conRank = 0;
     [SerializeField] private bool isUnlocked = true;
     [SerializeField] private bool isSpeaking = false;
+    
+    [SerializeField] private bool isTaskInProgress = false;
+    [SerializeField] private bool hasGivenTask = false;
+    [SerializeField] private bool isTaskCompleted = false;
+    [SerializeField] private int hangoutAmount = 0;
+    
 
     [Tooltip("Enter the node name from any yarn script for the confidant to start speaking")]
     [SerializeField] private string nodeName = "Confidant";
 
     public bool speaking { get { return isSpeaking; } set { isSpeaking = value; } }
-    
+
     [Header("Dialogue System")]
     [SerializeField] private DialogueRunner dialogueRunner;
     
@@ -141,6 +147,10 @@ public class Confidant : MonoBehaviour
             dialogueRunner.VariableStorage.SetValue("$conName", confidantName);
             dialogueRunner.VariableStorage.SetValue("$conUnlocked", isUnlocked);
             dialogueRunner.VariableStorage.SetValue("$conisSpeaking", isSpeaking);
+            dialogueRunner.VariableStorage.SetValue("$conHangoutAmount", hangoutAmount);
+            dialogueRunner.VariableStorage.SetValue("$conisTaskInProgress", isTaskInProgress);
+            dialogueRunner.VariableStorage.SetValue("$conhasGivenTask", hasGivenTask);
+            dialogueRunner.VariableStorage.SetValue("$conisTaskCompleted", isTaskCompleted);
         }
     }
     
@@ -232,6 +242,41 @@ public class Confidant : MonoBehaviour
             SaveConfidantData();
     }
 
+    [YarnCommand("StartTask")]
+    public void StartTask()
+    {
+        if(!hasGivenTask && !isTaskCompleted)
+        {
+            hasGivenTask = true;
+            isTaskInProgress = true;
+            UpdateYarnVariables();
+        }
+
+        
+    }
+
+    [YarnCommand("CompleteTask")]
+    public void CompleteTask()
+    {
+        if(hasGivenTask&& !isTaskCompleted)
+        {
+            hasGivenTask = false;
+            isTaskCompleted = true;
+            isTaskInProgress = false;
+            UpdateYarnVariables();
+        }
+    }
+
+    [YarnCommand("HangOuts")]
+    public void Hangout()
+    {
+        hangoutAmount++;
+
+        if(hangoutAmount % 5 == 0)
+        {
+            //event
+        }
+    }
 
     // Manual save command that can be called from Yarn
     [YarnCommand]
