@@ -34,7 +34,6 @@ public class TimeManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         
     }

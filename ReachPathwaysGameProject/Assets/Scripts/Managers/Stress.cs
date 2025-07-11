@@ -22,7 +22,6 @@ public class Stress : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         
     }
