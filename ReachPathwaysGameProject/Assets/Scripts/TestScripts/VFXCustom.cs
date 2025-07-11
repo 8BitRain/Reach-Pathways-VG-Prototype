@@ -20,6 +20,7 @@ public class VFXCustom : MonoBehaviour
     void Start()
     {
         rounds = 1;
+        
 
         visualEffect.SetFloat(PropertyName, rounds);
     }
