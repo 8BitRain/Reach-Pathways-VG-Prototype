@@ -6,6 +6,10 @@ tags:
 <<declare $conName = "DefaultConfidant">>
 <<declare $conUnlocked = true>>
 <<declare $conisSpeaking = true>>
+<<declare $conHangoutAmount = 0>>
+<<declare $conisTaskInProgress = false>>
+<<declare $conhasGivenTask = false>>
+<<declare $conisTaskCompleted = false>>
 
 PersonA: Greetings, {$player}!
 PersonA: I like the cut of your jib.

@@ -1,5 +1,49 @@
 ﻿title: Test
 tags:
 ---
-PersonB: Hi I'm {$conName} and I'm testing real so can't talk right now.
+<<if not $conhasGivenTask>>
+    PersonB: Hey {$player}! I have a task for you if you want it?
+        -> Accept
+            <<StartTask Confidant2>>
+            PersonB: Awesome, thanks!
+        -> Decline
+            PersonB: Darn, but alright
+<<else>>
+   PersonB: Hope everything is going well with your task!
+<<endif>>
+ <<jump MenuOption>>
+===
+
+title: MenuOption
+tags:
+---
+<<if $conisSpeaking>>
+    PersonB: What would you like to do?
+    -> Reset progress
+        <<ResetConfidant Confidant2>>
+        PersonA: I've reset our relationship data to default values.
+        <<jump MenuOption>>
+    -> I want to hangout with you
+        <<AdvanceTimeSlot Confidant2 1>>
+        <<Hangout Confidant2>>
+        PersonB: That was cool.
+        <<jump MenuOption>>
+    -> I want discuss about your task
+        PersonB: Ok, what would you want to know?
+            <<if $conisTaskCompleted>>
+                -> I completed the task
+                    PersonB: Thank you for doing your best, I greatly appreciate it.
+                    <<CompleteTask Confidant2>>
+            <<else>>
+                -> Nevermind
+                <<jump MenuOption>>
+            <<endif>>
+    -> Going to leave
+        PersonB: Sounds good, see ya!
+        <<SaveData Confidant2>>
+<<else>>
+    PersonB: Got to bounce but see ya around! 
+    <<SaveData Confidant2>>
+    <<HideConfidant Confidant2>>
+<<endif>>
 ===
