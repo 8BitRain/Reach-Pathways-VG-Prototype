@@ -99,7 +99,7 @@ Material:
     - _ScanLinesSpeed: {r: 0, g: -1, b: 0, a: 0}
     - _ScanLinesTiling: {r: 1, g: 1, b: 0, a: 0}
     - _ScreenLinePosition: {r: 1, g: 1, b: 1, a: 0}
-    - _mult: {r: 0, g: 1, b: 0.92156863, a: 1}
+    - _mult: {r: 0, g: 1, b: 0.9200001, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5059766812186098914
 MonoBehaviour:
