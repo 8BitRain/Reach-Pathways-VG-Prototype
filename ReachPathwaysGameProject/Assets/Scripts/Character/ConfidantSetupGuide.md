@@ -35,6 +35,7 @@ Your Yarn scripts can now use these commands and variables:
 - `<<SetRank GameObjectName X>>` - Sets rank to specific value X and updates $conRank
 - `<<UnlockConfidant GameObjectName>>` - Unlocks this confidant and updates $conUnlocked
 - `<<LockConfidant GameObjectName>>` - Locks this confidant and updates $conUnlocked
+- `<<AdvanceTimeSlot GameObjectName X>>` - Changes the time/date by X amount based on the player's decision (1 slot = rest | 2 slots = Skill-based activity | 2 slots = confidant interaction | 5 slots = Scenario (card game) | 5 slots = major confidant event)
 
 **Important**: You must specify the GameObject name that has the Confidant component when calling commands.
 
