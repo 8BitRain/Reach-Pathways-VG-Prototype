@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Yarn.Unity;
+using System.Linq;
 
 [System.Serializable]
 public class ConfidantSaveData
@@ -25,13 +26,35 @@ public class Confidant : MonoBehaviour
     [SerializeField] private string confidantName = "DefaultConfidant";
     [SerializeField] private int conRank = 0;
     [SerializeField] private bool isUnlocked = true;
+    [SerializeField] private bool isSpeaking = false;
     
+    [SerializeField] private bool isTaskInProgress = false;
+    [SerializeField] private bool hasGivenTask = false;
+    [SerializeField] private bool isTaskCompleted = false;
+    [SerializeField] private int hangoutAmount = 0;
+    
+
+    [Tooltip("Enter the node name from any yarn script for the confidant to start speaking")]
+    [SerializeField] private string nodeName = "Confidant";
+
+    public bool speaking { get { return isSpeaking; } set { isSpeaking = value; } }
+
     [Header("Dialogue System")]
     [SerializeField] private DialogueRunner dialogueRunner;
     
     [Header("Save/Load Settings")]
     [SerializeField] private bool autoSave = true;
     [SerializeField] private bool autoLoad = true;
+
+    [Header("Confidant time availability")]
+    [SerializeField] private TimeSlot[] timeAvailable;
+    [SerializeField] private string[] weekdayAvailable;
+    
+    
+    public TimeSlot[] tAvailable { get { return timeAvailable; } private set { tAvailable = value; } }
+    public string[] wdayAvailable { get { return weekdayAvailable; } private set { wdayAvailable = value; } }
+
+
 
     private void Start()
     {
@@ -53,12 +76,14 @@ public class Confidant : MonoBehaviour
         {
             // Update variables before starting dialogue
             UpdateYarnVariables();
-            dialogueRunner.StartDialogue("Confidant");
+            dialogueRunner.StartDialogue(nodeName);
         }
         else
         {
             Debug.LogError("DialogueRunner is not assigned!");
         }
+
+        isSpeaking = true;
     }
 
     // Simple YarnCommand that doesn't return a value to avoid source generator issues
@@ -86,7 +111,7 @@ public class Confidant : MonoBehaviour
         if (autoSave)
             SaveConfidantData();
     }
-    
+
     [YarnCommand]
     public void UnlockConfidant()
     {
@@ -121,6 +146,11 @@ public class Confidant : MonoBehaviour
             dialogueRunner.VariableStorage.SetValue("$conRank", (float)conRank);
             dialogueRunner.VariableStorage.SetValue("$conName", confidantName);
             dialogueRunner.VariableStorage.SetValue("$conUnlocked", isUnlocked);
+            dialogueRunner.VariableStorage.SetValue("$conisSpeaking", isSpeaking);
+            dialogueRunner.VariableStorage.SetValue("$conHangoutAmount", hangoutAmount);
+            dialogueRunner.VariableStorage.SetValue("$conisTaskInProgress", isTaskInProgress);
+            dialogueRunner.VariableStorage.SetValue("$conhasGivenTask", hasGivenTask);
+            dialogueRunner.VariableStorage.SetValue("$conisTaskCompleted", isTaskCompleted);
         }
     }
     
@@ -198,6 +228,54 @@ public class Confidant : MonoBehaviour
          * 5 slots = major confidant event [through yarn script: "Narrative milestone linked to Confidants or story forks"]
          */
         TimeManager.Instance.AdvanceTimeBySlots(num);
+
+        UpdateYarnVariables();
+    }
+
+    [YarnCommand("HideConfidant")]
+    public void DeactivateConfidant()
+    {
+        gameObject.SetActive(false);
+        UpdateYarnVariables();
+
+        if (autoSave)
+            SaveConfidantData();
+    }
+
+    [YarnCommand("StartTask")]
+    public void StartTask()
+    {
+        if(!hasGivenTask && !isTaskCompleted)
+        {
+            hasGivenTask = true;
+            isTaskInProgress = true;
+            UpdateYarnVariables();
+        }
+
+        
+    }
+
+    [YarnCommand("CompleteTask")]
+    public void CompleteTask()
+    {
+        if(hasGivenTask&& !isTaskCompleted)
+        {
+            hasGivenTask = false;
+            isTaskCompleted = true;
+            isTaskInProgress = false;
+            UpdateYarnVariables();
+        }
+    }
+
+    [YarnCommand("HangOuts")]
+    public void Hangout()
+    {
+        hangoutAmount++;
+
+        if(hangoutAmount % 5 == 0)
+        {
+            //event
+        }
     }
 
     // Manual save command that can be called from Yarn
@@ -208,7 +286,7 @@ public class Confidant : MonoBehaviour
 
         SaveConfidantData();
     }
-    
+
     // Manual load command that can be called from Yarn
     [YarnCommand]
     public void LoadData()

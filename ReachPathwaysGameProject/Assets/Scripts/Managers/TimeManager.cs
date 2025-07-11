@@ -18,6 +18,7 @@ public class TimeManager : MonoBehaviour
     private int startingMonth;
 
     public static TimeManager Instance;
+    public static event System.Action TimeChanged;
 
     [SerializeField]
     private GameObject UICanvas;
@@ -35,22 +36,26 @@ public class TimeManager : MonoBehaviour
         {
             Instance = this;
         }
-        
-    }
 
-    void Start()
-    {
-        if(resetTime)
+        if (resetTime)
         {
             ResetTimeData();
         }
 
-        if( UICanvas == null) { UICanvas = transform.GetChild(0).gameObject; }
-        if (timeUI == null) { timeUI = GetComponent<TimeUI>(); }
-
         int temp = 0;
         LoadTimeData(ref temp);
         calendar = new Calendar(temp);
+
+    }
+
+    void Start()
+    {
+
+
+        if ( UICanvas == null) { UICanvas = transform.GetChild(0).gameObject; }
+        if (timeUI == null) { timeUI = GetComponent<TimeUI>(); }
+
+        
 
         timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime, calendar.currentWeekday);
 
@@ -107,6 +112,8 @@ public class TimeManager : MonoBehaviour
         currentTime = (TimeSlot)timeIndex;
 
         timeUI.SetTimeAndDate(calendar.currentMonth, calendar.currentDay, currentTime, calendar.currentWeekday);
+
+        TimeChanged?.Invoke();
     }
 
     public void Rest()
@@ -118,7 +125,7 @@ public class TimeManager : MonoBehaviour
             timeUI.SetButtonCondition(false);
             canRest = false;
         }
-        
+        TimeChanged?.Invoke();
     }
 
     public void TimeCanvasDisplay(bool condition)
@@ -130,6 +137,16 @@ public class TimeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(FadeTransition.Instance.fadeTimer);
         UICanvas.SetActive(condition);
+    }
+
+    public TimeSlot GetTime()
+    {
+        return currentTime;
+    }    
+
+    public string GetWeekday()
+    {
+        return calendar.currentWeekday;
     }
 
     //Updating data
