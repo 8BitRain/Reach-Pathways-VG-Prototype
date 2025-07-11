@@ -30,15 +30,17 @@ public class Overworld : MonoBehaviour
          * Currently experience a small hiccup of scene changing for initial run
          */
         FadeTransition fadeTransition = FindObjectOfType<FadeTransition>();
+
         if (fadeTransition != null)
         {
-            fadeTransition.FadeIn(2);
-            DOVirtual.DelayedCall(2, () => {
-                SceneManager.LoadScene("SubArea", LoadSceneMode.Additive);
-                SceneManager.UnloadSceneAsync("Overworld");
-            });
+            fadeTransition.SwitchScenes("SubArea", "Overworld");
+        /*
+          SceneManager.LoadScene("SubArea", LoadSceneMode.Additive);
+          SceneManager.UnloadSceneAsync("Overworld");
+         */
         }
 
         AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
+
     }
 }
