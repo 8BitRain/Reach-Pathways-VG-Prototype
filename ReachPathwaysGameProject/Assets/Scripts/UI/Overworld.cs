@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class Overworld : MonoBehaviour
 {
+    public static string NextLocation { get; private set; }
     void Start()
     {
         SceneManager.sceneUnloaded += OnSceneUnload;
@@ -24,23 +25,27 @@ public class Overworld : MonoBehaviour
 
     public void LoadHospital()
     {
-
-        /* This is meant to test the fade effect happening between scenes. 
-         * Which either have to include to every script or within one script
-         * Currently experience a small hiccup of scene changing for initial run
-         */
         FadeTransition fadeTransition = FindObjectOfType<FadeTransition>();
 
         if (fadeTransition != null)
         {
             fadeTransition.SwitchScenes("SubArea", "Overworld");
-        /*
-          SceneManager.LoadScene("SubArea", LoadSceneMode.Additive);
-          SceneManager.UnloadSceneAsync("Overworld");
-         */
         }
 
         AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
 
+    }
+
+    //Load the area that will be displayed instead of making a new scene
+    public void LoadArea(string area)
+    {
+        FadeTransition fadeTransition = FindObjectOfType<FadeTransition>();
+
+        if (fadeTransition != null)
+        {
+            fadeTransition.SwitchScenes("SubArea", "Overworld");
+            NextLocation = area;
+        }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.menuSelect, transform.position);
     }
 }

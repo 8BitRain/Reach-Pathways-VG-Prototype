@@ -610,14 +610,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 533680995}
         m_TargetAssemblyTypeName: Overworld, Assembly-CSharp
-        m_MethodName: LoadHospital
-        m_Mode: 1
+        m_MethodName: LoadArea
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: AgricultureArea
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &580910712
@@ -742,14 +742,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 533680995}
         m_TargetAssemblyTypeName: Overworld, Assembly-CSharp
-        m_MethodName: LoadHospital
-        m_Mode: 1
+        m_MethodName: LoadArea
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MedicalArea
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &661577938
@@ -1134,14 +1134,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 533680995}
         m_TargetAssemblyTypeName: Overworld, Assembly-CSharp
-        m_MethodName: LoadHospital
-        m_Mode: 1
+        m_MethodName: LoadArea
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: TechArea
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1237173596
@@ -1334,14 +1334,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 533680995}
         m_TargetAssemblyTypeName: Overworld, Assembly-CSharp
-        m_MethodName: LoadHospital
-        m_Mode: 1
+        m_MethodName: LoadArea
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: BusinessArea
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1358807542
